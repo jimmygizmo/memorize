@@ -1,3 +1,13 @@
+# Tutorial files that are not yet or will note be part of the project repo will be stored here for
+# easy reference access or until any of them may be added to the project and repo.
+tutorial
+
+# MacOS finder files
+.DS_Store
+
+
+# ######## - ABOVE HERE: Jimmy Gizmo custom or project-specific patterns
+# ######## - BELOW HERE: GitHub Xcode .gitignore Template
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
