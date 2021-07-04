@@ -9,63 +9,46 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        return ZStack(alignment: .top, content: {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(lineWidth: 3)
-                .padding(.horizontal)
-                .foregroundColor(.red)
-            
-            Text("G'Day, mate!")
-                .font(.largeTitle)
-                .fontWeight(.black)
-                .foregroundColor(Color.blue)
-                .padding()
-        })  // ZStack
+        HStack {
+            CardView()
+            CardView()
+            CardView()
+            CardView()
+        }
+        .padding(.horizontal)
         
     }  // var body: some View
 }
 
-// NOTES on the above shown here:
-//struct ContentView: View {
-//    var body: some View {
-//        return Text("G'Day, mate!")  // There is an implied return here.
-//            .padding()
-//    }
-//}
-// 1. var body is calculated by executing the function contained in {} whenever referenced.
-// 2. 'some View' is not a type, it is more of a compiler suggestion and in this case it
-//    will return a Text (which is a View). Eventually the thing that is returned will get
-//    much more complicated.
-// 3. .padding is a function that is available to anything that behaves like a View. This
-//    .padding function returns a new thing which also behaves like a View but it is
-//    something complicated like a ModifiedPaddedView or similar. A Text is NOT returned.
-// 4. .foreGroundColor() applied to the ZStack is the same as applying it to each View
-//    inside the ZStack.
-// 5. Academic form of ZStack is like ZStack(content: {...}) but content and () are optional.
-// 6. However I think ZStack with any other args will need the content:
-//    ZStack (alignment: .top, content: {...})
+
+struct CardView: View {
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 3)
+                .foregroundColor(.red)
+            
+            Text("X")
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .foregroundColor(Color.blue)
+                .padding()
+        }  // ZStack
+    }
+}
 
 
-// PREVIEW SECTION:
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-// TEST: Trying optional specification of a preferred device for the preview pane. If not
-// specified (nil), then XCode will choose the device based on the run configuration.
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .previewDevice(PreviewDevice(rawValue:
                 "iPhone 12 mini (com.apple.CoreSimulator.SimDeviceType.iPhone-12-mini)")
+//                "iPhone 6s Plus (com.apple.CoreSimulator.SimDeviceType.iPhone-6s-Plus)")
             )
+            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .preferredColorScheme(.light)
     }
 }
-// iPhone 12 mini (com.apple.CoreSimulator.SimDeviceType.iPhone-12-mini)
-// iPhone 6s Plus (com.apple.CoreSimulator.SimDeviceType.iPhone-6s-Plus)
 
-// Command to get a list of simulator device identifiers you can use for the preview device:
-// % xcrun simctl list devicetypes
 
+/**/
