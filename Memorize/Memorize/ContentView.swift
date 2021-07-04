@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        return ZStack(content: {
+        return ZStack(alignment: .top, content: {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(lineWidth: 3)
                 .padding(.horizontal)
@@ -41,6 +41,9 @@ struct ContentView: View {
 //    something complicated like a ModifiedPaddedView or similar. A Text is NOT returned.
 // 4. .foreGroundColor() applied to the ZStack is the same as applying it to each View
 //    inside the ZStack.
+// 5. Academic form of ZStack is like ZStack(content: {...}) but content and () are optional.
+// 6. However I think ZStack with any other args will need the content:
+//    ZStack (alignment: .top, content: {...})
 
 
 // PREVIEW SECTION:
