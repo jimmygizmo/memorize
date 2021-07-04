@@ -9,11 +9,41 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
+        return ZStack(content: {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 3)
+                .padding(.horizontal)
+                .foregroundColor(.red)
+            
+            Text("G'Day, mate!")
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .foregroundColor(Color.blue)
+                .padding()
+        })  // ZStack
+        
+    }  // var body: some View
 }
 
+// NOTES on the above shown here:
+//struct ContentView: View {
+//    var body: some View {
+//        return Text("G'Day, mate!")  // There is an implied return here.
+//            .padding()
+//    }
+//}
+// 1. var body is calculated by executing the function contained in {} whenever referenced.
+// 2. 'some View' is not a type, it is more of a compiler suggestion and in this case it
+//    will return a Text (which is a View). Eventually the thing that is returned will get
+//    much more complicated.
+// 3. .padding is a function that is available to anything that behaves like a View. This
+//    .padding function returns a new thing which also behaves like a View but it is
+//    something complicated like a ModifiedPaddedView or similar. A Text is NOT returned.
+// 4. .foreGroundColor() applied to the ZStack is the same as applying it to each View
+//    inside the ZStack.
+
+
+// PREVIEW SECTION:
 
 //struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
@@ -30,7 +60,9 @@ struct ContentView_Previews: PreviewProvider {
             )
     }
 }
+// iPhone 12 mini (com.apple.CoreSimulator.SimDeviceType.iPhone-12-mini)
+// iPhone 6s Plus (com.apple.CoreSimulator.SimDeviceType.iPhone-6s-Plus)
 
-// Get a list of simulator device identifiers you can use for the preview device:
+// Command to get a list of simulator device identifiers you can use for the preview device:
 // % xcrun simctl list devicetypes
 
