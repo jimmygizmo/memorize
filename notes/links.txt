@@ -1,0 +1,17 @@
+Create a launch screen:
+https://www.appcoda.com/launch-screen-swiftui/
+
+** DEPRECATED? To see message, highlight Assets.xcassets. Default/empty should show unselected options of AccentColor and AppIcon, but you can add more via the plus icon at the bottom of this pane.
+PLUS ICON -> iOS -> "iOS Launch Image (Deprecated)"
+Looks like maybe the preferred alternative in the latest XCode 12.5.1 is to use:
+PLUS ICON -> iOS -> "iOS App Icon"
+TODO: Confirm the new way to do a launch/splash image.
+** So, the above link might be outdated at this point.
+
+-----------------------------
+
+
+
+
+
+

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     var body: some View {
         HStack {
@@ -16,24 +17,29 @@ struct ContentView: View {
             CardView()
         }
         .padding(.horizontal)
-        
-    }  // var body: some View
+    }
 }
 
 
 struct CardView: View {
     var body: some View {
+//        return ZStack (alignment: .top, content: {    // Longer form. A ) would be after }.
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .stroke(lineWidth: 3)
-                .foregroundColor(.red)
+                .fill()
+                .foregroundColor(.white)
             
-            Text("X")
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 3)
+            
+            Text("🚜")
                 .font(.largeTitle)
-                .fontWeight(.black)
-                .foregroundColor(Color.blue)
+//                .fontWeight(.black)  // Won't need these text mods with emoji/icons.
+//                .foregroundColor(.blue)
                 .padding()
-        }  // ZStack
+            // Tutorial takes the padding off the Text itself, but I'll keep it for now.
+        }
+        .foregroundColor(.purple)
     }
 }
 
