@@ -1,0 +1,47 @@
+To control the device simulated in the preview pane in realtime while coding, only the SHORT version of the device name can be used as an argument to previewDevice/rawValue. Long version does not work, BUT no error is thrown. SILENT FAILURE.
+(At least I did not notice any warning and certainly no error.)
+
+Anyhow, the following DOES WORK to control the preview device, INDEPENDENT of the pulldown.
+My test: I set the Active Scheme/Run Target to my hardware device iPhone and that runs fine, but also, I can quickly switch preview devices reliable using the short version of the device names:
+//            .previewDevice("iPhone 6s Plus")
+            .previewDevice("iPhone 12 mini")
+
+Also not, this is a simpler format where the rawValue argument is not named (as well as not using the long version of the name.)
+
+The long version of the names I was working with before came directly from the output of:
+xcrun simctl list devicetypes
+
+
+--------------------------------
+
+
+INFO BELOW HERE IS INCORRECT, NOW OUTDATED. ABOVE HERE IS CORRECT. WILL BE UPDATED.
+=============================
+What was discovered was that controlling the default device for the preview pane is best done through the GUI run target pulldown and simply using previewDevice is not enough to acheive the desired effect.
+Raw notes with the relevant bit of preview code below:
+- - - - - - - - 
+
+// NOTE: The XCode UI pulldown to select the Run Target (top of this pane 'Active Scheme')
+// takes complete precedence over .previewDevice set below. In fact I have never see the
+// .previewDevice in the code below have an effect. Even having a hardware device selected
+// as the Active Scheme/Run Target, still does not enable the below previewDevice to
+// take effect. IMPORTANT: When .previewDevice() is selected below, the GUI inspector,
+// shows this: Device: INHERITED (which is the behavior we seem to be seeing .. even
+// and actual hardware device (not a simulator) seems to be inherited down to the
+// preview. This does not seem to be correct behavior. There must be some other code
+// needed below to make this code take precedence over any GUI settings.
+// NOTE: preferredColorScheme DOES work in the code, INDEPENDENT of what theme the
+// hardware device shows.
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue:
+                "iPhone 12 mini (com.apple.CoreSimulator.SimDeviceType.iPhone-12-mini)")
+//                "iPhone 6s Plus (com.apple.CoreSimulator.SimDeviceType.iPhone-6s-Plus)")
+            )
+            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//            .preferredColorScheme(.light)
+    }
+}
+
+
