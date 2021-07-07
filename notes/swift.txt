@@ -14,7 +14,11 @@ Python: True
 (Presumably also - Swift: false, Python: False.)
 
 -----------------------------
+Decalrations - variable vs. constant:
+var - variable
+let - constant
 
+---------------------------------
 
 
 

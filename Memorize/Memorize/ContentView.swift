@@ -12,9 +12,9 @@ struct ContentView: View {
     var body: some View {
         HStack {
             CardView(isFaceUp: true)
+            CardView(isFaceUp: false)
             CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
+            CardView(isFaceUp: false)
         }
         .padding(.horizontal)
     }
@@ -22,30 +22,34 @@ struct ContentView: View {
 
 
 struct CardView: View {
-    var isFaceUp: Bool
-//    var isFaceUp: Bool { return false }  // This is how we would assign/hardcode a value here.
-// Since we do not set a vale above, this becomes like a required argument to CardView() since it
-// must have a value set by assignment or evaluation here or by passing as an argument.
+    @State var isFaceUp: Bool
     
     var body: some View {
-//        return ZStack (alignment: .top, content: {    // Longer form. A ) would be after }.
-//        Zstack (alignment: .top) {...}    // Another variant. content: implied.
         ZStack {
             let card_shape = RoundedRectangle(cornerRadius: 20)
+//            let card_shape = Circle()
+            
             if isFaceUp {
-                // TODO: CONFIRM: It looks like ZStack is painting the components from bottom to top,
-                // meaning from the device to the user, while the code itself is the opposite, from
-                // top to bottom.
-                card_shape.fill().foregroundColor(.gray)
+                // CARD FRONT
+                card_shape.fill().foregroundColor(.green)
                 
-                card_shape.stroke(lineWidth: 3)
+                card_shape.stroke(lineWidth: 3).foregroundColor(.purple)
                 
                 Text("🚜").font(.largeTitle)
+                    .shadow(color: .black, radius: 26)
+                    .shadow(color: .black, radius: 10)
             } else {
+                // CARD BACK
                 card_shape.fill().foregroundColor(.gray)
+                
+                card_shape.stroke(lineWidth: 3).foregroundColor(.purple)
             }
+            
         }  // ZStack
-        .foregroundColor(.orange)
+        .onTapGesture {
+            isFaceUp = !isFaceUp
+        }
+        
     }
 }
 

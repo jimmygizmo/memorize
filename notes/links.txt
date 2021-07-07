@@ -9,6 +9,12 @@ TODO: Confirm the new way to do a launch/splash image.
 ** So, the above link might be outdated at this point.
 
 -----------------------------
+drop shadow on a view
+
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-draw-a-shadow-around-a-view
+
+----------------------------------
+
 
 
 

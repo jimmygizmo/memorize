@@ -17,6 +17,76 @@ struct CardView: View {
 // must have a value set by assignment or evaluation here or by passing as an argument.
 
 --------------------------------------
+Viewbuilder variants:
+
+//        return ZStack (alignment: .top, content: {    // Longer form. A ) would be after }.
+//        ZStack (alignment: .top) {...}    // Another variant. content: implied.
+or just ..
+    ZStack {
+        thing1
+        thing2
+    }
+    .modifier()   // .. etc.
+
+------------------------------------------
+Sizing across ALL devices .. case of the emoji as icons. Large iPad will be too small:
+
+                // These icon (font) size and shadow settings were tested on an iPad 12.9 inch simulator
+                // and are way too small, so some platform detection and or a different sizing strategy
+                // would be needed.
+                Text("🚜").font(.largeTitle)
+                    .shadow(color: .black, radius: 26)
+                    .shadow(color: .black, radius: 10)
+
+------------------------------------------------
+Short vs long version of onTapGesture
+
+        .onTapGesture {
+            isFaceUp = !isFaceUp
+        }
+// Longer version of the onTap:
+//        .onTapGesture(perform: {
+//            isFaceUp = !isFaceUp
+//        })
+
+---------------------------------------
+@State
+
+    @State var isFaceUp: Bool
+    // The @State decorator changes this boolean variable from a stored value into a pointer
+    // and thus the following error is eliminated (triggered from where isFaceUp may be set)
+    // ERROR without @State: Cannot assign to property: 'self' is immutable
+
+
+-----------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
