@@ -19,6 +19,13 @@ var - variable
 let - constant
 
 ---------------------------------
+Swift can figure out an array type, or you can be explicit about it:
+
+    var cardIcons = [ "a", "b", "c", "d" ]
+    //    var cardIcons: Array<String> = [ "a", "b", "c", "d" ]  // Longer, explicit array type.
+
+--------------------------------------
+
 
 
 

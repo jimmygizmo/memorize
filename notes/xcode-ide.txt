@@ -1,0 +1,7 @@
+To bring up documentation on an item in the editor, OPTION-CLICK on the word. (Cursor will turn into a '?').
+This pop-up version is a summary.
+SCROLL to the bottom and click on the BLUE LINK: "Open in Developer Documentation" .. to get the FULL docs.
+
+------------------------------
+
+
