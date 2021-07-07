@@ -1,3 +1,21 @@
 Misc notes on Swift language in general and related
+------------------------------
+
+In Swift, you cannot have variables which have no value.
+Variables must always have a value from the time they are created, throughout their entire life.
+* There are 'optional' variables which sort of look this way but they actually have the value of "not set yet".
+But booleans must always have a value. (This seems true of any language with a boolean type. When would it not be?)
+
+-----------------------
+
+In Swift it is "true", LOWERCASE. (Different from Python where it must have an initial upper: "True".)
+Swift: true
+Python: True
+(Presumably also - Swift: false, Python: False.)
+
+-----------------------------
+
+
+
 
 

@@ -11,10 +11,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         HStack {
-            CardView()
-            CardView()
-            CardView()
-            CardView()
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: true)
+            CardView(isFaceUp: true)
         }
         .padding(.horizontal)
     }
@@ -22,25 +22,30 @@ struct ContentView: View {
 
 
 struct CardView: View {
+    var isFaceUp: Bool
+//    var isFaceUp: Bool { return false }  // This is how we would assign/hardcode a value here.
+// Since we do not set a vale above, this becomes like a required argument to CardView() since it
+// must have a value set by assignment or evaluation here or by passing as an argument.
+    
     var body: some View {
 //        return ZStack (alignment: .top, content: {    // Longer form. A ) would be after }.
 //        Zstack (alignment: .top) {...}    // Another variant. content: implied.
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill()
-                .foregroundColor(Color.gray)
-            
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(lineWidth: 3)
-            
-            Text("🚜")
-                .font(.largeTitle)
-//                .fontWeight(.black)  // Won't need these text mods with emoji/icons.
-//                .foregroundColor(.blue)
-                .padding()
-            // Tutorial takes the padding off the Text itself, but I'll keep it for now.
-        }
-        .foregroundColor(.blue)
+            let card_shape = RoundedRectangle(cornerRadius: 20)
+            if isFaceUp {
+                // TODO: CONFIRM: It looks like ZStack is painting the components from bottom to top,
+                // meaning from the device to the user, while the code itself is the opposite, from
+                // top to bottom.
+                card_shape.fill().foregroundColor(.gray)
+                
+                card_shape.stroke(lineWidth: 3)
+                
+                Text("🚜").font(.largeTitle)
+            } else {
+                card_shape.fill().foregroundColor(.gray)
+            }
+        }  // ZStack
+        .foregroundColor(.orange)
     }
 }
 

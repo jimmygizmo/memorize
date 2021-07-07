@@ -1,0 +1,22 @@
+
+Misc SwiftUI notes
+------------------
+
+
+                // TODO: CONFIRM: It looks like ZStack is painting the components from bottom to top,
+                // meaning from the device to the user, while the code itself is the opposite, from
+                // top to bottom.
+
+-----------------------
+Assign vs. pass as argument for vars inside a View:
+
+struct CardView: View {
+    var isFaceUp: Bool
+//    var isFaceUp: Bool { return false }  // This is how we would assign/hardcode a value here.
+// Since we do not set a vale above, this becomes like a required argument to CardView() since it
+// must have a value set by assignment or evaluation here or by passing as an argument.
+
+--------------------------------------
+
+
+
