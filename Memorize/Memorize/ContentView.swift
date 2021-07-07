@@ -9,23 +9,27 @@ import SwiftUI
 
 
 struct ContentView: View {
-    var deckIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍" ]
+    var deckIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚃", "🚲", "🚁", "🚐", "🚂",
+                      "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
+                      "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
     
     var body: some View {
         HStack {
-            // Using id: \.self is a temporary hack be cause String is not an identifiable so it
+            // Using id: \.self is a temporary hack because String is not an identifiable so it
             // really cannot be used in a ForEach like this. This won't work for the real app.
+            // This assigns the string itself as the identifier, id:. TODO: Research \.self
             ForEach(deckIcons, id: \.self) { cardIcon in
                 CardView(iconCharacter: cardIcon, isFaceUp: true)
             }
-// Longer version (with content: and the parens enclosing the lambda function):
-//            ForEach(deckIcons, id: \.self, content: { cardIcon in
-//                CardView(iconCharacter: cardIcon, isFaceUp: true)
-//            })
         }
         .padding(.horizontal)
     }
 }
+
+
+//    CONTINUE:
+//    https://youtu.be/3lahkdHEhW8?t=2432
+//    Lecture 2 at 40:32
 
 
 struct CardView: View {

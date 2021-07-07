@@ -25,6 +25,23 @@ Swift can figure out an array type, or you can be explicit about it:
     //    var cardIcons: Array<String> = [ "a", "b", "c", "d" ]  // Longer, explicit array type.
 
 --------------------------------------
+Showing the long vs short form of ForEach in a viewbuilder. Also shows how you can use id: \.self in cases
+where you dont have an actual identifiable to iterate over. This is actually a crude hack.
+
+        HStack {
+            // Using id: \.self is a temporary hack be cause String is not an identifiable so it
+            // really cannot be used in a ForEach like this. This won't work for the real app.
+            ForEach(deckIcons, id: \.self) { cardIcon in
+                CardView(iconCharacter: cardIcon, isFaceUp: true)
+            }
+// Longer version (with content: and the parens enclosing the lambda function):
+//            ForEach(deckIcons, id: \.self, content: { cardIcon in
+//                CardView(iconCharacter: cardIcon, isFaceUp: true)
+//            })
+        }
+
+--------------------------------------
+
 
 
 
