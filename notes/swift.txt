@@ -31,6 +31,7 @@ where you dont have an actual identifiable to iterate over. This is actually a c
         HStack {
             // Using id: \.self is a temporary hack be cause String is not an identifiable so it
             // really cannot be used in a ForEach like this. This won't work for the real app.
+            // This assigns the string itself as the identifier, id:. TODO: Research \.self
             ForEach(deckIcons, id: \.self) { cardIcon in
                 CardView(iconCharacter: cardIcon, isFaceUp: true)
             }
