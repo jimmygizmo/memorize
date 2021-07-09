@@ -25,6 +25,8 @@ struct ContentView: View {
             }  // HStack ROW OF CARDS
             .padding(.horizontal)
             
+            Spacer()
+            
             HStack {  // Button - Spacer - Button
                 removeButton
                 Spacer()
@@ -37,31 +39,28 @@ struct ContentView: View {
     }
     
     var removeButton: some View {
-            Button(action: {
+        Button(action: {
+            if iconCount > 1 {
                 iconCount -= 1
-            }, label: {
-                VStack {
-                    Text("Remove")
-                    Text("Card")
-                }
-            })
-            .padding(.horizontal)
+            }
+        }, label: {
+            Image(systemName: "minus.circle")
+        })
+        .font(.largeTitle)
+        .padding()
     }  // var removeButton
     
     var addButton: some View {
         Button(action: {
-            iconCount += 1
-        }, label: {
-            VStack {
-                Text("Add")
-                Text("Card")
+            if iconCount < deckIcons.count {
+                iconCount += 1
             }
+        }, label: {
+            Image(systemName: "plus.circle")
         })
-        .padding(.horizontal)
+        .font(.largeTitle)
+        .padding()
     }  // var addButton
-    
-    
-    
     
 }  // ContentView
 
