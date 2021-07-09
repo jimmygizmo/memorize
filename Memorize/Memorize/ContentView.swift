@@ -12,18 +12,33 @@ struct ContentView: View {
     var deckIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
                       "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
                       "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
-    @State var iconCount = 6
+    @State var iconCount = 32
+    
+    
+    
+    // CONTINUE:
+    // https://youtu.be/3lahkdHEhW8?t=4336
+    
+    
     
     var body: some View {
         VStack {
             
-            HStack {  // ROW OF CARDS
+            LazyVGrid(columns: [
+                        GridItem(),
+                        GridItem(),
+                        GridItem(),
+                        GridItem()
+            ]) {  // TOP-LEFT-FILLING GRID OF CARDS WITH 4 COLUMNS
+                // To be used for card aspect ratio: Golden Ratio (approx): 1.618 or the inverse: 0.618
+                //
                 // Using id: \.self is a temporary hack. TODO: This will be fixed as game logic evolves.
                 ForEach(deckIcons[ 0 ..< iconCount ], id: \.self) { cardIcon in
                     CardView(iconCharacter: cardIcon, isFaceUp: true)
                 }
             }  // HStack ROW OF CARDS
             .padding(.horizontal)
+            .foregroundColor(.purple)
             
             Spacer()
             
@@ -39,25 +54,25 @@ struct ContentView: View {
     }
     
     var removeButton: some View {
-        Button(action: {
+        Button {
             if iconCount > 1 {
                 iconCount -= 1
             }
-        }, label: {
+        } label: {
             Image(systemName: "minus.circle")
-        })
+        }
         .font(.largeTitle)
         .padding()
     }  // var removeButton
     
     var addButton: some View {
-        Button(action: {
+        Button {
             if iconCount < deckIcons.count {
                 iconCount += 1
             }
-        }, label: {
+        } label: {
             Image(systemName: "plus.circle")
-        })
+        }
         .font(.largeTitle)
         .padding()
     }  // var addButton
@@ -77,7 +92,7 @@ struct CardView: View {
                 
                 cardShape.fill().foregroundColor(.green)
                 
-                cardShape.stroke(lineWidth: 3).foregroundColor(.purple)
+                cardShape.stroke(lineWidth: 3)
                 
                 Text(iconCharacter).font(.largeTitle)
                     .shadow(color: .black, radius: 28)
@@ -87,7 +102,7 @@ struct CardView: View {
                 
                 cardShape.fill().foregroundColor(.gray)
                 
-                cardShape.stroke(lineWidth: 3).foregroundColor(.purple)
+                cardShape.stroke(lineWidth: 3)
                 
             }
             

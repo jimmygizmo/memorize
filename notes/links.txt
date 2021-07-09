@@ -14,7 +14,13 @@ drop shadow on a view
 https://www.hackingwithswift.com/quick-start/swiftui/how-to-draw-a-shadow-around-a-view
 
 ----------------------------------
+regarding "some View" and Swift's Opaque Return Types:
 
+https://www.hackingwithswift.com/books/ios-swiftui/why-does-swiftui-use-some-view-for-its-view-type
+Accompanying video:
+https://www.youtube.com/watch?v=SzgxLMUumic
+
+-----------------------------------
 
 
 

@@ -3,5 +3,15 @@ This pop-up version is a summary.
 SCROLL to the bottom and click on the BLUE LINK: "Open in Developer Documentation" .. to get the FULL docs.
 
 ------------------------------
+QUICKLY SEARCH AND OPEN SWIFT/OTHER LANGUAGE REFERENCES
+
+"Open Quickly" Shift-CMD-O
+Seen in a viedeo and the comments, but not known where it is documented.
+Seen here at this time marker:
+https://youtu.be/SzgxLMUumic?t=170
+
+-----------------------------------
+
+
 
 

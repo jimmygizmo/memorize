@@ -1,0 +1,66 @@
+What we usually see when simplifying the format of SwiftUI functions is handling a single final argument, which is a function argument but we can also do this when there are two function arguments like with Button. First the long form is shown below, then the shortend form.
+NOTE that the FIRST argument can have it's name (of 'action:' in this case) BUT the second function argument of 'lable:' must keep it's lable.
+I'll have to read up more on the formal rules for this.
+Noted here in the vidoe:
+https://youtu.be/3lahkdHEhW8?t=3630
+
+"Just put the lable: keyword right after the first {...} function and right before the second/last {...} function."
+So the first func gets no lable but the last one does and there are no parentheses and only spaces/newline separate things.
+
+- - - -
+
+    var removeButton: some View {
+        Button(action: {
+            if iconCount > 1 {
+                iconCount -= 1
+            }
+        }, label: {
+            Image(systemName: "minus.circle")
+        })
+        .font(.largeTitle)
+        .padding()
+    }  // var removeButton
+    
+    var addButton: some View {
+        Button(action: {
+            if iconCount < deckIcons.count {
+                iconCount += 1
+            }
+        }, label: {
+            Image(systemName: "plus.circle")
+        })
+        .font(.largeTitle)
+        .padding()
+    }  // var addButton
+
+-----------------------
+SHORT:
+
+    var removeButton: some View {
+        Button {
+            if iconCount > 1 {
+                iconCount -= 1
+            }
+        } label: {
+            Image(systemName: "minus.circle")
+        }
+        .font(.largeTitle)
+        .padding()
+    }  // var removeButton
+    
+    var addButton: some View {
+        Button {
+            if iconCount < deckIcons.count {
+                iconCount += 1
+            }
+        } label: {
+            Image(systemName: "plus.circle")
+        }
+        .font(.largeTitle)
+        .padding()
+    }  // var addButton
+
+
+----------------------
+
+
