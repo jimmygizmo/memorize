@@ -8,39 +8,40 @@
 import SwiftUI
 
 
+// TODO: Reading Assignment 1:
+// https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/reading_1.pdf
+
+// TODO: Programming Assignment 1:
+// https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/assignment_1.pdf
+
+
 struct ContentView: View {
     var deckIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
                       "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
                       "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
     @State var iconCount = 32
     
-    
-    
-    // CONTINUE:
-    // https://youtu.be/3lahkdHEhW8?t=4336
-    
-    
-    
     var body: some View {
         VStack {
             
-            LazyVGrid(columns: [
-                        GridItem(),
-                        GridItem(),
-                        GridItem(),
-                        GridItem()
-            ]) {  // TOP-LEFT-FILLING GRID OF CARDS WITH 4 COLUMNS
-                // To be used for card aspect ratio: Golden Ratio (approx): 1.618 or the inverse: 0.618
-                //
-                // Using id: \.self is a temporary hack. TODO: This will be fixed as game logic evolves.
-                ForEach(deckIcons[ 0 ..< iconCount ], id: \.self) { cardIcon in
-                    CardView(iconCharacter: cardIcon, isFaceUp: true)
-                }
-            }  // HStack ROW OF CARDS
-            .padding(.horizontal)
-            .foregroundColor(.purple)
-            
-            Spacer()
+            ScrollView {  // CARDS
+                LazyVGrid(columns: [
+                    GridItem(.adaptive(minimum: 65))
+                ]) {
+                    // To be used for card aspect ratio: Golden Ratio (approx): 1.618 or the inverse: 0.618
+                    //
+                    // Using id: \.self is a temporary hack. TODO: This will be fixed as game logic evolves.
+                    ForEach(deckIcons[ 0 ..< iconCount ], id: \.self) { cardIcon in
+                        CardView(iconCharacter: cardIcon, isFaceUp: true)
+                            .aspectRatio(0.618, contentMode: .fit)
+                    }
+                }  // LazyVGrid
+                .padding(.horizontal)
+                .foregroundColor(.purple)
+                
+            }  // ScrollView - CARDS
+                
+                Spacer()
             
             HStack {  // Button - Spacer - Button
                 removeButton
@@ -49,7 +50,7 @@ struct ContentView: View {
             }  // HStack Button - Spacer - Button
             // NOTE: The tutorial has the .padding on the HStack, but I prefer it on each button for now.
 //            .padding(.horizontal)
-            
+                
         }  // VStack ContentView
     }
     
@@ -92,7 +93,7 @@ struct CardView: View {
                 
                 cardShape.fill().foregroundColor(.green)
                 
-                cardShape.stroke(lineWidth: 3)
+                cardShape.strokeBorder(lineWidth: 3)
                 
                 Text(iconCharacter).font(.largeTitle)
                     .shadow(color: .black, radius: 28)
@@ -102,7 +103,7 @@ struct CardView: View {
                 
                 cardShape.fill().foregroundColor(.gray)
                 
-                cardShape.stroke(lineWidth: 3)
+                cardShape.strokeBorder(lineWidth: 3)
                 
             }
             

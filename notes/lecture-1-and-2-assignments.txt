@@ -1,0 +1,18 @@
+Reading assignment 1:
+https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/reading_1.pdf
+
+-- Swift Programming Language Documentation
+https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html
+
+Programming assignment 1:
+https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/assignment_1.pdf
+
+NOTE:
+The programming assignement adds quite a lot more on top of the features covered in the lectures 1 and 2.
+- Multiple icon sets/themes.
+- Randomization/shuffling.
+- Using images from the system library (SF Symbol).
+- and more
+
+It looks like the reading and programming assignments throughout the entire course are as much as or more work than following along with the lectures, even when repeating them and customizing some of the work along the way and deep diving a few topics. There is a LOT of work in this overall course (Stanford CS193P Srping 2021) and it looks like a lot of great skills will be gained by the end of it.
+

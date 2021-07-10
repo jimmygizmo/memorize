@@ -1,0 +1,49 @@
+Why we change the LazyVGrid from 4 or 6 or watever columns to a single columns that we will "pour" the cards into, with special setting to max number of cards of a reasonable size will fill across horizontally as many as possible before starting a new row.
+This solves the problem where say we have 4 nice sized cards in a row in portrait and a good number of rows (4 or 5 ish) .. BUT when we turn to landscape, we get 4 massive cards in one row or maybe a half a row below that. No good.
+The first block of code is the one with 4 hardcoded columns and the issue in landscape .. the second block of code has the solution to use a single column with a few additional settings on that column:
+
+--------------
+
+            ScrollView {  // CARDS
+                LazyVGrid(columns: [
+                            GridItem(),
+                            GridItem(),
+                            GridItem(),
+                            GridItem()
+                ]) {  // TOP-LEFT-FILLING GRID OF CARDS WITH 4 COLUMNS
+                    // To be used for card aspect ratio: Golden Ratio (approx): 1.618 or the inverse: 0.618
+                    //
+                    // Using id: \.self is a temporary hack. TODO: This will be fixed as game logic evolves.
+                    ForEach(deckIcons[ 0 ..< iconCount ], id: \.self) { cardIcon in
+                        CardView(iconCharacter: cardIcon, isFaceUp: true)
+                            .aspectRatio(0.618, contentMode: .fit)
+                    }
+                }  // LazyVGrid
+                .padding(.horizontal)
+                .foregroundColor(.purple)
+                
+            }  // ScrollView - CARDS
+
+-------------
+
+BETTER for filling cards at a good size in both landscape as well as portrait:
+
+            ScrollView {  // CARDS
+                LazyVGrid(columns: [
+                    GridItem(.adaptive(minimum: 65))
+                ]) {
+                    // To be used for card aspect ratio: Golden Ratio (approx): 1.618 or the inverse: 0.618
+                    //
+                    // Using id: \.self is a temporary hack. TODO: This will be fixed as game logic evolves.
+                    ForEach(deckIcons[ 0 ..< iconCount ], id: \.self) { cardIcon in
+                        CardView(iconCharacter: cardIcon, isFaceUp: true)
+                            .aspectRatio(0.618, contentMode: .fit)
+                    }
+                }  // LazyVGrid
+                .padding(.horizontal)
+                .foregroundColor(.purple)
+                
+            }  // ScrollView - CARDS
+
+
+And this will be improved shortly, since it still is less than ideal. What we really need is to add cards based on the screen real-estate currently available, different for different orientations, devices, etc. The fixed minimum of 65 for the .adaptive GridItem is a temporary solution.
