@@ -42,6 +42,50 @@ where you dont have an actual identifiable to iterate over. This is actually a c
         }
 
 --------------------------------------
+String interpolation looks like this:
+print("The current value of friendlyWelcome is \(friendlyWelcome)")
+
+Can evaluate expressions inline like this:
+let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
+// message is "3 times 2.5 is 7.5"
+
+Handle the equivalent of a Python "raw" string like this (when you don't want the interpolation to happen):
+print(#"Write an interpolated string in Swift using \(multiplier)."#)
+// Prints "Write an interpolated string in Swift using \(multiplier)."
+
+You can mix raw and interpolated:
+rint(#"6 times 7 is \#(6 * 7)."#)
+// Prints "6 times 7 is 42."
+
+-------------------------------------
+
+Swift has a REPL like Python (but different). You exit it with Ctrl-D like Py.
+
+➜  notes git:(main) ✗ swift
+Welcome to Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57).
+Type :help for assistance.
+  1> UInt8.max
+$R0: UInt8 = 255
+  2> ^D
+➜  notes git:(main) ✗
+
+Article on the Swift REPL:
+https://www.aidanf.net/learn-swift/running_code
+
+-------------------------------------
+
+Double is more accurate than float. Swift infers/defaults-to Double when a floating-point type is inferred.
+
+➜  notes git:(main) ✗ swift
+Welcome to Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57).
+Type :help for assistance.
+  1> Double.pi
+$R0: Double = 3.1415926535897931
+  2> Float.pi
+$R1: Float = 3.1415925
+
+-----------------------------------
+
 
 
 

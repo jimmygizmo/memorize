@@ -1,0 +1,9 @@
+Swift enforces (I have not seen this) a line length of 100 columns max.
+XCode does not show a guide line by default but you can enable it:
+XCode -> Preferences -> Text Editing -> Display -> Page Guide at column [100]
+
+----------------------------
+
+
+
+

@@ -16,9 +16,11 @@ import SwiftUI
 
 
 struct ContentView: View {
+    // TODO: I am going to support different sets of Icons. One set will be travelIcons.
     var deckIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
                       "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
                       "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
+//    let deckIcons = travelIcons  // This will not work here. Still figuring out theme strategy.
     @State var iconCount = 32
     
     var body: some View {
@@ -28,9 +30,9 @@ struct ContentView: View {
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 65))
                 ]) {
-                    // To be used for card aspect ratio: Golden Ratio (approx): 1.618 or the inverse: 0.618
+                    // For card aspect ratio, I use the inverse of the Golden Ratio: 1.618
                     //
-                    // Using id: \.self is a temporary hack. TODO: This will be fixed as game logic evolves.
+                    // Using id: \.self is a temporary hack in place until we have game logic.
                     ForEach(deckIcons[ 0 ..< iconCount ], id: \.self) { cardIcon in
                         CardView(iconCharacter: cardIcon, isFaceUp: true)
                             .aspectRatio(0.618, contentMode: .fit)
@@ -48,7 +50,8 @@ struct ContentView: View {
                 Spacer()
                 addButton
             }  // HStack Button - Spacer - Button
-            // NOTE: The tutorial has the .padding on the HStack, but I prefer it on each button for now.
+            // NOTE: The tutorial has the .padding on the HStack.
+            // I prefer to keep this padding on the individual buttons for now.
 //            .padding(.horizontal)
                 
         }  // VStack ContentView

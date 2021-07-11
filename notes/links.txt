@@ -22,6 +22,10 @@ https://www.youtube.com/watch?v=SzgxLMUumic
 
 -----------------------------------
 
+Article on the Swift REPL:
+https://www.aidanf.net/learn-swift/running_code
+
+-----------------------------------------
 
 
 

@@ -1,0 +1,10 @@
+Optionals are critical in Swift. An Optional can be considered as an enum.
+Here is a good read about Enums in general.
+There is also a section specific to each language.
+The section on Swift should be read .. as well as the sections for other languages you know, for comparision.
+
+https://en.wikipedia.org/wiki/Enumerated_type
+
+https://en.wikipedia.org/wiki/Enumerated_type#Swift
+
+
