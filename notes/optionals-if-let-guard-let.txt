@@ -1,0 +1,58 @@
+Very important to understand Optionals in Swift. As a Python programmer, my initial view of this topic is that it centers around the truthfulness of a variable in the context of deciding whether the value in the variable should even be used at all and if related code should even be executed.
+
+In Python, there are many things that equate to True and many things that equate to False, so it can be ambiguous to look at an empty string for example and decide when it is best to treat that as an unusable value (skip processing etc.) OR as a very usable value that so happens to also sort of be the absence of a value.
+Basically I see Swift Optionals as giving you more tools do deal with this potential ambiguity.
+This is just my take on it and as I learn more I expect to change how I define and explain Swift Optionals.
+
+For certain, this is a topic requiring careful study as it will be central to code operation in many places and does have potential to cause bugs and waste time etc if not well understood. Also, I can see that when used correctly it has great potential to make for robust code in compact syntax that is more explicit, predictable and safer than the parallel situation in a more free language like Python. I'm excited to see how this manifests in Swift as I'm realizing now this is a common pain point in Python for many developers and consistent treatment of the Trueness of possibly empty/zero/unreferenced values is hard to acheive, in the real world of many programmers, long-living projects, etc. One programmer might be consistent and that works fine, but for teams and larger apps with many developers, this is more of an issue .. and one programmer might use the convention that empty string or zero means to skip certain code, while the other developer always treats those as valid values and uses some other conditional mechanism for the data.
+
+This thread has some good info on the topic:
+https://stackoverflow.com/questions/29662836/swift-use-of-optional-with-let
+
+Swift Docs start talking about it here:
+https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html#ID462
+
+---------------------------------
+This is an important phrase to remember on this topic:
+"If the optional value is nil, the conditional is false and the code in braces is skipped."
+(See Swift Docs link above.)
+
+* Compared to Python we would just be talking about False for the value (or something that EQUATES to false like "" or 0)
+But in Swift it is more formal. We use a special VALUE of 'nil' which causes "let Optional" to be False.
+I know this is not a perfect explanation yet .. but realize these are my "notes" as I study this topic.
+
+So .. (different from Python) the Optional itself is NOT False, it is "nil" .. you have to assign it using "let Optional"
+in order to test the truthfulness, and hence decide on executing other code, branching execution there, etc.
+
+I'm still getting to 'guard'.
+
+** Warning in the above conclusions .. really I need to test some of this stuff with code now. I am a little confused by this in the docs regarding the ?? operator in this context. The implication is that an optional by itself in the code will be interpreted as False when it is nil, even if the 'let' is not right next to it.
+From this in the docs:
+let informalGreeting = "Hi \(nickname ?? fullName)"
+
+This looks like a short circuit operator and that nickname can be interpreted as False. Maybe ?? and let work together in a more special way than that. Obviously this needs to be clearly understood and why the overall topic takes some care, espcially for going from other languages into Swift.
+
+**** Ah yes! It is as I suspected. The ?? is not simply a short-circuit type operator like || but is actually a special operator that works with Optionals. From the docs:
+"The nil-coalescing operator (a ?? b) unwraps an optional a if it contains a value, or returns a default value b if a is nil."
+
+https://docs.swift.org/swift-book/LanguageGuide/BasicOperators.html#ID72
+
+**** The nil-coalescing operator is shorthand for the code below:
+
+a != nil ? a! : b
+
+QUESTION: Can a regular variable ever be nil? My guess is NO. Swift is type-safe, and nil is not a valid value for any standard Type I can think of.
+It is all starting to make sense, but I am curious what 'guard' is about. I vaguely recall it from years past but not even sure it was Swift. Could have been Java but anyhow, that should be one of the next topics in the docs.
+
+----------------------------
+TODO: Look up "FORCED UNWRAPPING" .. it is part of the ternary operator code snippet above.
+Exclamation point immediately after the variable name. (a!)
+
+--------------------------------------
+
+?? is in fact a type of short circuit operator.
+
+------------------------------------------
+
+
+

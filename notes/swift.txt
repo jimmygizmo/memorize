@@ -86,7 +86,30 @@ $R1: Float = 3.1415925
 
 -----------------------------------
 
+Triple quotes for multi-line and also to contain literal quote chars. Like:
 
+let quotation = """
+I said "I have \(apples) apples."
+And then I said "I have \(apples + oranges) pieces of fruit."
+"""
+
+NOTE!! Indentation removed if you match the indentation with the last """, like:
+
+    let quotation = """
+        I said "I have \(apples) apples."
+        And then I said "I have \(apples + oranges) pieces of fruit."
+        """
+
+* Result should be the same but the above example as typed is theoretical. I did not test it yet.
+
+-----------------------------------------------
+
+Many of the basic constructs and behavior of the languages is extremely similar between Python and Swift.
+This article shows how remarkably similar the two are, at least for the fundamentals.
+
+https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html
+
+-------------------------------------
 
 
 

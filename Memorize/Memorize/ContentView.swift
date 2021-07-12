@@ -16,11 +16,26 @@ import SwiftUI
 
 
 struct ContentView: View {
-    // TODO: I am going to support different sets of Icons. One set will be travelIcons.
-    var deckIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
+    let deckIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
+                      "🥪", "🍪", "☕️", "🍫", "🍚", "🍭", "🥦", "🍔", "🥕", "🍍", "🫒", "🍎",
+                      "🌽", "🍒", "🍰", "🌭", "🍉", "🥖", "🥝", "🥑" ]  // Count: 32
+    // Above we just use a literal copy of the array, until we get the theme mechanism working.
+    
+    let travelIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
                       "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
                       "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
-//    let deckIcons = travelIcons  // This will not work here. Still figuring out theme strategy.
+/*    let foodIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
+                      "🥪", "🍪", "☕️", "🍫", "🍚", "🍭", "🥦", "🍔", "🥕", "🍍", "🫒", "🌽",
+                      "🌽", "🍒", "🍰", "🌭", "🍉", "🥖", "🥝", "🥑" ]  // Count: 32
+ */
+    let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
+                      "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
+                      "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
+/*  let deckIcons = travelIcons  // Doesn't work here but the idea was to set a default theme.
+    If I try to simply copy this array here like this, I get the following ERROR:
+    Cannot use instance member 'travelIcons' within property initializer; property initializers run before 'self' is available
+ */
+    
     @State var iconCount = 32
     
     var body: some View {
@@ -124,7 +139,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .previewDevice("iPhone 12 mini")
 //            .previewDevice("iPhone 6s Plus")
-//            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)  // Comment this out for .light, which is the default.
+            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)  // Comment this out for .light, which is the default.
     }
 }
 

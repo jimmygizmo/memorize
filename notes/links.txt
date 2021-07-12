@@ -26,6 +26,22 @@ Article on the Swift REPL:
 https://www.aidanf.net/learn-swift/running_code
 
 -----------------------------------------
+Thread discussing Optionals, if let, guard let
+
+https://stackoverflow.com/questions/29662836/swift-use-of-optional-with-let
+
+---------------------------------------
+Don't confuse ?? with a Python-style short-circuit operator! ?? Is the NIL-COALESCING (Optional-unwrapping) operator!
+
+https://docs.swift.org/swift-book/LanguageGuide/BasicOperators.html#ID72
+
+---------------------------------------
+Comparison of Python to Swift
+
+https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html
+
+-----------------------------------
+
 
 
 
