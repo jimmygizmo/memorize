@@ -1,3 +1,11 @@
+# The JetBrains IDE for IOS App development is called AppCode and it works great.
+# There are many advantages to JetBrains IDEs over other IDEs such as XCode.
+# Realistically, I will be using BOTH, AppCode and XCode on IOS projects.
+# (I regularly use 5 different major IDEs from JetBrains and recommend their Pro license!)
+# Exclude JetBrains/AppCode preferences directory from the repo:
+.idea/
+
+
 # Tutorial files that are not yet or will note be part of the project repo will be stored here for
 # easy reference access or until any of them may be added to the project and repo.
 tutorial

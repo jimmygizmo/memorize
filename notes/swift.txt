@@ -111,7 +111,36 @@ https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html
 
 -------------------------------------
 
+One of the most important differences between structures and classes is that structures are always copied when they’re passed around in your code, but classes are passed by reference.
 
+------------------------------------------
+
+Swift DEFAULTS TO Double for floating-point numbers like 3.14159 etc.
+Swift support Float and Double types but Double is preferred if all else is the same.
+
+Assignment/initilization/declaration example of type inference:
+let pointOneFourOneFiveNine = 0.14159
+
+This gives you a Double.
+(not a Float)
+
+--------------------------------------------
+
+Swift floating-point to integer conversion:
+Floating-point values are always truncated when used to initialize a new integer value in this way. This means that 4.75 becomes 4, and -3.9 becomes -3.
+
+---------------------------------
+
+
+Clarifying usage of UNDERSCORE: _
+A GREAT Stack Overflow thread:
+
+https://stackoverflow.com/questions/39627106/why-do-i-need-underscores-in-swift
+
+Clarifies how it affects labels for function arguments, and disabling the requirement for argument labels when calling.
+(Required since Swift 3)
+
+-------------------------------------
 
 
 

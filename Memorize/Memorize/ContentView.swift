@@ -139,7 +139,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .previewDevice("iPhone 12 mini")
 //            .previewDevice("iPhone 6s Plus")
-            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)  // Comment this out for .light, which is the default.
+            .preferredColorScheme(.dark)  // Comment this out for .light, which is the default.
     }
 }
 

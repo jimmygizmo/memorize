@@ -1,0 +1,15 @@
+Apple Developer Site - Swift Language Reference Entry for: Optional
+https://developer.apple.com/documentation/swift/optional
+
+TODO: Figure out what documentation is on Swift.org and what is on Developer.Apple. Since Swift is Open Source,
+obviously Apple's implementation will have some (probably slight) differences. This is important to learn.
+The Stanford CS193P course has so far only referred to swift.org and not mentioned any differneces.
+
+UPDATE!!! The above link is to a page SHOWING UPCOMING CHANGES TO THE API BETWEEN XCODE 12.5 AND BETA 13.
+
+OK. So this obvliously means there is higher potential for differences bewtwwen Apple's Swift and the Open Source flavor.
+More learning on this is clearly warranted. (*Good to see them evoloving the language rapidly. This is mentioned elsewhere.)
+
+----------------------------------------------------------
+
+

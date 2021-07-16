@@ -42,8 +42,21 @@ https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html
 
 -----------------------------------
 
+Clarifying usage of UNDERSCORE: _
+A GREAT Stack Overflow thread:
 
+https://stackoverflow.com/questions/39627106/why-do-i-need-underscores-in-swift
 
+Clarifies how it affects labels for function arguments, and disabling the requirement for argument labels when calling.
+(Required since Swift 3)
+
+-------------------------------
+
+Tuples - general info. Mentions they are value types not reference types. This is my big question.
+
+https://www.journaldev.com/19515/swift-tuple
+
+-----------------------
 
 
 
