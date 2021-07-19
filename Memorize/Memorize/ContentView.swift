@@ -33,7 +33,8 @@ struct ContentView: View {
                       "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
 /*  let deckIcons = travelIcons  // Doesn't work here but the idea was to set a default theme.
     If I try to simply copy this array here like this, I get the following ERROR:
-    Cannot use instance member 'travelIcons' within property initializer; property initializers run before 'self' is available
+    Cannot use instance member 'travelIcons' within property initializer;
+     property initializers run before 'self' is available
  */
     
     @State var iconCount = 32

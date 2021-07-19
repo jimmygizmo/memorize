@@ -142,5 +142,24 @@ Clarifies how it affects labels for function arguments, and disabling the requir
 
 -------------------------------------
 
+This is unique to Swift: The nil-coalescing operator (a ?? b) unwraps an optional a if it contains a value, or returns a default value b if a is nil. The expression a is always of an optional type. The expression b must match the type that’s stored inside a.
 
+The nil-coalescing operator is shorthand for the code below:
 
+a != nil ? a! : b
+
+------------------------------
+
+Also unique to Swift; use the += operator to append an array onto another:
+shoppingList += ["Baking Powder"]
+// shoppingList now contains 4 items
+shoppingList += ["Chocolate Spread", "Cheese", "Butter"]
+// shoppingList now contains 7 items
+
+----------------------------------
+
+"POP" last item off of an array:
+
+let apples = shoppingList.removeLast()
+
+--------------------------------------

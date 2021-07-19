@@ -58,5 +58,16 @@ https://www.journaldev.com/19515/swift-tuple
 
 -----------------------
 
+Asserts in Swift and Why you Should Be Using Them:
+https://medium.com/@alecoconnor/asserts-in-swift-and-why-you-should-be-using-them-6a7c96eaec10
+
+-------------------
+
+It is good to follow multiple related tutorials on a topic to fill in gaps, learn related extras, solidify
+memory of information and discover new sources of information. I plan to have a look at this introductory
+SwiftUI tut on ScrollView, Shapes, TabBar and SwiftUI basics:
+https://www.youtube.com/watch?v=xfOehTZXnYk
+
+----------------
 
 

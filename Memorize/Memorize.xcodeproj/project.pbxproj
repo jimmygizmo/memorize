@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C32C1F526A617B300FC2FA3 /* DashBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */; };
+		4C32C1F726A6187300FC2FA3 /* DashContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32C1F626A6187300FC2FA3 /* DashContentView.swift */; };
 		4CC61F2E269119B40088B6F5 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC61F2D269119B40088B6F5 /* MemorizeApp.swift */; };
 		4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC61F2F269119B40088B6F5 /* ContentView.swift */; };
 		4CC61F32269119B50088B6F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC61F31269119B50088B6F5 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardView.swift; sourceTree = "<group>"; };
+		4C32C1F626A6187300FC2FA3 /* DashContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashContentView.swift; sourceTree = "<group>"; };
 		4CC61F2A269119B40088B6F5 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC61F2D269119B40088B6F5 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		4CC61F2F269119B40088B6F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 				4CC61F31269119B50088B6F5 /* Assets.xcassets */,
 				4CC61F36269119B50088B6F5 /* Info.plist */,
 				4CC61F33269119B50088B6F5 /* Preview Content */,
+				4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */,
+				4C32C1F626A6187300FC2FA3 /* DashContentView.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C32C1F526A617B300FC2FA3 /* DashBoardView.swift in Sources */,
 				4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */,
+				4C32C1F726A6187300FC2FA3 /* DashContentView.swift in Sources */,
 				4CC61F2E269119B40088B6F5 /* MemorizeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
