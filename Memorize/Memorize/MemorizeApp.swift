@@ -20,7 +20,7 @@ struct MemorizeApp: App {
              
              When I want to try out a different UI, for now the easiest way to switch is
              doing so here at the very top entry point. Comment/uncomment below to
-             enter the app with the various UIs, with the main one being 'ContentView(()'
+             enter the app with the various UIs, with the main one being 'ContentView()'
              */
             
             //ContentView()  // The main entry-point for the Memorize app, focus of this repo.
@@ -32,7 +32,8 @@ struct MemorizeApp: App {
 }
 
 
-/* [Tutorial B] - Source for code in DashContentView and related files/code:
+/*
+ [Tutorial B] - Source for code in DashContentView and related files/code:
  https://www.youtube.com/watch?v=xfOehTZXnYk
  Channel: DevScorch. Title: SwiftUI Tutorial. Building a UI with ScrollView, Shapes and TabBar
  

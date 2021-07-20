@@ -1,0 +1,10 @@
+https://www.youtube.com/watch?v=xfOehTZXnYk
+
+The rendering of the system image "time" is not working for me and if I search SF Symbols there is no stopwatch symbol in it called 'time'. There is one called 'stopwatch'.
+This fixes the error and there is now an image but only very slightly visible and with the wrong sizing and design per what he has in the tut video, some some adjustment will be necessary.
+
+I think this will be an issue for all apps. You can use the latest symbols, but then your app MIGHT not work on older devices and OS versions and CONVERSELY, when developing with the latest XCode etc, you might not have access to the older icons etc.
+TODO: What is best practice? Is it necessary to provide for different icons/assets and hence different code based on detecting device and/or OS version? Probably. RESEARCH THIS IMPORTANT TOPIC. DEVELOP A MATRIX BASED ON INSTALLED-BASED FOR A PLAN TO REASONABLY ACCOMMADATE AS MANY USERS AS POSSIBLE.
+
+
+

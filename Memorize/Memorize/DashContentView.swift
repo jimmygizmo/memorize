@@ -30,7 +30,7 @@ struct DashContentView: View {
                 DashBoardView()
                     .tabItem {
                         Image(systemName: "house")
-                        Text("Dasboard")
+                        Text("Dashboard")
                     }
                 DashBoardView()
                     .tabItem {
