@@ -1,0 +1,14 @@
+Picking a color scheme and the exact colors in it and how those will be used in a UI design is non-trivial and critically important.
+
+This is a GREAT article to start with:
+https://designerup.co/blog/ui-design-choosing-color-palettes/
+
+
+AND .. there are issues of contrast between your theme colors that are subjective to everyone and important for many individuals with different vision. You will need a tool to test your colors for appropriate contrast differences and for proper Accessibility Certification.
+Contrast tool:
+
+https://colorable.jxnblk.com/7f389d/73ba55
+
+
+
+

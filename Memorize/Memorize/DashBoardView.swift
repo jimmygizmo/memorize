@@ -49,6 +49,83 @@ struct DashBoardView: View {
                     HStack(alignment: .center) {  // TIME ENTRY [STOPWATCH - WORKED HOURS]
                         Image(systemName: "stopwatch")  // STOPWATCH
                             .resizable()
+                            .padding(18)  // Fix 4 new img. Not in tut.
+                            .background(colorDarkNavyBlue)  // Fix 4 new img. Not in tut.
+                            // Tut size is 68 but I like 66 better:
+                            .frame(width: 66, height: 66, alignment: .center)
+                            .cornerRadius(14)  // Fix 4 new img. Not in tut.
+                        
+                        VStack {  // WORKED HOURS
+                            Text("Worked Hours")
+                                .foregroundColor(colorDarkGreyBlackish)
+                                .font(.system(size: 14))
+                                .fontWeight(.bold)
+                            
+                            Text("140")
+                                .foregroundColor(colorDarkGreyBlackish)
+                                .font(.system(size: 12))
+                                .padding(.top, 2)
+                                .padding(.leading, 1)
+                        }  // VStack - Worked Hours
+                        .padding(.horizontal, 10)  // Not in tut but looks better.
+                        
+                        Spacer()
+                        
+                    }  // HStack - Time Entry [STOPWATCH - WORKED HOURS]
+                    .padding(.all, 15.0)
+                    // The below has bg white, which is over the parent bg which is almost
+                    // white. TODO: The colors are a bit too hard to distinguish. Fix.
+                    // This color might need to be a tad darker: colorAlmostWhite
+                    .background(RoundedRectangle(cornerRadius: 22)
+                                    // Based on what is observed, the following foregrounColor
+                                    // is of course the color of the BACKGROUND of the record
+                                    // item itself which is meant to pop out a bit from the
+                                    // slightly-darker parent bg of the scrollview and top parent
+                                    // view.
+                                    .foregroundColor(.white)
+                                    .frame(width: nil, height: 94, alignment: .center)
+                    )
+                    /*--------------------------------*/
+                    
+                    
+                    /*--------------------------------*/
+                    HStack(alignment: .center) {  // TIME ENTRY [XXXX - WORKED HOURS]
+                        Image(systemName: "car")  // STOPWATCH
+                            .resizable()
+                            .padding(18)
+                            .background(colorDarkNavyBlue)
+                            .frame(width: 66, height: 66, alignment: .center)
+                            .cornerRadius(14)
+                        
+                        VStack {  // WORKED HOURS
+                            Text("Worked Hours")
+                                .foregroundColor(colorDarkGreyBlackish)
+                                .font(.system(size: 14))
+                                .fontWeight(.bold)
+                            
+                            Text("140")
+                                .foregroundColor(colorDarkGreyBlackish)
+                                .font(.system(size: 12))
+                                .padding(.top, 2)
+                                .padding(.leading, 1)
+                        }  // VStack - Worked Hours
+                        .padding(.horizontal, 10)
+                        
+                        Spacer()
+                        
+                    }  // HStack - Time Entry [STOPWATCH - WORKED HOURS]
+                    .padding(.all, 15.0)
+                    .background(RoundedRectangle(cornerRadius: 22)
+                                    .foregroundColor(.white)
+                                    .frame(width: nil, height: 94, alignment: .center)
+                    )
+                    /*--------------------------------*/
+                    
+                    
+                    /*--------------------------------*/
+                    HStack(alignment: .center) {  // TIME ENTRY [XXXX - WORKED HOURS]
+                        Image(systemName: "person")  // STOPWATCH
+                            .resizable()
                             .padding(18)
                             .background(colorDarkNavyBlue)
                             .frame(width: 66, height: 66, alignment: .center)

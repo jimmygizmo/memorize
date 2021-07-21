@@ -75,4 +75,17 @@ https://stackoverflow.com/questions/60192357/inverted-mask-swiftui-with-system-i
 
 ----------------------
 
+Don't forget how important it is to pick a good set of colors to use in your UI Design.
+As with everything, there are a lot of poor sources of info on this topic, but I think this link is
+a very good place to start. Quick overview of a handful of formal/traditional design strategies for
+picking a color scheme. Quick read, but very interesting. Lots of clear examples.
+
+https://designerup.co/blog/ui-design-choosing-color-palettes/
+
+UPDATE: I read more of this. It is really quite good. Goes into detail on exactly how to apply your color scheme
+idea into the parts of the UI design, in particular how you can do it all with different shades of a single
+theme color, which is a good way to start and keep the design clean from the get go.
+
+-------------------------
+
 
