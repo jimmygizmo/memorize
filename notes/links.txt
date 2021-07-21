@@ -70,4 +70,9 @@ https://www.youtube.com/watch?v=xfOehTZXnYk
 
 ----------------
 
+Get really fancy using code to manipulate SF Symbols as masks and do photoshop-stle tricks from CODE!
+https://stackoverflow.com/questions/60192357/inverted-mask-swiftui-with-system-image
+
+----------------------
+
 

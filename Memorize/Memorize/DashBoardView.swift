@@ -15,10 +15,11 @@ struct DashBoardView: View {
     var body: some View {
         
         let colorDarkGreyBlackish = Color(red: 57/255, green: 57/255, blue: 57/255)
+        let colorDarkNavyBlue = Color(red: 19/255, green: 18/255, blue: 88/255)
+        let colorAlmostWhite = Color(red: 245/255, green: 245/255, blue: 249/255)
         
         ZStack {
-            Color(red: 245/255, green: 245/255, blue: 249/255)
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            colorAlmostWhite.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
             VStack(alignment: .leading) {
                 HStack {  // DASHBOARD
@@ -44,12 +45,14 @@ struct DashBoardView: View {
                     .padding(20)
                     
                     
+                    /*--------------------------------*/
                     HStack(alignment: .center) {  // TIME ENTRY [STOPWATCH - WORKED HOURS]
-                        Image(systemName: "stopwatch.fill")  // STOPWATCH
+                        Image(systemName: "stopwatch")  // STOPWATCH
                             .resizable()
-                            .foregroundColor(colorDarkGreyBlackish)
-                            .padding(16)
-                            .frame(width: 68, height: 68, alignment: .center)
+                            .padding(18)
+                            .background(colorDarkNavyBlue)
+                            .frame(width: 66, height: 66, alignment: .center)
+                            .cornerRadius(14)
                         
                         VStack {  // WORKED HOURS
                             Text("Worked Hours")
@@ -60,13 +63,20 @@ struct DashBoardView: View {
                             Text("140")
                                 .foregroundColor(colorDarkGreyBlackish)
                                 .font(.system(size: 12))
-                                .multilineTextAlignment(.trailing)
                                 .padding(.top, 2)
                                 .padding(.leading, 1)
                         }  // VStack - Worked Hours
+                        .padding(.horizontal, 10)
+                        
                         Spacer()
                         
                     }  // HStack - Time Entry [STOPWATCH - WORKED HOURS]
+                    .padding(.all, 15.0)
+                    .background(RoundedRectangle(cornerRadius: 22)
+                                    .foregroundColor(.white)
+                                    .frame(width: nil, height: 94, alignment: .center)
+                    )
+                    /*--------------------------------*/
                     
                     
                 }  // ScrollView
@@ -91,22 +101,13 @@ struct DashBoardView_Previews: PreviewProvider {
  Issue encountered in trying to use Image("time") under my current XCode 12.5.1
  (Current SF Symbols version is Beta 3.0 build 56.)
  The system image called 'time' no longer exists and the closest replacement is called
- 'stopwatch' but it is quite different from the tutorial image and a lot of adjustment
- will be needed. First issue is that it is nearly impossible to see because the foreground
- color nearly matches the background and next issue is the lack of padding and borders etc.
- Error when original 'time' image was not found was:
+ 'stopwatch'. The result has some other differences and some modifiers not in the tutorial might
+ be needed. The literal error was:
  
  No symbol named 'time' found in system symbol set
  
  Other symbols that could work:
  stopwatch.fill, clock, clock.fill, deskclock, deskclock.fill
- 
- These modifiers help the new symbols match the style of the tutorial:
- .foregroundColor(colorDarkGreyBlackish)
- .padding(16)
- 
- * The old 'time' symbol was an inverse design by default it seems so it looked fine. Had
- rounded edges and a dark BG, or the BG is the foreground color etc. This is shown in the video.
  
  */
 

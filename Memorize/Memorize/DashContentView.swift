@@ -14,17 +14,19 @@ import SwiftUI
 struct DashContentView: View {
     init() {
         UITabBar.appearance().isTranslucent = false
-        // Dark Blue / Navy Blue:
+        // Tab Bar Background Color: Dark Blue / Navy Blue:
         UITabBar.appearance().barTintColor =
             UIColor(red: 19/255, green: 18/255, blue: 88/255, alpha: 1)
     }
+    
+    var colorAlmostWhite = Color(red: 245/255, green: 245/255, blue: 249/255)
     
     
     var body: some View {
 
         ZStack {
             
-            Color(red: 245/255, green: 245/255, blue: 249/255)
+            colorAlmostWhite
             
             TabView {
                 DashBoardView()
