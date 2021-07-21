@@ -8,6 +8,17 @@
 // This file is related to a supplemental tutorial. See other comments marked for: [Tutorial B]
 // https://www.youtube.com/watch?v=xfOehTZXnYk
 
+// Unfortunately, it looks like there is no follow-on video from the same channel and might
+// never be. This might just be a one-off. I still think this was a great little tutorial to do.
+// DevScorch YouTube Channel:
+// https://www.youtube.com/c/DevScorch
+// * But it looks like he is not focusing on SwiftUI at the moment (July 2021.)
+
+// My plan is to do a few more small tutorials in separate files, but within this project/repo
+// most likely focusing on UI as I proceed with the Swift language reading assignements for
+// the Stanford CS193P course. This involves a lot of reading so it is good to keep the UI
+// gears turning at the same time for breaks from all the language-focused reading.
+
 import SwiftUI
 
 
@@ -17,9 +28,9 @@ struct DashBoardView: View {
         // TODO: Refactor these color constants (and more) into a separate file.
         let colorDarkGreyBlackish = Color(red: 57/255, green: 57/255, blue: 57/255)
         let colorDarkNavyBlue = Color(red: 19/255, green: 18/255, blue: 88/255)
-//        let colorAlmostWhite = Color(red: 245/255, green: 245/255, blue: 249/255)  // Tutorial
-        let colorAlmostWhite = Color(red: 237/255, green: 237/255, blue: 240/255)  // a tad darker
-        // 'tad darker' above is good, but the two colors below need improving. TODO: Fix:
+        // colorAlmostWhite is a tad darker than the tutorial color and works much better:
+        let colorAlmostWhite = Color(red: 237/255, green: 237/255, blue: 240/255)
+        // TODO: These two colors could be better. Similar to tut. Need proper color scheme.
         let colorEarthyYellow = Color(red: 255/255, green: 226/255, blue: 12/255)
         let colorBurntOrange = Color(red: 230/255, green: 147/255, blue: 12/255)
         
@@ -136,7 +147,7 @@ struct DashBoardView: View {
                                 .font(.system(size: 14))
                                 .fontWeight(.bold)
                             
-                            Text("140")
+                            Text("230")
                                 .foregroundColor(colorDarkGreyBlackish)
                                 .font(.system(size: 12))
                                 .padding(.top, 2)
@@ -154,6 +165,19 @@ struct DashBoardView: View {
                     )
                     /*--------------------------------*/
                     
+                    /*================================================================*/
+                    
+                    HStack {  // ACTIVE TIMERS
+                        Text("Active Timers")
+                            .foregroundColor(colorDarkGreyBlackish)
+                            .fontWeight(.bold)
+                            .font(.system(size: 20))
+                            .padding(.leading, 10)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                    }  // HStack - Active Timers
+                    .padding(20)
+                    
                     
                 }  // ScrollView
             }  // VStack - MAIN
@@ -170,22 +194,6 @@ struct DashBoardView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)  // Comment this out for .light, which is the default.
     }
 }
-
-
-/* System 'time' image used by the DevScorch tutorial no longer exists.
- 
- Issue encountered in trying to use Image("time") under my current XCode 12.5.1
- (Current SF Symbols version is Beta 3.0 build 56.)
- The system image called 'time' no longer exists and the closest replacement is called
- 'stopwatch'. The result has some other differences and some modifiers not in the tutorial might
- be needed. The literal error was:
- 
- No symbol named 'time' found in system symbol set
- 
- Other symbols that could work:
- stopwatch.fill, clock, clock.fill, deskclock, deskclock.fill
- 
- */
 
 
 /**/

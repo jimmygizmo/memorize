@@ -88,4 +88,9 @@ theme color, which is a good way to start and keep the design clean from the get
 
 -------------------------
 
+Good info on how to manage different kinds of app constants in structs in multiple constants files:
+Look at post by: Anish Parajuli
+
+https://stackoverflow.com/questions/26252233/global-constants-file-in-swift
+
 
