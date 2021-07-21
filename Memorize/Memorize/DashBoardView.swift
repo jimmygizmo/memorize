@@ -14,9 +14,14 @@ import SwiftUI
 struct DashBoardView: View {
     var body: some View {
         
+        // TODO: Refactor these color constants (and more) into a separate file.
         let colorDarkGreyBlackish = Color(red: 57/255, green: 57/255, blue: 57/255)
         let colorDarkNavyBlue = Color(red: 19/255, green: 18/255, blue: 88/255)
-        let colorAlmostWhite = Color(red: 245/255, green: 245/255, blue: 249/255)
+//        let colorAlmostWhite = Color(red: 245/255, green: 245/255, blue: 249/255)  // Tutorial
+        let colorAlmostWhite = Color(red: 237/255, green: 237/255, blue: 240/255)  // a tad darker
+        // 'tad darker' above is good, but the two colors below need improving. TODO: Fix:
+        let colorEarthyYellow = Color(red: 255/255, green: 226/255, blue: 12/255)
+        let colorBurntOrange = Color(red: 230/255, green: 147/255, blue: 12/255)
         
         ZStack {
             colorAlmostWhite.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -46,8 +51,8 @@ struct DashBoardView: View {
                     
                     
                     /*--------------------------------*/
-                    HStack(alignment: .center) {  // TIME ENTRY [STOPWATCH - WORKED HOURS]
-                        Image(systemName: "stopwatch")  // STOPWATCH
+                    HStack(alignment: .center) {  // WORKED HOURS
+                        Image(systemName: "stopwatch")
                             .resizable()
                             .padding(18)  // Fix 4 new img. Not in tut.
                             .background(colorDarkNavyBlue)  // Fix 4 new img. Not in tut.
@@ -71,17 +76,44 @@ struct DashBoardView: View {
                         
                         Spacer()
                         
-                    }  // HStack - Time Entry [STOPWATCH - WORKED HOURS]
+                    }  // HStack - WORKED HOURS
                     .padding(.all, 15.0)
-                    // The below has bg white, which is over the parent bg which is almost
-                    // white. TODO: The colors are a bit too hard to distinguish. Fix.
-                    // This color might need to be a tad darker: colorAlmostWhite
                     .background(RoundedRectangle(cornerRadius: 22)
-                                    // Based on what is observed, the following foregrounColor
-                                    // is of course the color of the BACKGROUND of the record
-                                    // item itself which is meant to pop out a bit from the
-                                    // slightly-darker parent bg of the scrollview and top parent
-                                    // view.
+                                    .foregroundColor(.white) // Makes item pop from darker bg.
+                                    .frame(width: nil, height: 94, alignment: .center)
+                    )
+                    /*--------------------------------*/
+                    
+                    
+                    /*--------------------------------*/
+                    HStack(alignment: .center) {  // BILLABLE HOURS
+                        Image(systemName: "dollarsign.square")
+                            .resizable()
+                            .padding(18)
+                            .background(colorEarthyYellow)
+                            .foregroundColor(colorDarkGreyBlackish)  // Needed for lighter bg
+                            .frame(width: 66, height: 66, alignment: .center)
+                            .cornerRadius(14)
+                        
+                        VStack {  // BILLABLE HOURS
+                            Text("Billable Hours")
+                                .foregroundColor(colorDarkGreyBlackish)
+                                .font(.system(size: 14))
+                                .fontWeight(.bold)
+                            
+                            Text("120")
+                                .foregroundColor(colorDarkGreyBlackish)
+                                .font(.system(size: 12))
+                                .padding(.top, 2)
+                                .padding(.leading, 1)
+                        }  // VStack - Billable Hours
+                        .padding(.horizontal, 10)
+                        
+                        Spacer()
+                        
+                    }  // HStack - BILLABLE HOURS
+                    .padding(.all, 15)
+                    .background(RoundedRectangle(cornerRadius: 22)
                                     .foregroundColor(.white)
                                     .frame(width: nil, height: 94, alignment: .center)
                     )
@@ -89,16 +121,17 @@ struct DashBoardView: View {
                     
                     
                     /*--------------------------------*/
-                    HStack(alignment: .center) {  // TIME ENTRY [XXXX - WORKED HOURS]
-                        Image(systemName: "car")  // STOPWATCH
+                    HStack(alignment: .center) {  // BILLABLE EXPENSES
+                        Image(systemName: "list.bullet")
                             .resizable()
                             .padding(18)
-                            .background(colorDarkNavyBlue)
+                            .background(colorBurntOrange)
+                            .foregroundColor(colorDarkGreyBlackish)  // Needed for lighter bg
                             .frame(width: 66, height: 66, alignment: .center)
                             .cornerRadius(14)
                         
-                        VStack {  // WORKED HOURS
-                            Text("Worked Hours")
+                        VStack {  // BILLABLE EXPENSES
+                            Text("Billable Expenses")
                                 .foregroundColor(colorDarkGreyBlackish)
                                 .font(.system(size: 14))
                                 .fontWeight(.bold)
@@ -108,46 +141,12 @@ struct DashBoardView: View {
                                 .font(.system(size: 12))
                                 .padding(.top, 2)
                                 .padding(.leading, 1)
-                        }  // VStack - Worked Hours
+                        }  // VStack - Billable Expenses
                         .padding(.horizontal, 10)
                         
                         Spacer()
                         
-                    }  // HStack - Time Entry [STOPWATCH - WORKED HOURS]
-                    .padding(.all, 15.0)
-                    .background(RoundedRectangle(cornerRadius: 22)
-                                    .foregroundColor(.white)
-                                    .frame(width: nil, height: 94, alignment: .center)
-                    )
-                    /*--------------------------------*/
-                    
-                    
-                    /*--------------------------------*/
-                    HStack(alignment: .center) {  // TIME ENTRY [XXXX - WORKED HOURS]
-                        Image(systemName: "person")  // STOPWATCH
-                            .resizable()
-                            .padding(18)
-                            .background(colorDarkNavyBlue)
-                            .frame(width: 66, height: 66, alignment: .center)
-                            .cornerRadius(14)
-                        
-                        VStack {  // WORKED HOURS
-                            Text("Worked Hours")
-                                .foregroundColor(colorDarkGreyBlackish)
-                                .font(.system(size: 14))
-                                .fontWeight(.bold)
-                            
-                            Text("140")
-                                .foregroundColor(colorDarkGreyBlackish)
-                                .font(.system(size: 12))
-                                .padding(.top, 2)
-                                .padding(.leading, 1)
-                        }  // VStack - Worked Hours
-                        .padding(.horizontal, 10)
-                        
-                        Spacer()
-                        
-                    }  // HStack - Time Entry [STOPWATCH - WORKED HOURS]
+                    }  // HStack - BILLABLE EXPENSES
                     .padding(.all, 15.0)
                     .background(RoundedRectangle(cornerRadius: 22)
                                     .foregroundColor(.white)
