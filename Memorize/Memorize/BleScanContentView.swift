@@ -39,23 +39,84 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
     // LocationManager to be kept alive during the entire life of the app.
     var locationManager: CLLocationManager?
     
-    
     var lastDistance = CLProximity.unknown
     
+    
     override init() {
-        super.init()
+        super.init()  // NSObject initializer
         
+        // locationManager is declared above and first assigned here, using the Type's
+        // constructor (or is it better to call it 'initializer' in Swift? Probably, it seems.)
+        // This creates an instance.
         locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.requestWhenInUseAuthorization()
         
-        // CONTINUE VIDEO HERE:
-        // https://youtu.be/lCNpEaZiKqU?t=431
+        // We assign ourselves to be its delegate so we are told when something happens
+        locationManager?.delegate = self
+        
+        // User will be asked for permission to use the location. TODO: Clarify when.
+        // (He says, when app is being run.) Clarify if it saves the permission etc.
+        // I know Info.plist can be involved with such permissions. Clarify.
+        locationManager?.requestWhenInUseAuthorization()
+    }  // init
+    
+    
+    // Make decision of allow/disallow use of Location
+    func locationManager(_ manager: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            // Can this device scan for beacons?
+            if CLLocationManager.isMonitoringAvailable(
+                for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    // good to go!
+                    // TODO ??? Probably: startScanning(???)
+                    
+                }  // isRangingAvailable
+                
+            }  // isMonitoringAvailable
+            
+        }  // authorizedWhenInUse
+    }  // func locationManager
+    
+    // Said in tutorial to be an Apple test uuid:
+    // 5A4BCFCE-174E-4BAC-A814-092E77F6B7E5
+    // Probably cannot make BLE hardware operate without an approved UUID.
+    // This might require getting app approved in MFi program before it can go into the store.
+    // This is a primary reason that Apple's very substantial MFi program exists.
+    func startScanning () {
+        let uuid = UUID(uuidString: "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5")!
+        
+        // CLBeaconIdentityConstraint was introduced in IOS 13 for detecting Beacons
         //
+        // major: CLBeaconMajorValue -- Example: brand/company, store location
+        //
+        // minor: <#T##CLBeaconMinorValue#> -- Example: floor within store
+        //
+        // uuid, major and minor must match in whatever app or device you are using to
+        // transmit beacons with.
+        let constraint = CLBeaconIdentityConstraint(uuid: uuid, major: 123, minor: 456)
+        
+        // Wrap the constraint in a BeaconRegion
+        let beaconRegion = CLBeaconRegion(beaconIdentityConstraint: constraint,
+            identifier: "MyBeacon")
+        
+        locationManager?.startMonitoring(for: beaconRegion)
+        locationManager?.startRangingBeacons(satisfying: constraint)
+    } // startScanning
+    
+    // When we find a beacon
+    func update(distance: CLProximity) {
+        lastDistance = distance  // the property we defined
+        didChange.send(())  // immediately call our publisher to inform any Views observing us
     }
     
     
     
+    // CONTINUE VIDEO HERE:
+    // https://youtu.be/lCNpEaZiKqU?t=759
+    //
+    
+
 }  // BeaconDetector
 
 
