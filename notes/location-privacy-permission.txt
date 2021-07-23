@@ -1,0 +1,12 @@
+Tutorial c uses bluetooth location services. When we got to the point of trying to read the observed property tied to beacon detection data from location services, we got the expected error.
+
+2021-07-23 13:38:10.448329-0700 Memorize[16167:8179187] This app has attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an “NSLocationWhenInUseUsageDescription” key with a string value explaining to the user how the app uses this data
+
+Interestingly, there did not come whene we were accessing this data, but when we tried to show it in the UI. Now maybe the compiler said well if it never does anything, then dont even call this code, but I doubit it. I suspect that our BeaconDetector code was accessing CoreLocation, but the warning/error does not show until you actually try ot access/use/read that data.
+Interesting enough that I want to learn more. A novice might expect that the permission would be needed for even trying to scan for or range beacons, but that is not where we got the error. Got the error when trying to re-paint the view with this data connected through @ObservedObject.
+
+Anyhow, we need to add an entry to Info.plist to fix this. Then the user will be prompted for permission.
+
+We have han outstanding TODO to determine how often/when the user has to grant this permission.
+
+

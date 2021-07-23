@@ -101,5 +101,10 @@ https://www.youtube.com/watch?v=lCNpEaZiKqU
 
 -----------------------------
 
+Logging in Swift
+https://stevenpcurtis.medium.com/logging-in-swift-d9b59146ff00
+
+---------------------
+
 
 
