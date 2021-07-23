@@ -93,4 +93,13 @@ Look at post by: Anish Parajuli
 
 https://stackoverflow.com/questions/26252233/global-constants-file-in-swift
 
+-----------------------
+
+Candidate for tutorial C:
+SwiftUI Tutorial: Build an iBeacon detector with object binding and custom modifiers
+https://www.youtube.com/watch?v=lCNpEaZiKqU
+
+-----------------------------
+
+
 

@@ -23,9 +23,11 @@ struct MemorizeApp: App {
              enter the app with the various UIs, with the main one being 'ContentView()'
              */
             
-            ContentView()  // The main entry-point for the Memorize app, focus of this repo.
+            //ContentView()  // The main entry-point for the Memorize app, focus of this repo.
             
             //DashContentView()  // An experimental view with a TabBar and more. [Tutorial B]
+            
+            BleScanContentView()  // An experimental view with a TabBar and more. [Tutorial C]
             
         }
     }
