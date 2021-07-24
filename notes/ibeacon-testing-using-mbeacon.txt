@@ -1,0 +1,56 @@
+This article includes how to simulate ibeacons from a mac:
+https://www.beaconzone.co.uk/blog/make-your-mac-advertise-ibeacon/
+
+Links to this tool on GitHub which also installs via brew:
+https://github.com/watr/mbeacon
+
+FOLLOW THE INSTRUCTIONS CAREFULLY ON THE GITUB PAGE.
+
+Install is simple though:
+brew tap watr/formulae
+brew install mbeacon
+
+Be sure to give permission to Terminal.app and/or iTerm.app or whatever you use for console to run mbeacon.
+IT MUST BE GIVEN BLUETOOTH PERMISSION IN SYSTEM PREFERENCES.
+Might need this for your IDE etc.
+
+If you don't have permission, you will get a very minimal process Abort message with no details.
+
+You also must set the UUID, MAJOR and MINOR ids like this:
+$ defaults write mbeacon uuid -string "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+$ defaults write mbeacon measuredPower -integer -45
+
+
+And then use it:
+$ mbeacon -major 0 -minor 0
+
+MY RESULTS:
+So far my app is not detecting a simulated beacon (or any beacon) and I cannot prove that mbeacon is working.
+Based on its output it looks like it is working and configured correctly.
+
+--------------------
+
+Apparently running correctly after having been given permission:
+
+➜  ~ mbeacon -major 123 -minor 456
+uuid: 5A4BCFCE-174E-4BAC-A814-092E77F6B7E5, major: 123, minor: 456, measuredPower: -45
+
+----------------------
+
+TESTING SUCCESSFUL.
+Was able to detect this beacon and it's distance, turn it on and off and see the corresponding effect.
+This is a nice tool to have, but I will start testing with some real Apple iBeacons shortly.
+
+--------------------------
+
+I suspect that some adjustment might need to be made to the value for measuredPower.
+I get all three zones: immediate, near, far and unknown .. but the occur VERY close to the laptop running
+mbeacon to simulate the ibeacon. I think the simulation needs more power.
+I will research what Apple intends the open-air/low-noise distance ranges to be, then see if I can adjust the
+measuredPower value to get something that matches.
+I'm not sure if the BLE antennae are in the base or in the lid of the macbook pro, but anyhow, my lid is open at about 90 degrees.
+Will update here when I might be able to get to doing this calibration after the research.
+
+
+
+

@@ -71,7 +71,7 @@ struct ContentView: View {
 //            .padding(.horizontal)
                 
         }  // VStack ContentView
-    }
+    } // var body View
     
     var removeButton: some View {
         Button {
@@ -131,7 +131,7 @@ struct CardView: View {
             isFaceUp = !isFaceUp
         }
         
-    }
+    }  // var Body View
 }  // CardView
 
 

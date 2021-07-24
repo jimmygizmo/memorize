@@ -29,9 +29,9 @@ struct MemorizeApp: App {
             
             BleScanContentView()  // An experimental view with a TabBar and more. [Tutorial C]
             
-        }
-    }
-}
+        }  // WindowGroup
+    }  // var body Scene
+}  // App
 
 
 /*

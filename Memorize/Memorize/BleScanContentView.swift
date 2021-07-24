@@ -30,6 +30,28 @@ import SwiftUI
 // TODO: Look for a memory leak. I see memory usage slowly increasing, but have no explanation.
 
 
+// This is just so our logging can show a human readable proximity. There don't appear to be a
+// built-in string option, just rawValue integers, which effectively is what is matching here:
+extension CLProximity {
+    var stringValue: String {
+        switch self {
+        case .unknown:
+            return "unknown"
+        case .immediate:
+            return "immediate"
+        case .near:
+            return "near"
+        case .far:
+            return "far"
+        default:
+            return "[Warning: Unconfigured CLProximity value. Cannot convert to string.]"
+            // This error has not occurred in basic testing so it looks like these are all
+            // the cases we need to cover (along with the case: no beacons at all returned.)
+        }
+    }
+}
+
+
 // TODO: Clarify/re-write the below as it was transcribed from hard-to-hear tutorial audio:
 // BeaconDetector class will be an ObservableObject and a the delegate for a CL Location Manager.
 // A requirement for working with delegates on IOS in UIKit is you must inherit from NSObject.
@@ -46,7 +68,13 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
     // LocationManager to be kept alive during the entire life of the app.
     var locationManager: CLLocationManager?
     
-    var lastDistance = CLProximity.unknown
+    // The @Published decorator was the final piece needed to cause the View to update.
+    // I could see that the data was updating, but not the view. Swift has changed since the
+    // time of the tutorial and there are three pieces that work together in the new way,
+    // different from the time of the tut. These are: @Published, ObservableObject and
+    // @ObservedObject. See docs for how these all work together. All are part of Combine,
+    // I am pretty sure.
+    @Published var lastDistance = CLProximity.unknown
     
     override init() {
         super.init()  // NSObject initializer
@@ -119,10 +147,28 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didRange beacons: [CLBeacon], satisfying beaconConstraint: CLBeaconIdentityConstraint) {
         // Just pull out the first beacon that got matched. TODO: Potential problems?
         if let beacon = beacons.first {
-            print("beacon ranged: ", beacon.proximity)
+            print("beacon ranged: ", beacon.proximity.stringValue)
             update(distance: beacon.proximity)
         } else {
-            print("beacon ranged: (unknown distance)")
+            print("No appropriate beacons could be detected.")
+            // TODO: We might not want to call update here, more even better .. we need to be
+            // able to indicate an additional state, which we can obviously see we have from
+            // the behavior and that is: no beacon detected.
+            // FACT IS, we only get into this else block when I completely turn off the beacon
+            // or move very far away. Otherwise, what we get is unknown, far, near and immediate,
+            // but that 'unknown' comes from the TRUE block above .. so it is actually logically
+            // incorrect to call update(.unknown) here.
+            // TODO: This is an area of improvement over the tutorial, or maybe the behavior has
+            // changed since the time of the tut, but regardless, a little experimentation and
+            // thinking through of the logic and how to communicate with the user is
+            // warranted here.
+            // LOOKING at the conditional: if let beacon = beacons.first
+            // Most obviously, this will return false when no beacons have been detected at all.
+            // A log message like this seems most appropriate, since some criteria has of course
+            // been applied, such that we might not be detecting ALL possible beacons, just
+            // certain ones, perhaps matching our UUID, Major, Minor or some part or some or
+            // all of those.
+            // Message to use for now: "No appropriate beacons could be detected."
             update(distance: .unknown)
         }
     }  // CALLBACK - didRange
@@ -131,7 +177,7 @@ class BeaconDetector: NSObject, ObservableObject, CLLocationManagerDelegate {
     // When we find a beacon
     // Record the measured distance and then tell the views to repaint based off new data.
     func update(distance: CLProximity) {
-        print("BEACON update: ", distance)
+        print("BEACON update: ", distance.stringValue)
         lastDistance = distance  // the property we defined
         didChange.send(())  // immediately call our publisher to inform any Views observing us
     }  // update
@@ -188,25 +234,25 @@ struct BleScanContentView: View {
             // a year or two ago, but nowadays it is preferred to remove, common implied syntax.
             Text("RIGHT HERE")
                 .modifier(BigText())
-                .background(Color.gray)
+                .background(Color.green)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         } else if detector.lastDistance == .near {
             Text("NEARBY")
                 .modifier(BigText())
-                .background(Color.gray)
+                .background(Color.orange)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         } else if detector.lastDistance == .far {
             Text("FAR")
                 .modifier(BigText())
-                .background(Color.gray)
+                .background(Color.blue)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         } else {
             Text("UNKNOWN")
                 .modifier(BigText())
                 .background(Color.gray)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        }
-    }
+        }  // if-else like select-case for detector.lastDistance
+    }  // var body View
 }  // BleScanContentView
 
 

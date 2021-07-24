@@ -1,0 +1,55 @@
+raw value of CLProximity is an int. to get a human readable string we might use our own simple lookup:
+
+https://stackoverflow.com/questions/29534540/ibeacon-parse-swift-clproximity
+
+extension CLProximity {
+    var stringValue: String {
+        switch self {
+        case .unknown:
+            return "unknown"
+        case .immediate:
+            return "immediate"
+        case .near:
+            return "near"
+        case .far:
+            return "far"
+        }
+    }
+}
+
+but need an informative string for when we might hit an unconfigured value, per the warning:
+Switch covers known cases, but 'CLProximity' may have additional unknown values, possibly added in future versions
+Handle unknown values using "@unknown default"
+------------
+
+I'll just throw a default into the case for now.
+Anyhow, this is how we use it:
+
+print("Proximity: \(proximity.stringValue)")
+
+-----------------------
+
+This version solves the warning about unsupported values of CLProximity:
+
+
+// This is just so our logging can show a human readable proximity. There don't appear to be a
+// built-in string option, just rawValue integers, which effectively is what is matching here:
+extension CLProximity {
+    var stringValue: String {
+        switch self {
+        case .unknown:
+            return "unknown"
+        case .immediate:
+            return "immediate"
+        case .near:
+            return "near"
+        case .far:
+            return "far"
+        default:
+            return "[Warning: Unconfigured CLProximity value. Cannot convert to string.]"
+        }
+    }
+}
+
+--------------------------------
+
