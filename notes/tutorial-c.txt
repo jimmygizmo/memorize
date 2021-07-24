@@ -12,7 +12,6 @@ App will scan for nearby iBeacons. Uses object binding.
 
 * Tutorial is a bit old now (2 yrs+) and one system object has changed. It is part of Combine.
 BindableObject is now ObservableObject.
-Remains TBD to see if usage has changed and what all needs to be done to get working code.
-I don't expect it to take too much to adapt to any changes to Swift/SwiftUI/Foundation  etc.
-
+See code comments for 3 small changes needed to operate under swift 5.5 with the new ObservableObject.
+Works great.
 
