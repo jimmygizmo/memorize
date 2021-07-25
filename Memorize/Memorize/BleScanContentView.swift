@@ -1,5 +1,5 @@
 //
-//  BleScanContentView.swift
+//  BleBeaconContentView.swift
 //  Memorize
 //
 //  Created by Jimmy Gizmo on 7/21/21.
@@ -30,8 +30,13 @@ import SwiftUI
 // important areas I will cover soon as they are common problems for any kind of app.
 
 
-// This is just so our logging can show a human readable proximity. There doesn't appear to be a
-// built-in string option, just rawValue integers.
+// So our logging can show a human readable proximity. There doesn't appear to be a
+// built-in string option for CLProximity, just rawValue integers. TODO: Learn the details
+// of how an 'extension' like this works and is built in the standar use case. On face value
+// it looks like we added a class-level property that operates like a method which is in fact
+// a simple case statement. That is my way of describing this, but it would be better to know
+// the official and correct way to describe this. It's kind of a cool way to add this
+// capability and I wonder how often things like this will be needed. For logging, perhaps often.
 extension CLProximity {
     var stringValue: String {
         switch self {
@@ -45,7 +50,7 @@ extension CLProximity {
             return "far"
         default:
             return "[Warning: Unconfigured CLProximity value. Cannot convert to string.]"
-            // This error has not occurred in basic testing so it looks like these are all
+            // This error has not occurred in basic testing so it looks like these are probably all
             // the cases we need to cover (along with the case of no beacons at all returned.)
         }
     }
@@ -193,7 +198,7 @@ struct BigText: ViewModifier {
 }  // BigText - ViewModifier
 
 
-struct BleScanContentView: View {
+struct BleBeaconContentView: View {
     // Swift has changed a little in the two years since the tutorial. This decorator was
     // originally @ObjectBinding, related to BindableObject, both of which are now gone.
     // TODO: Test and confirm my conclusion that the new equivalent decorator is @ObservedObject.
@@ -239,7 +244,7 @@ struct BleScanContentView: View {
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         }  // if-else like select-case for detector.lastDistance
     }  // var body View
-}  // BleScanContentView
+}  // BleBeaconContentView
 
 
 // IMPORTANT CLARIFICATION OF ACTUAL CODE EXECUTION FLOW AND SYSTEM OPTIMIZATIONS
@@ -256,9 +261,9 @@ struct BleScanContentView: View {
 // Try wrapping the preview code in: #if DEBUG\n...\n#endif
 // The effect this has, in the context of how I currently use XCode, is not yet apparent.
 //#if DEBUG
-struct BleScanContentView_Previews: PreviewProvider {
+struct BleBeaconContentView_Previews: PreviewProvider {
     static var previews: some View {
-        BleScanContentView()
+        BleBeaconContentView()
             .previewDevice("iPhone 12 mini")
 //            .previewDevice("iPhone 6s Plus")
             .preferredColorScheme(.dark)  // Comment this out for .light, which is the default.

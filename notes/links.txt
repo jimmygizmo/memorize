@@ -111,3 +111,15 @@ https://www.beaconzone.co.uk/blog/make-your-mac-advertise-ibeacon/
 
 ----------------------
 
+Looks like a good general CoreBluetooth tutorial. IOS but only does print output and no UI.
+This is fine for now.
+https://www.novelbits.io/intro-ble-mobile-development-ios/
+Part 2:
+https://www.novelbits.io/intro-ble-mobile-development-ios-part-2/
+Part 2 has a UI and looks like a fairly complete scanner.
+
+This will be tutorial C, to get some coding in, while completing the large reading assignment for Stanford CS193P.
+
+-------------------------
+
+
