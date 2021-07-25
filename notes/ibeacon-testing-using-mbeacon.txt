@@ -14,12 +14,20 @@ Be sure to give permission to Terminal.app and/or iTerm.app or whatever you use 
 IT MUST BE GIVEN BLUETOOTH PERMISSION IN SYSTEM PREFERENCES.
 NOTE: You might need this for your IDE if you run it from the terminal there.
 
-If you don't have permission, you will get a very minimal process Abort message with no details.
+- - - - - - - -
+If you don't have permission, you will get a very minimal process Abort message with no details, like this:
+➜  ~ mbeacon -major 123 -minor 456
+[1]    43198 abort      mbeacon -major 123 -minor 456
+- - - - - - - -
 
-You also must set the UUID, MAJOR and MINOR ids like this:
+GIVE YOUR TERMINAL PERMISSION TO USE BLUETOOTH:
+System Preferences -> Security & Privacy -> TAB: Privacy -> Left Panel: Bluetooth -> Main Panel (+) PLUS - Add App
+Add your Terminal.app, iTerm.app or IDE etc.
+
+
+Before using, you also must FIRST set the UUID, MAJOR and MINOR ids like this:
 $ defaults write mbeacon uuid -string "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 $ defaults write mbeacon measuredPower -integer -45
-
 
 And then use it like this:
 $ mbeacon -major 123 -minor 456

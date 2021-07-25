@@ -122,4 +122,22 @@ This will be tutorial C, to get some coding in, while completing the large readi
 
 -------------------------
 
+I have an HM-10 BLE module to use with Arduino etc. I want to use it as an iBeacon for testing etc.
+This shows how (although it references PC only tools, has lots of good info.)
+https://www.instructables.com/make-iBeacon/
+
+---------------------------
+
+Nordic nRF51 DK BLE Development kit, Arduino compatible  used by am authoratative BLE course/author:
+https://www.nordicsemi.com/Products/Development-hardware/nRF52-DK
+
+Referenced in this BLE Tutorial part 1:
+https://www.novelbits.io/intro-ble-mobile-development-ios/
+
+And part 2:
+https://www.novelbits.io/intro-ble-mobile-development-ios-part-2/
+
+-----------------------
+
+
 

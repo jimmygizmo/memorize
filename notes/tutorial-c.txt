@@ -1,4 +1,4 @@
-Candidate for tutorial-C:
+tutorial-C:
 
 SwiftUI Tutorial: Build an iBeacon detector with object binding and custom modifiers
 https://www.youtube.com/watch?v=lCNpEaZiKqU
