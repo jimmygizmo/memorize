@@ -27,7 +27,7 @@ struct MemorizeApp: App {
             
             //DashContentView()  // An experimental view with a TabBar and more. [Tutorial B]
             
-            BleScanContentView()  // An experimental view with a TabBar and more. [Tutorial C]
+            BleBeaconContentView()  // An experimental view with a TabBar and more. [Tutorial C]
             
         }  // WindowGroup
     }  // var body Scene

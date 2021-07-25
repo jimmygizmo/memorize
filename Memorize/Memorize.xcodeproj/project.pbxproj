@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C32C1F526A617B300FC2FA3 /* DashBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */; };
 		4C32C1F726A6187300FC2FA3 /* DashContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32C1F626A6187300FC2FA3 /* DashContentView.swift */; };
-		4C5505CB26A92A5200C35046 /* BleScanContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5505CA26A92A5200C35046 /* BleScanContentView.swift */; };
+		4C5505CB26A92A5200C35046 /* BleBeaconContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5505CA26A92A5200C35046 /* BleBeaconContentView.swift */; };
 		4CC61F2E269119B40088B6F5 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC61F2D269119B40088B6F5 /* MemorizeApp.swift */; };
 		4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC61F2F269119B40088B6F5 /* ContentView.swift */; };
 		4CC61F32269119B50088B6F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC61F31269119B50088B6F5 /* Assets.xcassets */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardView.swift; sourceTree = "<group>"; };
 		4C32C1F626A6187300FC2FA3 /* DashContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashContentView.swift; sourceTree = "<group>"; };
-		4C5505CA26A92A5200C35046 /* BleScanContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanContentView.swift; sourceTree = "<group>"; };
+		4C5505CA26A92A5200C35046 /* BleBeaconContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleBeaconContentView.swift; sourceTree = "<group>"; };
 		4CC61F2A269119B40088B6F5 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC61F2D269119B40088B6F5 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		4CC61F2F269119B40088B6F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 				4CC61F33269119B50088B6F5 /* Preview Content */,
 				4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */,
 				4C32C1F626A6187300FC2FA3 /* DashContentView.swift */,
-				4C5505CA26A92A5200C35046 /* BleScanContentView.swift */,
+				4C5505CA26A92A5200C35046 /* BleBeaconContentView.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -148,7 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C32C1F526A617B300FC2FA3 /* DashBoardView.swift in Sources */,
-				4C5505CB26A92A5200C35046 /* BleScanContentView.swift in Sources */,
+				4C5505CB26A92A5200C35046 /* BleBeaconContentView.swift in Sources */,
 				4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */,
 				4C32C1F726A6187300FC2FA3 /* DashContentView.swift in Sources */,
 				4CC61F2E269119B40088B6F5 /* MemorizeApp.swift in Sources */,

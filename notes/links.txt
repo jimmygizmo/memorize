@@ -139,5 +139,12 @@ https://www.novelbits.io/intro-ble-mobile-development-ios-part-2/
 
 -----------------------
 
+Looks like a great article on the HM-10 BLE module and how to connect it to a Mac.
+http://www.hangar42.nl/hm10
+
+GREAT SET OF LINKS TO HM-10 RESOURCES AND VARIOUS EXAMPLE CODE PROJECTS AT END OF PAGE
+
+----------------------------
+
 
 

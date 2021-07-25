@@ -1,0 +1,62 @@
+
+
+
+
+
+How to choose the best Bluetooth Developmnet Kit in 2021
+https://silabs-prod.adobecqms.net/community/blog.entry.html/2021/04/22/how_to_choose_therightbluetoothdevelopmentkit-bJT7?filter=page+has+i_should_expressthatilikethisarticlesoaton-MXzV
+
+
+4 Essential Tools for Every Bluetooth Low Energy Developer
+https://www.bluetooth.com/blog/4-essential-tools-for-every-bluetooth-low-energy-developer/
+
+
+All links above this line are just misc useful Bluetooth links.
+==========================================================================================
+
+*Everything here below this ===== line are the links found at the end of this Mac + HM-0 article:
+http://www.hangar42.nl/hm10
+
+---------------------------------------------------
+MacOS/IOS + HM-10 BLE Module Example Code/Projects:
+
+BluetoothSerial helper class (Swift 3)
+https://github.com/hoiberg/swiftBluetoothSerial
+
+HM10 Bluetooth Serial test app (Swift 3)
+https://github.com/hoiberg/HM10-BluetoothSerial-iOS
+
+BluetoothMidi (Swift 3, from my Stein;Way project)
+https://github.com/hoiberg/bluetoothMidi
+
+Eaze (Swift 3)
+https://github.com/hoiberg/eaze
+
+
+--------------------------------------------------
+HM-10/CC2540 chip/BLE Resources
+
+The HM10 datasheet
+http://www.hangar42.nl/wp-content/uploads/2015/08/HM10-docu.pdf
+
+JNHuamao website (docs + sample code + firmware updates)
+http://www.jnhuamao.cn/
+** This is probably not my HM-10 manufacturer, but they might have firmware/utils for the chip. Not sure.
+
+Core Bluetooth Guidelines
+https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257-CH1-SW1
+
+Core Bluetooth 101 and Advanded Core Bluetooth
+https://developer.apple.com/videos/wwdc/2012/
+
+Connect an Arduino to your iPhone | Let’s make Robots!
+http://letsmakerobots.com/content/connect-arduino-your-iphone
+
+****
+Using the HM-10 as iBeacon
+http://www.blueluminance.com/HM-10-as-iBeacon.pdf
+
+
+
+
+

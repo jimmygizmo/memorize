@@ -1,0 +1,29 @@
+https://www.instructables.com/make-iBeacon/
+
+I have an HM-10 running off of an Arduino Mega and that all seems to be working nicely.
+I have connected to it successfully, but not much more than that.
+My plan for the current work is to use it an iBeacon and potentially as much Bluetooth/BLE as it can do, to work with the IOS apps I am experimenting with.
+
+First, per the link above, I will just use it as an iBeacon, which should be simple.
+Note that my Arduino is providing the HM-10 with 5V, however I am using the correct voltage divider on the RX.
+So the setup is good and what I am curious about now is just how much power/control I will have over the serial interface and the AT command set provided on my particular HM-10.
+
+* This article strongly recommends updating the firmware, which I plan to do.
+** I'm starting to think I have enough going on with BT in this repo for the Memorize Stanford course app, that it might be time soon to start a repo/project just for BT stuff. Gettting to that point now.
+
+- - - - - - 
+
+Details on my HM-10:
+
+Main chip:
+-------
+CC2541
+F256
+TI  OCI
+APYP G4
+-------
+
+It does have the oscillator mounted. (If missing, it means the HM-10 is a lousy fake.) I have a good HM-10.
+
+
+
