@@ -22,6 +22,29 @@ import SwiftUI
 // TODO: This is a good opportunity to trace and profile the app, look at variables/objects etc.
 
 
+// So we can log a string value for these states.
+extension CBManagerState {
+    var stringValue: String {
+        switch self {
+        case .poweredOff:
+            return "poweredOff"
+        case .poweredOn:
+            return "poweredOn"
+        case .resetting:
+            return "resetting"
+        case .unauthorized:
+            return "unauthorized"
+        case .unknown:
+            return "unknown"
+        case .unsupported:
+            return "unsupported"
+        default:
+            return "[Warning: Unconfigured CBManagerState value. Cannot convert to string.]"
+        }
+    }
+}
+
+
 class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     // PROBABLY NEEDED FOR UPDATING THE VIEW. NEEDED TO CONFORM TO ObservableObject
@@ -60,16 +83,18 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     override init() {
         super.init()  // NSObject initializer
         
-        centralManager = CBCentralManager()
-        
+        // Assign self as the delegate. Callbacks will happen on this class instance.
         centralManager = CBCentralManager(delegate: self, queue: nil)
         
-        // We assign ourselves to be its delegate so we are told when something happens
-        // ADAPTED FROM BEACON CODE - LOOKS LIKE THIS IS DONE IN THE INIT CALL ARGS. DISABLING.
-        //centralManager?.delegate = self
+        // Beacon tutorial C was a little different and we were dealing with an optional.
+        // TODO: Would be nice to know why we treat locationManager as optionl but not here.
+        //locationManager?.delegate = self
         
         
-        // centralManager?.requestWhenInUseAuthorization() // ADAPTING: NO EQUIVALENT
+        
+        // CONTINUE HERE
+        
+        
         
     }  // init
     
@@ -80,23 +105,43 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     
     
     
-    // XCode provided this FIX stub so that we conform to the CBCentralManagerDelegate protocol.
+    // This function is required to conform to the CBCentralManagerDelegate protocol.
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print("sup!")
         if central.state == CBManagerState.poweredOn {
-            print("BLE powered on")
+            print("BLE powered on. CBManagerState: \(central.state.stringValue)")
+            // TODO: Should we start scanning here? We do have to validate first, so maybe.
+            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            // NOTE: This callback happens asynchronously and can happen at any time.
+            // That has a lot of implications, but on s simple level, it means starting to
+            // scan here does make sense. There is in implication that we need to handle many
+            // state transitions of this type and in some cases do cleanup .. inform user, etc.
+            // IOS does some of the informing of users to solve basic issues like turning BT on,
+            // but what else would a rich, professional App need to do in this area?
         } else {
-            print("BLE is not powered on, not available or has some other problem.")
+            print("Some problem with BLE! CBManagerState: \(central.state.stringValue)")
+            // TODO: then what?
         }
-//        CBManagerState.poweredOff
-//        CBManagerState.poweredOn
-//        CBManagerState.resetting
-//        CBManagerState.unauthorized
-//        CBManagerState.unknown
-//        CBManagerState.unsupported
+        
+        
+        
     }  // centralManagerDidUpdateState
     
-    // NICE! Everything working so far to just detect BLE is powered on.
+    
+    // CALLBACK: didDiscover
+    // This can get a lot of rapid updates. We need to manage state for every UUID and then
+    // expire it out after some cool-down period, but continue updating the state with the
+    // latest data from each UUID as long as we are scanning. How long should we scan for?
+    // It is really an activity to find our peripheral, until we are connected and using it.
+    func centralManager(_ central: CBCentralManager,
+                        didDiscover peripheral: CBPeripheral,
+                        advertisementData: [String : Any],
+                        rssi RSSI: NSNumber) {
+        if let pname = peripheral.name {
+            print(pname)
+        }
+    }  // CALLBACK - didDiscover
+    
+
     
     
     
