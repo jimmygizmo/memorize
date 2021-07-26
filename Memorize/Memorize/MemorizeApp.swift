@@ -23,11 +23,14 @@ struct MemorizeApp: App {
              enter the app with the various UIs, with the main one being 'ContentView()'
              */
             
+            // Memorize App - part of the coursework for Stanford CS193P.
             //ContentView()  // The main entry-point for the Memorize app, focus of this repo.
             
             //DashContentView()  // An experimental view with a TabBar and more. [Tutorial B]
             
-            BleBeaconContentView()  // An experimental view with a TabBar and more. [Tutorial C]
+            //BleBeaconContentView()  // An experimental view with a TabBar and more. [Tutorial C]
+            
+            BleConnectView()  // Basic Bluetooth Low Energy (BLE) communications. [Tutorial D]
             
         }  // WindowGroup
     }  // var body Scene

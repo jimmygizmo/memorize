@@ -1,0 +1,46 @@
+
+Introduction to BLE Mobile Development [iOS]
+https://www.novelbits.io/intro-ble-mobile-development-ios/
+PART 2:
+https://www.novelbits.io/intro-ble-mobile-development-ios-part-2/
+
+------------------------
+Done in my files in this repo/project (alongside the work for the Stanford CS193P course.):
+BleConnectView.swift
+
+NOTE:
+I'm going to code up this tutorial sightly different than it describes, to go along more with everything I am currently doing in this repo which is just SwiftUI.
+The first part of the tut is all just print output anyhow, with no UI at all, so that part I might do the same, but when it comes to UI I will be changing things a little. It is a simple UI anyhow.
+The focus is on making a bluetooth connection and specifically I want to leverage this tut to connect an iPhone app to my HM-10 BLE module (which happens to be connected and controlled by an Arduino Mega at the moment.)
+
+The tutorial builds a UI Kit app and starts out that way even for the non-UI print-only version.
+I will make this a SwiftUI app.
+I will put the main Bluetooth code inside a class and run it (via instantiation or maybe another way) like was done in the previous tutorial D Beacon tut in file BleBeaconContentView.swift.
+These filenames are too long IMO. From now on I will leave out 'Content' .. like this:
+BleConnectView.swift (instead of BleConnectContentView.swift. Much better.)
+
+----------------------
+Links:
+Core Bluetooth | Apple Developer Documentation
+https://developer.apple.com/documentation/corebluetooth
+
+Core Bluetooth Programming Guide
+https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257
+
+Design Patterns on iOS using Swift – Part 1/2 (NOTE: These are 2017 some some things will have changed a little.)
+https://www.raywenderlich.com/477-design-patterns-on-ios-using-swift-part-1-2
+
+Design Patterns on iOS using Swift – Part 2/2
+https://www.raywenderlich.com/476-design-patterns-on-ios-using-swift-part-2-2
+
+Definition of states from CBManager:
+https://developer.apple.com/documentation/corebluetooth/cbmanagerstate
+
+
+-------------------------
+We will be using CBCentralManager and CBPeripheral classes since our phone will be the central manager and we will use methods to interface with the peripheral BLE device. 
+
+
+
+
+

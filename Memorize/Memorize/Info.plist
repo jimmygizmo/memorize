@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This App needs access to Bluetooth to communicate with other Bluetooth devices and Peripherals. [For iOS 13 and later users.]</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This App needs access to Bluetooth to communicate with other Bluetooth devices and Peripherals. [For pre-iOS 13 and earlier users.]</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses Bluetooth data to scan for iBeacons and determine their distance. This infomation can be used to determine the location of this device.</string>
 	<key>CFBundleDevelopmentRegion</key>
