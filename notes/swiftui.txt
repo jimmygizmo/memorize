@@ -60,9 +60,15 @@ Short vs long version of onTapGesture
 
 -----------------------------------
 
+For gradient backgrounds and other gradient usage. Pretty cool!
 
+Gradients
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-a-gradient
 
+Fancy Gradients
+https://sarunw.com/posts/gradient-in-swiftui/
 
+-----------------------------------------
 
 
 

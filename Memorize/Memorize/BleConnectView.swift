@@ -22,7 +22,7 @@ import SwiftUI
 // TODO: This is a good opportunity to trace and profile the app, look at variables/objects etc.
 
 
-// So we can log a string value for these states.
+// For logging.
 extension CBManagerState {
     var stringValue: String {
         switch self {
@@ -39,7 +39,26 @@ extension CBManagerState {
         case .unsupported:
             return "unsupported"
         default:
-            return "[Warning: Unconfigured CBManagerState value. Cannot convert to string.]"
+            return "[WARNING: Unconfigured CBManagerState value. Cannot convert to string.]"
+        }
+    }
+}
+
+
+// For logging.
+extension CBPeripheralState {
+    var stringValue: String {
+        switch self {
+        case .connected:
+            return "connected"
+        case .connecting:
+            return "connecting"
+        case .disconnected:
+            return "disconnected"
+        case .disconnecting:
+            return "disconnecting"
+        default:
+            return "[WARNING: Unconfigured CBPeripheralState value. Cannot convert to string.]"
         }
     }
 }
@@ -104,7 +123,7 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     
     
     
-    
+    // CBCentralManager CALLBACK - centralManagerDidUpdateState
     // This function is required to conform to the CBCentralManagerDelegate protocol.
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
@@ -123,11 +142,10 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
         }
         
         
-        
-    }  // centralManagerDidUpdateState
+    }  // CBCentralManager CALLBACK - centralManagerDidUpdateState
     
     
-    // CALLBACK: didDiscover
+    // centralManager CALLBACK - didDiscover
     // This can get a lot of rapid updates. We need to manage state for every UUID and then
     // expire it out after some cool-down period, but continue updating the state with the
     // latest data from each UUID as long as we are scanning. How long should we scan for?
@@ -136,19 +154,44 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any],
                         rssi RSSI: NSNumber) {
-        if let pname = peripheral.name {
-            print(pname)
-        }
-    }  // CALLBACK - didDiscover
+        logDiscoveredPeripheral(peripheral)
+        
+        // TODO: LOOK FOR THE PERIPHERAL WE WANT TO CONNECT TO AND CONNECT (next step in Tutorial)
+        
+    }  // centralManager CALLBACK - didDiscover
     
-
     
+    func logDiscoveredPeripheral(_ peripheral: CBPeripheral) {
+        // In here, CBPeripheral.name is an optional, and we want to use empty string or
+        // something similar to show that name was nil etc. We could combine forced unwrapping
+        // with the ternary operator like this:
+        // x = a != nil ? a! : ""
+        // Even better, we could use the Nil Coalescing Operator, which is intended for this:
+        // x = a ?? ""
+        print("----------------------------------------------------------------")
+        
+        print("NAME: \(peripheral.name ?? "") ")
+        
+        print("UUID: \(peripheral.identifier)")
+        
+        // bools ANCS and CSWWR will print as strings "true" or "false"
+        print("STATE: \(peripheral.state.stringValue)    ",
+              "ANCS: \(peripheral.ancsAuthorized)    ",
+              "CSWWR: \(peripheral.canSendWriteWithoutResponse)"
+        )
+        
+        if let services: [CBService] = peripheral.services {
+            print("* SERVICES COUNT: \(services.count)")
+        }  // services?
+    }  // logDiscoveredPeripheral
+    
+    // NOTE: When we are connected, we can do: peripheral.readRSSI()
     
     
     // When we want to update some data in the View. Perhaps an integer called usefulInt.
     // This update will be called by some callback from the CoreBluetooth interactions.
     // Look at BleBeaconContentView.swift for the parallel elements that need to be adapted.
-    // * I just made this an int to keep to keep it simple.
+    // * I just made this an int to keep it simple.
     // * We will likely need a custom update method for every piece of information we want to
     //   update separately in the UI.
     func update(usefulInt: Int) {
@@ -161,19 +204,33 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
 }  // BleEngine
 
 
-
-
 struct BleConnectView: View {
     
     @ObservedObject var bleEngine = BleEngine()
     
+    // Rainbow gradient to use in any View inside this struct
+    let gradient = Gradient(colors: [.red, .orange, .yellow, .green, .blue, .purple])
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        VStack {
+            Text("🍒")
+                .font(.largeTitle)
+                .shadow(color: .black, radius: 28)
+                .shadow(color: .black, radius: 12)
+        }  // .frame, .background + gradient .. is for entire screen:
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            AngularGradient(gradient: gradient, center: .center, angle: .degrees(90))
+        )
+    } // var body View
+}  // BleConnectView
+
 
 struct BleConnectView_Previews: PreviewProvider {
     static var previews: some View {
         BleConnectView()
     }
 }
+
+
+ /**/

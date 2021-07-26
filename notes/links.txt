@@ -146,5 +146,20 @@ GREAT SET OF LINKS TO HM-10 RESOURCES AND VARIOUS EXAMPLE CODE PROJECTS AT END O
 
 ----------------------------
 
+For gradient backgrounds and other gradient usage. Pretty cool!
+
+Gradients
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-a-gradient
+
+Fancy Gradients
+https://sarunw.com/posts/gradient-in-swiftui/
+
+-----------------------------------------
+
+Apple Notification Center Service (ANCS) Specification
+https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Introduction/Introduction.html
+
+-----------------------------
+
 
 
