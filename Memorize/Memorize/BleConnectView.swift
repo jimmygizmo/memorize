@@ -16,10 +16,18 @@
 import Combine  // For publishing data to subscribe to with views for real-time UI updating.
 import CoreBluetooth
 import SwiftUI
+import AVFoundation  // To make sounds
 
 // TODO: Look for memory leaks or a way to explain any increase of memory usage of running app.
 // We need to explain what was observed in tutorial C. Is the slow growth from printing/logging?
 // TODO: This is a good opportunity to trace and profile the app, look at variables/objects etc.
+// UPDATE: Profiled the app and there is no sign of a memory leak. Mermory usage is small and
+// growth is slow. Have not yet confirmed that log output is causing slow App memory growth.
+
+
+// Some testing is being done using an HM-10 Bluetooth module.
+// NAME: DSD TECH
+// UUID: CE420004-A991-7876-5AA8-F315A0BC8D67
 
 
 // For logging.
@@ -77,7 +85,15 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     // The exclamation mark at the end means this is an unwrapped optional variable
     // and if we refer to it later we can check for null-safety. TODO: Clarify meaning and why.
     
-    var myPeripheral: CBPeripheral!
+    var chosenPeripheral: CBPeripheral!
+    
+    let soundChosenPeripheralDiscovered: SystemSoundID = 1120
+    // TODO: Describe sound
+    
+    let soundChosenPeripheralConnected: SystemSoundID = 1109
+    // 1109 Shake (hands, like connecting)
+    
+    // Possible system sound alternatives:
     
     
     
@@ -127,7 +143,7 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     // This function is required to conform to the CBCentralManagerDelegate protocol.
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
-            print("BLE powered on. CBManagerState: \(central.state.stringValue)")
+            print("* NOTICE: BLE powered on. CBManagerState: \(central.state.stringValue)")
             // TODO: Should we start scanning here? We do have to validate first, so maybe.
             centralManager.scanForPeripherals(withServices: nil, options: nil)
             // NOTE: This callback happens asynchronously and can happen at any time.
@@ -137,7 +153,8 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
             // IOS does some of the informing of users to solve basic issues like turning BT on,
             // but what else would a rich, professional App need to do in this area?
         } else {
-            print("Some problem with BLE! CBManagerState: \(central.state.stringValue)")
+            print("* ERROR: Some problem with BLE! CBManagerState: \(central.state.stringValue)")
+            print("This issue may resolve itself. Check to see that Bluetooth is turned on.")
             // TODO: then what?
         }
         
@@ -154,9 +171,41 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any],
                         rssi RSSI: NSNumber) {
+        
         logDiscoveredPeripheral(peripheral)
         
-        // TODO: LOOK FOR THE PERIPHERAL WE WANT TO CONNECT TO AND CONNECT (next step in Tutorial)
+        // Will connect to the known UUID of my HM-10 module (attached to an Arduino, doncha kno)
+        // DSD TECH HM-10 UUID: CE420004-A991-7876-5AA8-F315A0BC8D67
+        if peripheral.identifier.uuidString == "CE420004-A991-7876-5AA8-F315A0BC8D67" {
+            AudioServicesPlaySystemSound(soundChosenPeripheralDiscovered)
+            print("* DSD TECH HM-10 module identified during scan. Scan stopping. Will connect.")
+            self.centralManager.stopScan()
+            print("* CBManagerState: \(central.state.stringValue)")
+            
+            self.chosenPeripheral = peripheral  // assign this peripheral to a property
+            // CONFIRM: We assign it to this property so we can perform read/write actions
+            // from this property (now a reference to the peripheral.)
+            self.chosenPeripheral.delegate = self  // Object to which callbacks are sent.
+            
+            // TODO: Explore available connection options. Word 'chosen' in vars and log: weird?
+            print("* CONNECTING to chosen peripheral.")
+            self.centralManager.connect(peripheral, options: nil)
+            //
+            // IMPORTANT DISCOVERY. If you check the connection inside here, you won't see it.
+            // In fact .. no connection will happen until this block exits.
+            // I had tried checking for 'connected' status in here many times, with 1 second
+            // delays in-between. It never showed connecte UNTIL the didConnect callback
+            // happened, and that NEVER happened until THIS block exited. So the thing to do
+            // is to just issue the connect and then exit here.
+            // TODO: Need to understand the internals of why the connect does not take immediate
+            // effect and why exiting this block appears necessary before the connect can
+            // actually happen. Can the centralManager only do one thing at a time?
+            // That seems like the best explanation. It is a single instance, when is a single
+            // reference which must be only running on a single thread in the sense that
+            // one method (any of these CB callbacks) must complete before another method
+            // (CB callback) can be called. This is my best guess.
+            
+        }
         
     }  // centralManager CALLBACK - didDiscover
     
@@ -185,7 +234,18 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
         }  // services?
     }  // logDiscoveredPeripheral
     
+    
     // NOTE: When we are connected, we can do: peripheral.readRSSI()
+    
+    
+    // centralManager CALLBACK - didConnect
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        AudioServicesPlaySystemSound(soundChosenPeripheralConnected)
+        
+        print("* CONNECTED.")
+        print("* didConnect called. CBPeripheral.state: \(peripheral.state.stringValue)")
+        // TODO: Check RSSI
+    }  // centralManager CALLBACK - didConnect
     
     
     // When we want to update some data in the View. Perhaps an integer called usefulInt.
