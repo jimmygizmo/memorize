@@ -87,15 +87,13 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     
     var chosenPeripheral: CBPeripheral!
     
-    let soundChosenPeripheralDiscovered: SystemSoundID = 1120
-    // TODO: Describe sound
+    // TODO: This sound JBL Confirm as a discovery sound is not horrible but we can do better.
+    let soundChosenPeripheralDiscovered: SystemSoundID = 1111
+    // 1111 JBL Confirm (sounds like a blip appearing)
     
+    // TODO: This sound is pretty good for connecting but maybe it too can be a little better.
     let soundChosenPeripheralConnected: SystemSoundID = 1109
     // 1109 Shake (hands, like connecting)
-    
-    // Possible system sound alternatives:
-    
-    
     
     // The @Published decorator was the final piece needed to cause the View to update.
     // I could see that the data was updating, but not the view. Swift has changed since the
@@ -143,8 +141,8 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     // This function is required to conform to the CBCentralManagerDelegate protocol.
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
-            print("* NOTICE: BLE powered on. CBManagerState: \(central.state.stringValue)")
-            // TODO: Should we start scanning here? We do have to validate first, so maybe.
+            print("* BLE powered on. CBCentralManager.state: \(central.state.stringValue)")
+            print("* BLE scan starting.")
             centralManager.scanForPeripherals(withServices: nil, options: nil)
             // NOTE: This callback happens asynchronously and can happen at any time.
             // That has a lot of implications, but on s simple level, it means starting to
@@ -153,7 +151,8 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
             // IOS does some of the informing of users to solve basic issues like turning BT on,
             // but what else would a rich, professional App need to do in this area?
         } else {
-            print("* ERROR: Some problem with BLE! CBManagerState: \(central.state.stringValue)")
+            print("* ERROR: Some problem with BLE! CBCentralManager.state: ",
+                  "\(central.state.stringValue)")
             print("This issue may resolve itself. Check to see that Bluetooth is turned on.")
             // TODO: then what?
         }
@@ -172,15 +171,16 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
                         advertisementData: [String : Any],
                         rssi RSSI: NSNumber) {
         
+        AudioServicesPlaySystemSound(soundChosenPeripheralDiscovered)
         logDiscoveredPeripheral(peripheral)
         
         // Will connect to the known UUID of my HM-10 module (attached to an Arduino, doncha kno)
         // DSD TECH HM-10 UUID: CE420004-A991-7876-5AA8-F315A0BC8D67
         if peripheral.identifier.uuidString == "CE420004-A991-7876-5AA8-F315A0BC8D67" {
-            AudioServicesPlaySystemSound(soundChosenPeripheralDiscovered)
-            print("* DSD TECH HM-10 module identified during scan. Scan stopping. Will connect.")
+            print("================================================================")
+            print("* DSD TECH HM-10 module identified during scan. Stopping scan.")
             self.centralManager.stopScan()
-            print("* CBManagerState: \(central.state.stringValue)")
+            print("* CBPeripheral.state: \(peripheral.state.stringValue)")
             
             self.chosenPeripheral = peripheral  // assign this peripheral to a property
             // CONFIRM: We assign it to this property so we can perform read/write actions
@@ -190,6 +190,7 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
             // TODO: Explore available connection options. Word 'chosen' in vars and log: weird?
             print("* CONNECTING to chosen peripheral.")
             self.centralManager.connect(peripheral, options: nil)
+            print("* CBPeripheral.state: \(peripheral.state.stringValue)")
             //
             // IMPORTANT DISCOVERY. If you check the connection inside here, you won't see it.
             // In fact .. no connection will happen until this block exits.
@@ -242,8 +243,8 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         AudioServicesPlaySystemSound(soundChosenPeripheralConnected)
         
-        print("* CONNECTED.")
-        print("* didConnect called. CBPeripheral.state: \(peripheral.state.stringValue)")
+        print("* CONNECTED. didConnect was called.")
+        print("* CBPeripheral.state: \(peripheral.state.stringValue)")
         // TODO: Check RSSI
     }  // centralManager CALLBACK - didConnect
     

@@ -161,5 +161,12 @@ https://developer.apple.com/library/archive/documentation/CoreBluetooth/Referenc
 
 -----------------------------
 
+Could be a great tutorial to do and makes a useful app.
+Makes a table view of all IOS system sounds which you can play to sample. UIKit needs to be adapted to SwiftUI.
+Systematic table creation with dynamic links back to a function like play audio is useful.
+https://www.youtube.com/watch?v=6ZlbAb_Gyzo
+
+----------------------------
+
 
 
