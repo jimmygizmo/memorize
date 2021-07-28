@@ -1,35 +1,42 @@
 //
-//  BleBeaconContentView.swift
+//  BleBeaconView.swift
 //  Memorize
 //
 //  Created by Jimmy Gizmo on 7/21/21.
 //
-
 // This file is related to a supplemental tutorial, distinct from the CS193P course.
-// Related items in project will be named/noted/flagged somehow as: Tutorial C
+// Referred to in this project as: 'Tutorial C' or 'tut C'.
 //
 // SwiftUI Tutorial: Build an iBeacon detector with object binding and custom modifiers
 // https://www.youtube.com/watch?v=lCNpEaZiKqU
 
 // NOTE: Tutorial is old. BindableObject has been replaced with ObservableObject. The code here
-// now has been adapted to work with Swift 5.5. You must also put @Published decorator on
+// now has been adapted to work with Swift 5.5. You must also put the @Published decorator on
 // the var that is published. Also, the @ObservedObject decorator is needed on the observed
 // BeaconDetector object/instance where it is instantiated/initialized.
 // I believe all of these are part of Combine. They all go together with the new ObservableObject.
 import Combine
-
 import CoreLocation
-
 import SwiftUI
 
 
-// TODO: Look for a memory leak. I see memory usage slowly increasing, but have no explanation.
-// There is continuous log output, but I would not expect that to show up as RAM usage, but
-// this is an IOS app running in an iPhone, so I don't know for sure how log output storage usage
-// shows up. Neither do I know the common pitfalls of memory leaks in Swift yet. These are
-// important areas I will cover soon as they are common problems for any kind of app.
-
-
+// TODO: Move TODOs like the following (ideas and obviously important topics for further study
+// and a more complete understanding of Swift and IOS/SwiftUI development) into a dedicated file.
+// unless it is a very short term topic that needs immediate attention for the current context
+// or work to proceed, then do it soon or eventually move it. The info needs to be tracked and
+// captured, but as much code comments as possible need to be condensed or removed more moved
+// to documentation or some other location, so that code stays lean and clean. This is less
+// important for work done during the learning process. But take note, I believe that most
+// projects, in their early phases, should have lots of code comments that need resolving.
+// The issues are always there in the early days and when I see no comments from developers, it
+// tells me that they are not paying attention to important details that can and will come up
+// later or are very important for teams to understand and address. By the end of the project
+// or maturity of the app, most comments can be condensed and given a proper home and the code
+// can be lean and clean, but that process of starting with a lot of unknowns and carefully noting
+// tracking and addressing them through the use of code comments right there in the code where
+// everything relevant is happening; that is an essential process that not nearly enough teams
+// do.
+// TODO: Address the following TODO as per above:
 // So our logging can show a human readable proximity. There doesn't appear to be a
 // built-in string option for CLProximity, just rawValue integers. TODO: Learn the details
 // of how an 'extension' like this works and is built in the standar use case. On face value
@@ -54,7 +61,7 @@ extension CLProximity {
             // the cases we need to cover (along with the case of no beacons at all returned.)
         }
     }
-}
+}  // extension CLProximity
 
 
 // Narrator comments:
