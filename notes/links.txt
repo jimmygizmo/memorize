@@ -168,5 +168,27 @@ https://www.youtube.com/watch?v=6ZlbAb_Gyzo
 
 ----------------------------
 
+Short tut on ObservableObject, @Publish etc
+https://www.youtube.com/watch?v=VioWHKN1eKs
+
+The above tut mentions that "Combine is Apple's new reactive framework for IOS 13" ..
+I found the following Reddit post that sheds light in what reactive framwork means (it means pub/sub perhaps among other things) .. and Combine etc.
+https://www.reddit.com/r/iOSProgramming/comments/bwg1i7/combine_apples_new_reactive_framework/
+
+and ... Pub/Sub Vs Observer Vs Reactive CLARIFIED a little bit:
+https://stackoverflow.com/questions/30784360/pub-sub-vs-observer-vs-reactive
+
+Short tut on STATE: @State, @ObjectBinding, @EnvironmentObject ..
+https://www.youtube.com/watch?v=stSB04C4iS4
+
+---------------------------
+
+Discusses fact that SwiftUI will not let you bind optionals to Text fields, but this is part of a larger topic.
+https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-support-observableobject
+
+--------------------------------
+
+
+
 
 

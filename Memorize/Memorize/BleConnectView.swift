@@ -120,7 +120,48 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     // not work, then the question is what value should we set: empty string? error or warning?
     // Maybe even a special value that the View can interpret and handle in a custom way and not
     // simply just render/display text etc.
-    @Published var classChosenDeviceRSSI: NSNumber?
+    //@Published var classChosenDeviceRSSI: NSNumber?
+    //@Published var classChosenDeviceRSSI: String  // FIX ATTEMPT. Unwrap in the callback.
+    
+    // Small issue .. After changing things to use NumberFormatter() and forced unwrapping in
+    // the callback to get this to be a simple string (possibly empty string) .. then when I
+    // am not assigning any value here (as disabled above), I am getting this error:
+    // ERROR: Property 'self.classChosenDeviceRSSI' not initialized at super.init call
+    
+    @Published var classChosenDeviceRSSI: String = ""  // OF FIX FIX ATTEMPT. Assign something.
+    // FIX WORKED! We are now seeing the RSSI value in the UI.
+    // CONCLUSION: OPTIONALS HAVE EXTRA CHALLENGES WHEN USING @Publish TO A View().
+    // CURRENT SOLUTION: Make everything simple a String etc. using forced unwrapping
+    // if necessary, so edge-case values (lack of value upon unwrap attempt etc) will need
+    // closer consideration. BUT, since a lot of stuff happens because of callbacks .. we
+    // will more often than not have a value available, related to a callback we just got,
+    // in particular, the value may frequently be provided by the callack, and if it occurs,
+    // will always be present. There are a lot of important issues here, so no doubt a
+    // solid strategy for these issues will evolve for me soon than later.
+    
+    /*
+     -- UNDERSTANDING HOW Combine WORKS HERE:
+     -- GETTING DATA FROM CORE APP FUNCTIONALITY TO THE VIEWS:
+     There are no doubt many ways to do this, but our current strategy uses Combine's:
+     ObservableObject protocol and the @Published and @ObservedObject decorators.
+     TODO: 'Decorator' is a term borrowed from Python. Determine the correct terminology.
+     
+     The core which is publishing data uses the @Published decorator on variables that are
+     'sending' data updates out. The subscribing Views or their containing class/struct use
+     the @ObservedObject decorator when they declare the object they are subscribing to and
+     receiving from. TODO: Clarify how I say 'class/struct' where they declare...
+     
+     Snippets from the docs:
+     - - - -
+     ObservableObject
+     A type of object with a publisher that emits before the object has changed.
+     By default an ObservableObject synthesizes an objectWillChange publisher that emits the changed value before any of its @Published properties changes.
+     - - - -
+     
+     TODO: Concept needs clarification: emits changed value BEFORE property changes. What is the essence of this concept?
+     
+     
+     */
     
     
     override init() {
@@ -277,7 +318,17 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     // -------- didReadRSSI    <- centralManager
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         print("* RSSI of the connected device: \(RSSI)")
-        classChosenDeviceRSSI = RSSI  // Set the published class variable
+        // Looks like print() can handle an NSNumber or optional NSNumber? but I have
+        // had to poke aroung to figure out how to simple confert it to String().
+        // Simple things like String(RSSI) do not work.
+        // Now trying the NumberFormatter class (which might be what print() uses.)
+        let formatter = NumberFormatter()
+        // Aha! Looks like this is going to work, but in fact the result from formatter is
+        // and optional, so we have to unwrap it and as planned I will use ?? with "" to
+        // handle the nil case.
+        // Set the value of the published class variable:
+        classChosenDeviceRSSI = formatter.string(from: RSSI) ?? ""
+        
         // TODO: This is currently declared as an optional and we are interested to see how a View
         // which is consuming an @Published variable deals with an optional. Questions remain
         // about how to treat the variable and values at this point in the code, depending on
@@ -288,6 +339,41 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
         // Most likely, I suspect that Views will handle an optional more elegantly than it might
         // sound like I am predicting, but Views and UI-invalidating and repainting might have
         // special requirements.
+        //
+        // UPDATE on @Published for optionals:
+        // I tried to use it in the view and got this error:
+        // Initializer 'init(_:)' requires that 'Published<NSNumber?>.Publisher'
+        //    conform to 'StringProtocol'
+        // OK. For now I will just try it as a string and use nil-coalescing into the
+        // at an early step get rid of the optional and just make it a string.
+        // This would just be a quick fix, prior to being able to explain the situation in
+        // better detail. So to clarify, when I am getting error, the var is defined thus:
+        // @Published var classChosenDeviceRSSI: NSNumber?
+        // and access is attempted in the View thus:
+        // Text(bleEngine.$classChosenDeviceRSSI)
+        //
+        // UPDATE ON THE UPDATE - MADE IT JUST A STRING AT AN EARLY STEP.
+        // ** See details on final fix above in comments.
+        // Bottom line is this. I have see this topic now mentioned elsewhere:
+        // SWIFTUI DOES NOT LET YOU BIND OPTIONALS TO TEXT FIELDS. My feeling is that there
+        // is a more general way to express this and there might be more to it, such that you
+        // are limited to how you can use @Published optionals in Views. Maybe there are
+        // issues with note only SwiftUI and Views but also with @Published and Combine etc.
+        // This will remain an open topic for some time. This link is immediately relevant:
+/*
+https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-support-observableobject
+ */
+        // This is basically the same solution I figured out on my own, but it is nice to see
+        // a different perspective, to have my ideas confirmed and also I like the idea of
+        // creating some methods called wrappers that do this, because each kind of field
+        // of data might need a custom way of creating a string (usually) for the case where
+        // the optional is nil and has no value. Often this will just mean: for_view = opt ?? ""
+        // REMEMBER: There also seems to be a requirement that vars to be published in some
+        // cases must have a value assigned (or the compiler must see this at least) and I would
+        // guess that the reason is they dont want to allow publishling of nil objects or
+        // something like that. Makes sense if this is how it works or close to how the design
+        // was intended to work.
+        
     }  // -------- didReadRSSI    <- centralManager
     
     
@@ -315,8 +401,17 @@ struct BleConnectView: View {
     let gradient = Gradient(colors: [.red, .orange, .yellow, .green, .blue, .purple])
     
     var body: some View {
+        
         VStack {
-            Text("🍒")
+            /* Text(bleEngine.$classChosenDeviceRSSI)  <-- Notice the $
+             When this var classChosenDeviceRSSI was a NSNumber? in BleEngine and we accessed
+             thus, we got this error:
+                 Initializer 'init(_:)' requires that 'Published<NSNumber?>.Publisher'
+                     conform to 'StringProtocol'
+             But now with the var as just a String (and unwrapped early in the callback),
+             error is solved. But topic is large and deserves more research.
+            */
+            Text(bleEngine.classChosenDeviceRSSI)  // Works now because just a String
                 .font(.largeTitle)
                 .shadow(color: .black, radius: 28)
                 .shadow(color: .black, radius: 12)
