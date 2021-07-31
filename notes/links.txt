@@ -212,4 +212,16 @@ https://learnappmaking.com/delegation-swift-how-to/
 
 ------------------------------------
 
+Create a conditional view modifier extension
+https://www.avanderlee.com/swiftui/conditional-view-modifier/
+
+-------------------------------
+
+I think when a UI/app gets even moderately complex then a central messaging system will be needed.
+Something with pub/sub and more that independent objects and even threads can be coordinated with.
+Not sure if this is THE solution, but it is somewhere to start: NotificationCenter
+https://developer.apple.com/documentation/foundation/notificationcenter
+
+-------------------------------
+
 

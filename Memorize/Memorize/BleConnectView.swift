@@ -443,6 +443,9 @@ struct BleConnectView: View {
 struct BleConnectView_Previews: PreviewProvider {
     static var previews: some View {
         BleConnectView()
+            .previewDevice("iPhone 12 mini")
+//            .previewDevice("iPhone 6s Plus")
+            .preferredColorScheme(.dark)  // Comment this out for .light, which is the default.
     }
 }
 

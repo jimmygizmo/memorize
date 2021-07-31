@@ -30,7 +30,12 @@ struct MemorizeApp: App {
             
             //BleBeaconContentView()  // An experimental view with a TabBar and more. [Tutorial C]
             
-            BleConnectView()  // Basic Bluetooth Low Energy (BLE) communications. [Tutorial D]
+            //BleConnectView()  // Basic Bluetooth Low Energy (BLE) communications. [Tutorial D]
+            
+            // TODO: Create this after doing the quick tutorial on @State below.
+            //BleBrowseView()  // Basic BLE Browse/Connect/Services - Part Two of: [Tutorial D]
+            
+            StateTimerView() // Very quick tutorial on @State, timer, more.
             
         }  // WindowGroup
     }  // var body Scene
