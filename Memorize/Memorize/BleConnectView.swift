@@ -32,17 +32,17 @@ import AVFoundation
 extension CBManagerState {
     var stringValue: String {
         switch self {
-        case .poweredOff:
+        case .poweredOff:  // 4   <-- Int RawValue
             return "poweredOff"
-        case .poweredOn:
+        case .poweredOn:  // 5
             return "poweredOn"
-        case .resetting:
+        case .resetting:  // 1
             return "resetting"
-        case .unauthorized:
+        case .unauthorized:  // 3
             return "unauthorized"
-        case .unknown:
+        case .unknown:  // 0
             return "unknown"
-        case .unsupported:
+        case .unsupported:  // 2
             return "unsupported"
         default:
             return "[WARNING: Unconfigured CBManagerState value. Cannot convert to string.]"
@@ -55,13 +55,13 @@ extension CBManagerState {
 extension CBPeripheralState {
     var stringValue: String {
         switch self {
-        case .connected:
+        case .connected:  // 2   <-- Int RawValue
             return "connected"
-        case .connecting:
+        case .connecting:  // 1
             return "connecting"
-        case .disconnected:
+        case .disconnected:  // 0
             return "disconnected"
-        case .disconnecting:
+        case .disconnecting:  // 3
             return "disconnecting"
         default:
             return "[WARNING: Unconfigured CBPeripheralState value. Cannot convert to string.]"
@@ -155,12 +155,12 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
      - - - -
      ObservableObject
      A type of object with a publisher that emits before the object has changed.
-     By default an ObservableObject synthesizes an objectWillChange publisher that emits the changed value before any of its @Published properties changes.
+     By default an ObservableObject synthesizes an objectWillChange publisher that emits the
+       changed value before any of its @Published properties changes.
      - - - -
      
-     TODO: Concept needs clarification: emits changed value BEFORE property changes. What is the essence of this concept?
-     
-     
+     TODO: Concept needs clarification: emits changed value BEFORE property changes. What is the
+       essence of this concept?
      */
     
     
@@ -289,7 +289,7 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         AudioServicesPlaySystemSound(soundChosenPeripheralConnected)
         
-        print("* CONNECTED. didConnect was called.")
+        print("* CONNECTED. didConnect was called by CBCentralManager.")
         print("* CBPeripheral.state: \(peripheral.state.stringValue)")
         
         // Reading the RSSI can only be done when connected.
@@ -301,6 +301,12 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
         // there are multiple alternative techniques, but this is a simple method that is
         // working well for the current use cases.
         peripheral.readRSSI()
+        
+        // TODO: Change 'chosen' to 'selected' etc., but will do it all at once.
+        // The best terminology to use will depend on the purpose and behavior of the final app.
+        print("* DISCOVERING services on chosen peripheral.")
+        peripheral.discoverServices(nil)
+        
         //
         // * * * *
         // TODO: What else might we do here, post-connecting?
@@ -317,6 +323,7 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
     
     // -------- didReadRSSI    <- centralManager
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        print("* didReadRSSI was called by CBCentralManager")
         print("* RSSI of the connected device: \(RSSI)")
         // Looks like print() can handle an NSNumber or optional NSNumber? but I have
         // had to poke aroung to figure out how to simple confert it to String().
@@ -353,21 +360,22 @@ class BleEngine: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriphe
         // Text(bleEngine.$classChosenDeviceRSSI)
         //
         // UPDATE ON THE UPDATE - MADE IT JUST A STRING AT AN EARLY STEP.
-        // ** See details on final fix above in comments.
-        // Bottom line is this. I have see this topic now mentioned elsewhere:
+        // ** See details on final fix above in comments and near the class property declarations.
+        // Bottom line is this. I have seen this topic now mentioned elsewhere:
         // SWIFTUI DOES NOT LET YOU BIND OPTIONALS TO TEXT FIELDS. My feeling is that there
         // is a more general way to express this and there might be more to it, such that you
         // are limited to how you can use @Published optionals in Views. Maybe there are
-        // issues with note only SwiftUI and Views but also with @Published and Combine etc.
-        // This will remain an open topic for some time. This link is immediately relevant:
+        // issues with not only SwiftUI and Views but also with @Published and Combine etc.
+        // This will remain an open topic for some time. This link is relevant:
 /*
 https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-support-observableobject
  */
         // This is basically the same solution I figured out on my own, but it is nice to see
-        // a different perspective, to have my ideas confirmed and also I like the idea of
+        // a different perspective, to have my ideas confirmed and I might use the idea of
         // creating some methods called wrappers that do this, because each kind of field
         // of data might need a custom way of creating a string (usually) for the case where
-        // the optional is nil and has no value. Often this will just mean: for_view = opt ?? ""
+        // the optional is nil and has no value. Often this will just mean:
+        // string_going_to_a_view = optional_string ?? ""
         // REMEMBER: There also seems to be a requirement that vars to be published in some
         // cases must have a value assigned (or the compiler must see this at least) and I would
         // guess that the reason is they dont want to allow publishling of nil objects or
@@ -375,6 +383,14 @@ https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-s
         // was intended to work.
         
     }  // -------- didReadRSSI    <- centralManager
+    
+    
+    // -------- didDiscoverServices    <- centralManager
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        print("* didDiscoverServices was called by CBCentralManager")
+    }  // -------- didDiscoverServices    <- centralManager
+    
+    
     
     
     // Say we want to update some data in the View; imagine an integer called usefulInt ..

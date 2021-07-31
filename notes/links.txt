@@ -188,7 +188,28 @@ https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-s
 
 --------------------------------
 
+Good little article (and other interesting postings on this blog). Topic:
+Implementing a simple Queue.
+https://medium.com/@JoyceMatos/data-structures-in-swift-queues-and-stacks-e7d715634f07
+* Was thinking that when beacons are detected, they should be pushed onto a queue and then
+dequeued FIFO after that. Along with this, block on the playing of the little beep in the loop that
+dequeues, so that we hear each individual beep for a discovery event individually and not a bunch of
+them on top of each other like we do now. Would be a nicer user experience I think. For sure mushing audio alerts together is a horrible thing. Is there somewhere we could block and sort of cause an internal queuue to happen for the didDiscover events? This would have limits I am sure and might be disallowed/or an anti-patterns etc lol.
 
+---------------------------
 
+Getting RSSI to View meant converting an optional NSNumber to a String. NumberFormatter will make the string.
+You might use the nil-coalescing operator too. Remember you can't send optionals to SwiftUI Views.
+NumberFormatter article:
+https://www.swiftbysundell.com/articles/formatting-numbers-in-swift/
+Another little related article:
+https://www.hackingwithswift.com/example-code/language/what-is-nsnumber
+
+------------------------------
+
+What is delegation in Swift?
+https://learnappmaking.com/delegation-swift-how-to/
+
+------------------------------------
 
 
