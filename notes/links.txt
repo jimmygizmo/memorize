@@ -244,6 +244,11 @@ https://chris.eidhof.nl/post/structs-and-mutation-in-swift/
 
 --------------------------------
 
+Threads, Queues, @State
+https://www.hackingwithswift.com/quick-start/concurrency/understanding-threads-and-queues
+
+-----------------------------------
+
 
 
 

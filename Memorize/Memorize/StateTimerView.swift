@@ -5,6 +5,17 @@
 //  Created by Jimmy Gizmo on 7/31/21.
 //
 
+// UPDATE: WILL BE USING AN ADDITIONAL CODE FILE FOR @State, Timer tutorial.
+// This tutorial at this timing mark will be continued on the topic of two-way binding
+// and SwiftUI read/write properties using $sign syntax:
+// https://youtu.be/stSB04C4iS4?t=353
+// If the tut or some interest of mine brings me back to the timers or conditional view modifiers,
+// then I will continue in this file, otherwise this @State may conclude in the next code file
+// I will start working on now:
+// TwoWayStateView.swift
+
+// - - - - - - - - - - - -
+
 // I found this tutorial to be interesting and relevant. I especially noticed how he used
 // A very small amount of code to set up an async timer to update a view and I've thought
 // of some things I will need functionality like this for. Found this tutorial during my
@@ -53,6 +64,24 @@
 // These are important things to note. We have an extremely simple implementation here with
 // nothing mentioned about thread/timer simultaneity or locking, so I am sure a more thorough
 // discussion of the topic (maybe even later in this tutorial) we will have a solution.
+// Found an article on some relevant topics:
+// https://www.hackingwithswift.com/quick-start/concurrency/understanding-threads-and-queues
+//
+// TODO: To understand what I am seeing better, I wanted to instrument my code a little. I wanted
+// to see how many threads my app is using in realtime and I also wanted to see how many
+// active timers there are. I looked for some property or method on DispatchQueue but found
+// nothing. Found no good info on number of threads.
+//
+// FURTHER OBSERVATION:
+// Again, I clicked many times and got the counter to start incrementing rapidly. It got up to
+// around 1200 to 1500 while I Was not watching, but then I noticed that at some point it had
+// slowed back down to one-per-second. This implies that the original timer is the only one
+// still running, or perhaps this timer was replaced with one from the toggle button clicks
+// (totally possibly but I would lean towards there being a single original timer.) .. but
+// anyhow, what it looks like to me is ALL the extra timers that were started from clicks
+// have gone away for an as yet unknown reason (but certainly ran for many iterations each)
+// and only one remains. As I touched on before, there appeared to be some limit of about 10
+// of these simultaneously.
 
 
 import SwiftUI
@@ -81,6 +110,7 @@ struct StateTimerView: View {
         return VStack {
         
             Text("Reload count: \(reloadCount)")
+                .padding()
                     .border(Color.white)
         
             Button(action: {

@@ -35,7 +35,9 @@ struct MemorizeApp: App {
             // TODO: Create this after doing the quick tutorial on @State below.
             //BleBrowseView()  // Basic BLE Browse/Connect/Services - Part Two of: [Tutorial D]
             
-            StateTimerView() // Very quick tutorial on @State, timer, more.
+            //StateTimerView() // Very quick tutorial on @State, timer, more.
+            
+            TwoWayStateView() // And a continuation of the work for the @State tutorial above.
             
         }  // WindowGroup
     }  // var body Scene
@@ -50,6 +52,9 @@ struct MemorizeApp: App {
  Files:
  DashContentView.swift, DashBoardView.swift
  */
+
+// For the many other tutorials worked on:
+// See individual code files for full details on all the tutorials and coresework covered.
 
 
 /**/

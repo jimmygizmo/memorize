@@ -163,3 +163,20 @@ shoppingList += ["Chocolate Spread", "Cheese", "Butter"]
 let apples = shoppingList.removeLast()
 
 --------------------------------------
+
+Was doing a simple example that had a @State var but I was getting an error when I changed the Text()
+using it to a TextField(). Anyhow, in trying to solve that error, I tried simply changing the @State to
+@Published and then Swift dropped a little wisdom on me, which I had not yet pinned in my mind:
+
+'wrappedValue' is unavailable: @Published is only available on properties of classes
+
+OK. So I'm sure I will see more on this topic soon, or will chase that down as I will be using
+ObservableObject a lot, no doubt.
+
+This comes from work and wanderings via this tut:
+https://www.youtube.com/watch?v=stSB04C4iS4
+
+--------------------------------
+
+
+
