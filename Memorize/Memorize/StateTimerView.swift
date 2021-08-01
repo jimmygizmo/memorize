@@ -17,12 +17,26 @@
 // The author's channel has a lot of good tutorials: Paul Hudson
 // https://www.youtube.com/channel/UCmJi5RdDLgzvkl3Ly0DRMlQ
 
-// ALSO - BONUS!! See more of this tut, it has some cool stuff but I might only use the first
-// part in this code. I am using this tut for making a custom view modifier, but it goes a bit
+// ALSO - BONUS!! See more of this conditional modifier tutorial, it has some cool stuff
+// but I might only use the first part in this code. I am using this tut for
+// making a custom view modifier, but it goes a bit
 // further than I am including in this code here, because I want to move on for now from the
 // quick @State tutorial. Will turn back to this one later:
 // https://www.avanderlee.com/swiftui/conditional-view-modifier/
+// TODO: Come back to this for how to use @autoclosure and extensions to make this even more
+// powerful!! The end result is a very concise systax which can solve the problem of needing
+// many and possibly a variety of many custom CONDITIONAL view modifiers (with groups of view
+// modifiers) all in a NEAT DESCRIPTIVE CONCISE SYNTAX.
+// This is so good I will capture it in a separate file. It would be good to find additional
+// tutorials on this. It reminds me of CSS classes.
+// ANOTHER WAY TO RESTATE THE VALUE of what the above tutorial covers: Swift makes it easy to
+// have conditional VIEWS and groups of VIEWS .. but not view modifiers. So without this solution,
+// you might have to have a LOT of duplicated View code, just to capture changes to modifiers only.
+// A valuable tool for sure, at least until SwiftUI introduces a similar feature.
 
+
+// -------------------------------------------------------------------------------------------------
+// Regarding @State, async timer tutorial work:
 // INTERESTING OBSERVED BEHAVIOR - RACE CONDITIONS, NO LOCKING/THREAD-SAFETY IN THIS EXAMPLE.
 // I did more than the tutorial and I have the timer incrementing the text value but also I have
 // the boolean button which also causes a reload. Well, I clicked the button a bunch of times
@@ -66,7 +80,6 @@ struct StateTimerView: View {
         
         return VStack {
         
-            
             Text("Reload count: \(reloadCount)")
                     .border(Color.white)
         
@@ -87,11 +100,7 @@ struct StateTimerView: View {
                     
             }  // Button
         
-            
-                
         }  // VStack
-        
-            
         
     }  // var body View
 }  // StateTimerView
