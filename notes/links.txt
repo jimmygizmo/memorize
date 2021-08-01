@@ -224,4 +224,26 @@ https://developer.apple.com/documentation/foundation/notificationcenter
 
 -------------------------------
 
+3-PART TUT ON SWIFTUI LAYOUT SYSTEM.
+Looks good and should fill some gaps I have been curious about:
+https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-1/
+https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-2/
+https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-3/
+
+-----------------------------------------
+
+Looks like a very good tutorial on Frames, Layouts:
+https://swiftui-lab.com/frame-behaviors/
+
+------------------------------
+
+This article on Structs/Immutability/Extensions and more was written about an older Swift version (3.9) but covers fairly generic concepts so is probably all/most still relevant.
+I think it is good to read and then read something else on the same topics for Swift 5.5.
+Important topics here and a good alternative perspective like this helps things sink in.
+https://chris.eidhof.nl/post/structs-and-mutation-in-swift/
+
+--------------------------------
+
+
+
 

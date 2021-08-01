@@ -23,6 +23,23 @@
 // quick @State tutorial. Will turn back to this one later:
 // https://www.avanderlee.com/swiftui/conditional-view-modifier/
 
+// INTERESTING OBSERVED BEHAVIOR - RACE CONDITIONS, NO LOCKING/THREAD-SAFETY IN THIS EXAMPLE.
+// I did more than the tutorial and I have the timer incrementing the text value but also I have
+// the boolean button which also causes a reload. Well, I clicked the button a bunch of times
+// while the counter was going of course and what I saw was a little bit chaotic. The counter
+// started incrementing MUCH faster. I could tell there were many independent async timers now
+// ALL incrementing the count in a slightly random onslaught (randomized no doubt by each timer
+// being started by a random touch from my rapidly tapping finder.) BUT there was another effect
+// noted. While the values were rapidly and slightly randomly increasing at the rate of about
+// 10 per second (implying about 10 simultaneous timers) OCCASIONALLY, maybe about 1 out of 10
+// increments or about once per second, I would see the value go DOWN to the previous value
+// (down by one, never two or more that I had observed) .. meaning there was some race condition
+// with the storing/retreival of the actual count value, meaning not total thread-safety, meaning
+// not an effective locking mechanism is in place on the @State variable.
+// These are important things to note. We have an extremely simple implementation here with
+// nothing mentioned about thread/timer simultaneity or locking, so I am sure a more thorough
+// discussion of the topic (maybe even later in this tutorial) we will have a solution.
+
 
 import SwiftUI
 
@@ -32,27 +49,56 @@ struct StateTimerView: View {
     //   get this error: Cannot use mutating member on immutable value: 'self' is immutable
     // This error is triggered by self.isActivated.toggle().  So we use @State:
     @State var isActivated = false
-    //
+    
+    @State var reloadCount = 0
     
     var body: some View {
-        Button(action: {
-            self.isActivated.toggle()
-        }) {
-            Text("TOGGLE BUTTON")
-                .padding()
-                // We have deviated from the @State tut here and thrown in the custom conditional
-                // view modifier 'if':
-                .if(isActivated) { view in
-                    view.background(Color.green)
-                }
+        
+        // Asynchronous Timer
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.reloadCount += 1
         }
-    }
+        
+        // Explicit 'return' was required here after I added the above DispatchQueue block.
+        // Apparently, things nearby where you might want an implicit return to happen can
+        // confuse the compiler. The error I was getting without the return (after adding
+        // the above timer block) was this:  Type '()' cannot conform to 'View'
+        
+        return VStack {
+        
+            
+            Text("Reload count: \(reloadCount)")
+                    .border(Color.white)
+        
+            Button(action: {
+                self.isActivated.toggle()
+            }) {
+                // We have deviated from the @State tutorial here and thrown in the custom
+                // conditional view modifier 'if':
+                // COMMENT: Admittedly, this is not a great example of why or how to use this.
+                Text("TOGGLE BUTTON")
+                    .padding()
+                    .if(isActivated) { view in  // This custom 'if' is defined just below here.
+                        view.overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .strokeBorder(Color.white, lineWidth: 4)
+                        )
+                    }  // Custom 'if' conditional view modifier
+                    
+            }  // Button
+        
+            
+                
+        }  // VStack
+        
+            
+        
+    }  // var body View
 }  // StateTimerView
 
 
-// TODO: Quick idea is that I want the text button background to change based on the boolean
+// TODO: Quick idea: I want the text button background to change based on the boolean
 // toggle state.
-// Is this similar to what was done for CS193P/Memorize game for changing the cards etc?
 // https://www.avanderlee.com/swiftui/conditional-view-modifier/
 // CREATE A CONDITIONAL VIEW MODIFIER EXTENSION
 
