@@ -52,14 +52,14 @@ struct MemorizeApp: App {
             //BleConnectView()  // Basic Bluetooth Low Energy (BLE) communications. [Tutorial D]
             
             // TODO: Create this after doing the quick tutorial on @State below.
-            //BleBrowseView()  // Basic BLE Browse/Connect/Services - Part Two of: [Tutorial D]
+            BleBrowseView()  // Basic BLE Browse/Connect/Services - Part Two of: [Tutorial D]
             
             //StateTimerView() // Very quick tutorial on @State, timer, more.
             
             // Part of the @State tutorial, for the below View() to work, also uses the User
             // class defined in this top-level App file.
             // We supply the data to the environment and launch the view in the same statement:
-            TwoWayStateView().environmentObject(userData)
+            //TwoWayStateView().environmentObject(userData)
             
         }  // WindowGroup
     }  // var body Scene

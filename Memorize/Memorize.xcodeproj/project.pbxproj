@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C00E12D26B91015000D35B5 /* BleBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00E12C26B91015000D35B5 /* BleBrowseView.swift */; };
 		4C24BE3526B5D6DF00F5B606 /* StateTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24BE3426B5D6DF00F5B606 /* StateTimerView.swift */; };
 		4C2CB88A26AE225F00C1F366 /* BleConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2CB88926AE225F00C1F366 /* BleConnectView.swift */; };
 		4C32C1F526A617B300FC2FA3 /* DashBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C00E12C26B91015000D35B5 /* BleBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleBrowseView.swift; sourceTree = "<group>"; };
 		4C24BE3426B5D6DF00F5B606 /* StateTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTimerView.swift; sourceTree = "<group>"; };
 		4C2CB88926AE225F00C1F366 /* BleConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleConnectView.swift; sourceTree = "<group>"; };
 		4C32C1F426A617B300FC2FA3 /* DashBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				4C2CB88926AE225F00C1F366 /* BleConnectView.swift */,
 				4C24BE3426B5D6DF00F5B606 /* StateTimerView.swift */,
 				4C56A29426B74DAA00CEE557 /* TwoWayStateView.swift */,
+				4C00E12C26B91015000D35B5 /* BleBrowseView.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */,
 				4C32C1F726A6187300FC2FA3 /* DashContentView.swift in Sources */,
 				4CC61F2E269119B40088B6F5 /* MemorizeApp.swift in Sources */,
+				4C00E12D26B91015000D35B5 /* BleBrowseView.swift in Sources */,
 				4C24BE3526B5D6DF00F5B606 /* StateTimerView.swift in Sources */,
 				4C56A29526B74DAA00CEE557 /* TwoWayStateView.swift in Sources */,
 			);
