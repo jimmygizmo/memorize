@@ -6,11 +6,30 @@
 //
 
 import SwiftUI
+import Combine
+
+
+// Example of environment data used to hold a user record at the highest app level, then
+// passing that user into a Content View. Illustrating @EnvironmentObject for the @State tutorial.
+// This goes along with the file TwoWayStateView.swift
+// Below when we launch the view, we also have to pass this data at the same time:
+// TwoWayStateView().environmentObject(userData)
+class User: ObservableObject {
+    var didChange = PassthroughSubject<Void, Never>()
+    @Published var userName = "Jimmy" { didSet { didChange.send() } }
+    @Published var userPass = "opensesame" { didSet { didChange.send() } }
+    @Published var userEmail = "jimmy.gizmo@internet.com" { didSet { didChange.send() } }
+    
+}
 
 
 @main
 struct MemorizeApp: App {
+    
+    var userData = User()  // See User() above. For the @State tut in file TwoWayStateView.swift.
+    
     var body: some Scene {
+        
         WindowGroup {
             /* Most of the work in this repository is from following the Stanford CS193P course
              and the application/game being built, called 'Memorize' is using the common
@@ -37,7 +56,10 @@ struct MemorizeApp: App {
             
             //StateTimerView() // Very quick tutorial on @State, timer, more.
             
-            TwoWayStateView() // And a continuation of the work for the @State tutorial above.
+            // Part of the @State tutorial, for the below View() to work, also uses the User
+            // class defined in this top-level App file.
+            // We supply the data to the environment and launch the view in the same statement:
+            TwoWayStateView().environmentObject(userData)
             
         }  // WindowGroup
     }  // var body Scene
