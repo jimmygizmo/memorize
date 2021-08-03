@@ -256,7 +256,17 @@ is made. I am considering doing the entire series quickly. But at this point I m
 advanced topics, but I'll see what he has got because I think he's pretty good.
 https://www.youtube.com/watch?v=Xx9HjAB-Zz0
 
-
 -------------------------------------------
+
+THREE ARTICLES ON SUPPORTING BOTH LIGHT AND DARK MODES
+https://thinkdiff.net/swiftui-dark-mode-the-easiest-way-81e48d055189
+https://www.avanderlee.com/swift/dark-mode-support-ios/
+https://blog.waldo.io/swiftui-dark-mode/
+
+-------------------------------------------------------
+
+
+
+
 
 
