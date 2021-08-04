@@ -5,7 +5,7 @@
 //  Created by Jimmy Gizmo on 8/2/21.
 //
 
-// Work for second part of general Bluetooth BLE tutorial:
+// Work for second part of general Bluetooth BLE tutorial: [Tutorial D - Part 2]
 // https://www.novelbits.io/intro-ble-mobile-development-ios-part-2/
 // NOTE: This tutorial is designed as a lead-in to a paid course and explains that some key
 // functionality related to what we do here, will be found in the main course, not here.
@@ -25,28 +25,29 @@
 // backgrounds, the switching of text and probably also standard control colors would be
 // automatic.
 
+// Lists() reference - This will be an often-used and important UI component.
+// https://developer.apple.com/documentation/swiftui/list
+
 
 import SwiftUI
 
 
-struct Peripheral: Identifiable {
-    let name: String
-    //let uuid: UUID
-    //let rssi: Double?
-    let id = UUID()
-}
-
-private var peripherals = [
-    Peripheral(name: "BLE Peripheral 1"),
-    Peripheral(name: "BLE Peripheral 2"),
-    Peripheral(name: "BLE Peripheral 3"),
-    Peripheral(name: "BLE Peripheral 4")
-]
+//struct Peripheral: Identifiable {
+//    let name: String
+//    //let uuid: UUID
+//    //let rssi: Double?
+//    let id = UUID()  // I made this for test data. Looks like the one from the tutorial
+//    // will use an Int for id. Will add comment if I figure out why they chose Int, since
+//    // UUID is the ID of a Peripheral by definition since that field is required by
+//    // Bluetooth itself anyhow.
+//}
 
 
 struct BleBrowseView: View {
     
-    let bluetoothStatus = "ON"
+    @ObservedObject var bleManager = BleManager()
+    
+    @State private var selectedPeripheral: UUID?
     
     var body: some View {
         
@@ -56,7 +57,8 @@ struct BleBrowseView: View {
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .center)
             
-            List(peripherals){  // - PERIPHERALS
+            List(bleManager.viewDiscoveredPeripherals,
+                 selection: $selectedPeripheral){  // - PERIPHERALS
                 Text($0.name)
                     .italic()
             }  // List - PERIPHERALS
@@ -68,8 +70,13 @@ struct BleBrowseView: View {
             Text("STATUS")
                 .font(.headline)
             
-            Text("Bluetooth is \(bluetoothStatus)")
-                .foregroundColor(Color.red)
+            if bleManager.viewBleState {
+                Text("Bluetooth is powered ON")
+                    .foregroundColor(Color.green)
+            } else {
+                Text("Bluetooth is powered OFF")
+                    .foregroundColor(Color.red)
+            }
             
             
             HStack {  // - CONTROLS

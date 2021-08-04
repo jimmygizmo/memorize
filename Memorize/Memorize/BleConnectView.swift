@@ -391,8 +391,6 @@ https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-s
     }  // -------- didDiscoverServices    <- centralManager
     
     
-    
-    
     // Say we want to update some data in the View; imagine an integer called usefulInt ..
     // This update will be called by some callback from the CoreBluetooth interactions.
     // Look at BleBeaconContentView.swift for the parallel elements that need to be adapted.
@@ -404,7 +402,6 @@ https://www.hackingwithswift.com/books/ios-swiftui/extending-existing-types-to-s
         classUsefulInt = usefulInt  // store it in the property we defined in this class.
         didChange.send(())  // immediately call our publisher to inform any Views observing us
     }  // update
-    
     
 }  // BleEngine
 

@@ -265,6 +265,15 @@ https://blog.waldo.io/swiftui-dark-mode/
 
 -------------------------------------------------------
 
+Lists() reference - This will be an often-used and important UI component.
+https://developer.apple.com/documentation/swiftui/list
+
+-------------------
+
+Article on Identifiables:
+https://www.hackingwithswift.com/books/ios-swiftui/working-with-identifiable-items-in-swiftui
+
+---------------------------
 
 
 
