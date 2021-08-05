@@ -275,7 +275,16 @@ https://www.hackingwithswift.com/books/ios-swiftui/working-with-identifiable-ite
 
 ---------------------------
 
+Touches on some of the issues of which of the multiple 'name' fields used in the BT spec in advertising/scanning and more.
+Came from seeing difference between:
+advertisementData[CBAdvertisementDataLocalNameKey]
+vs.
+CALLBACK -> didDiscover ... peripheral: CBPeripheral ... peripheral.name
+Aparently these are two different name fields with different uses and concerns. TODO: Investigate!
+https://devzone.nordicsemi.com/f/nordic-q-a/19426/gap-device-name-vs-advertised-complete-local-name
 
+Best detail on the topic so far in this thread:
+https://developer.apple.com/forums/thread/19381
 
-
+-------------------------------------
 

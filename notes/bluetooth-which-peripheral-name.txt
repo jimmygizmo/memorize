@@ -1,0 +1,72 @@
+These are the notes taken in code comments as I worked on the issue of which of multiple names to use for BLE peripherals.
+
+The best info on this issue is here:
+https://developer.apple.com/forums/thread/19381
+
+To resolve the issue I will make it practice to capture both. I think there might be 2 or 3 use cases. How different peripherals are configured or behave might matter. I think just a little bit of clear documentation and perhaps a few simple variations of logic on which value to use and/or defaults etc and this will put the entire issue mostly to rest.
+For some time, I will include both and make them very visible in all my experimental/learning/developmental work, so I can get a feel for how various peripherals use those fields.
+
+---------
+
+My notes:
+
+
+        
+        // TODO: Update these comments and clarify when/why to choose the different strategies
+        // for getting peripheral data in this context.
+        // Look deeper into how name is obtained here. TODO: Code not actually tested yet!!
+        // This is not how I got name in BleConnectView.swift. Maybe I'm jumping ahead of myself.
+        // And Name is frequently blank. I prefer using UUID but I guess it depends on the device
+        // and use case. Anyhow, first time I have used:
+        // advertisementData[CBAdvertisementDataLocalNameKey]
+        // In BleConnectView, what I did was use the callback data's peripheral.name:
+        // didDiscover peripheral: CBPeripheral ... and then peripheral.name
+        // But of course there are usually MANY ways to do things in modern frameworks.
+        //
+        // UPDATE: Aparently these are two different name fields with different uses and
+        // concerns. I will flesh this out as I work on BLE/BT apps and make sure this is
+        // documented in some full featured code that I can tap into for future projects.
+        // This article touches on the issues:
+        // https://devzone.nordicsemi.com/f/nordic-q-a/19426/gap-device-name-vs-advertised-complete-local-name
+        // Maybe even better article on this:
+        // https://developer.apple.com/forums/thread/72343
+        //
+        
+        // TWO OPTIONS FOR PERIPHERAL NAME
+        //
+        // PERIPHERAL NAME 1
+        // CALLBACK -> didDiscover ... peripheral: CBPeripheral ... peripheral.name
+        // GAP Device Name
+        // * "Device publishes a database BLE Generic Access Profile device name."
+        // ** "This takes priority." (From what perspective?)
+        //
+        // PERIPHERAL NAME 2
+        // advertisementData[CBAdvertisementDataLocalNameKey]
+        // "This is scan response data that comes after scan response request."
+        //
+        // **** IMPORTANT **** peripheral.device will PREFER and return the GAP Device Name
+        // if it is available, otherwise it sounds like peripheral.name will return
+        // from option 2 source? TODO: THIS MUST BE CONFIRMED AND CLARIFIED.
+        //
+        // Most these notes are coming from the second link above on developer.apple.
+        //
+        
+        // The tutorial touches on the topic, but it still needs fleshing out:
+        /* Note that we are using CBAdvertisementDataLocalNameKey key to access the name being
+         advertised. We can also use peripheral.name but this may return the name of the device
+         that exists in its database as the GAP device name. */
+        
+        // REALIZATION! This needs to be confirmed. Is this database user-editable, such as
+        // possibly holding nicknames of devices the user has set?
+        // Example: Jimmy Gizmo's iPods
+        // (Implying identification based off UUID, of course, but we are talking about what
+        // peripheral.name returns (vs. option 2) and how the implications would play out
+        // for different use cases.
+        
+        // The above issues should be easy to put to rest soon, once I find some key sources
+        // on the info. Apple CoreBluetooth docs, references should help.
+        
+        // Found a developer.apple thread that covers the most detail so far:
+        // https://developer.apple.com/forums/thread/19381
+
+

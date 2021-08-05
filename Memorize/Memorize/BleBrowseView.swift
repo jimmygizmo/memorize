@@ -59,8 +59,14 @@ struct BleBrowseView: View {
             
             List(bleManager.viewDiscoveredPeripherals,
                  selection: $selectedPeripheral){  // - PERIPHERALS
-                Text($0.name)
-                    .italic()
+                
+                    Text($0.name)
+                        .italic()
+                    Text($0.nameAdvertised)
+                        .italic()
+                    Text(String($0.rssi))
+                        .italic()
+                
             }  // List - PERIPHERALS
             .frame(height: 300)
             
@@ -82,13 +88,13 @@ struct BleBrowseView: View {
             HStack {  // - CONTROLS
                 VStack (spacing: 10) {
                     Button(action: {
-                        print("Start scanning")
+                        self.bleManager.startScanning()
                     }) {
                         Text("Start Scan")
                     }
                     
                     Button(action: {
-                        print("Stop scanning")
+                        self.bleManager.stopScanning()
                     }) {
                         Text("Stop Scan")
                     }

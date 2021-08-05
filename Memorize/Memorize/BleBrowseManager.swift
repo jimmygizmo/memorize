@@ -29,6 +29,7 @@ import CoreBluetooth
 struct Peripheral: Identifiable {
     let id: Int
     let name: String
+    let nameAdvertised: String
     let rssi: Int
     //let uuid: UUID
 }
@@ -90,27 +91,52 @@ class BleManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager,
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        
+        // TODO: See what else is available in advertisement data
+        
+        // Name returned with the peripheral object which could be from the GAP database
+        // and could be cached by IOS and might be less reliable for matching.
+        // TODO: Rewrite and improve. We need clear info on this here where name originates.
+        // OBSERVATION: This is usually nil for all devices I test with. Only the DSD TECH HM-10
+        // module has this populated.
         var peripheralName: String!
         
+        // Name advertised by the peripheral during the scan. TODO: Rewrite and improve.
+        // OBSERVATION: This is sometimes nil. Usually: Mac hostname, Jimmy's AirPods etc.
+        var peripheralNameAdvertised: String!
         
-        // TODO: Update these comments and clairfy when/why to choose the different strategies
-        // for getting peripheral data in this context.
-        // Look deeper into how name is obtained here. TODO: Code not actually tested yet!!
-        // This is not how I got name in BleConnectView.swift. Maybe I'm jumping ahead of myself.
-        // And Name is frequently blank. I prefer using UUID but I guess it depends on the device
-        // and use case. Anyhow, first time I have used:
-        // advertisementData[CBAdvertisementDataLocalNameKey]
-        // In BleConnectView, what I did was use the callback data's peripheral.name:
-        // didDiscover peripheral: CBPeripheral ... and then peripheral.name
-        // But of course there are usually MANY ways to do things in modern frameworks.
+        // ADDITIONAL OBSERVATION: The HM-10 triggered didDiscover twice, the first time
+        // peripheral.name was nil, the secon time, it was "DSD TECH", BOTH times, the
+        // advertised name was "DSD TECH"
+        
+        // CONCLUSION: Should generally always use the advertised name. Keep eye open for use
+        // cases where the peripheral.name (potentially the GAP database/cached,
+        // possibly-user-assigned name) might need special treatment. Otherwise I'll just log it.
+        
+        // TEST-BASED-CORRECTION: I re-named my AirPODS and the name changed for advertised name
+        // NOT for peripheral.name. This was not expected and contrary to my notes. POSSIBLY,
+        // The name I edited was actually done ON the AirPODs in the device state itself and thus
+        // changes the advertised name. This could mean that what I edited was NOT the GAP database
+        // (or the creation of such an entry) but rather was editing of the advertised data.
+        // That has to be the case or many of my sources are wrong. SO .. after exploring IOS
+        // settings, I could not see how to assign a nickname or anything like that .. meaning
+        // so far I see no way to make entries into or to edit the GAP db.
+        
         if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             peripheralName = name
         } else {
             peripheralName = "Unknown"
         }
         
+        if let name = peripheral.name{
+            peripheralNameAdvertised = name
+        } else {
+            peripheralNameAdvertised = "Unknown"
+        }
+        
         let newPeripheral = Peripheral(id: viewDiscoveredPeripherals.count,
                                        name: peripheralName,
+                                       nameAdvertised: peripheralNameAdvertised,
                                        rssi: RSSI.intValue)
         print(newPeripheral)
         viewDiscoveredPeripherals.append(newPeripheral)
@@ -118,6 +144,16 @@ class BleManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     }
     
     
+    func startScanning() {
+        print("start scanning")
+        centralMgr.scanForPeripherals(withServices: nil, options: nil)
+    }
+    
+    
+    func stopScanning() {
+        print("stop scanning")
+        centralMgr.stopScan()
+    }
     
     
     
