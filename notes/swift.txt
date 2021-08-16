@@ -178,5 +178,17 @@ https://www.youtube.com/watch?v=stSB04C4iS4
 
 --------------------------------
 
+A particularly important nugget of info from near the beginning of Closures in the Language Guide:
+Closure Expression Syntax
+Closure expression syntax has the following general form:
+
+{ (parameters) -> return type in
+    statements
+}
+The parameters in closure expression syntax can be in-out parameters, but they can’t have a default value. Variadic parameters can be used if you name the variadic parameter. Tuples can also be used as parameter types and return types.
+
+-----------------------------------
+
+
 
 

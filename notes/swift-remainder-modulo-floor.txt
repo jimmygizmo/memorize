@@ -1,0 +1,35 @@
+Since Swift is weird with the % operator, this doc will contain the best links I find to clear the topic up with best practices as of Swift 5.5.
+Some of the top links I found so far do little to clarify and even confuse the situation and/or are outdated.
+While covering this topic, it will be good to clarify related topics (floor, ceiling, etc.) .. and maybe compare to stuff to Python and C etc.
+
+Swift 5.5 Language Guide - OPERATORS (reference)
+% operator = REMAINDER OPERATOR
+https://docs.swift.org/swift-book/LanguageGuide/BasicOperators.html
+
+Remainder Operator
+The remainder operator (a % b) works out how many multiples of b will fit inside a and returns the value that’s left over (known as the remainder).
+
+NOTE
+
+The remainder operator (%) is also known as a modulo operator in other languages. However, its behavior in Swift for negative numbers means that, strictly speaking, it’s a remainder rather than a modulo operation.
+
+TODO: CLARIFY!
+This is one of the most official sources and it does not even specify the cases of whether it is the dividend or the divisor that are negative. The information online, even the latest is extremely poor on this topic.
+I will address this in code and see if I can clarify.
+
+ALSO NOTE:
+The division operator does not work as a Python programmer might expect. For example 16/10 = 1.
+So is it just integer division? TODO: Really need to calrify this stuff.
+
+I see these as good interview questions for first tier technical screening: Test knowledge of
+the % and / operators. If you do not know Swift specifically, you will probably get it wrong.
+
+----------------------
+Related topics for context:
+
+Swift ref: REMAINDER
+https://developer.apple.com/documentation/swift/double/2884269-remainder
+
+
+
+

@@ -43,7 +43,7 @@ struct MemorizeApp: App {
              */
             
             // Memorize App - part of the coursework for Stanford CS193P.
-            //ContentView()  // The main entry-point for the Memorize app, focus of this repo.
+            ContentView()  // The main entry-point for the Memorize app, focus of this repo.
             
             //DashContentView()  // An experimental view with a TabBar and more. [Tutorial B]
             
@@ -52,7 +52,7 @@ struct MemorizeApp: App {
             //BleConnectView()  // Basic Bluetooth Low Energy (BLE) communications. [Tutorial D]
             
             // TODO: Create this after doing the quick tutorial on @State below.
-            BleBrowseView()  // Basic BLE Browse/Connect/Services - Part Two of: [Tutorial D]
+            //BleBrowseView()  // Basic BLE Browse/Connect/Services - Part Two of: [Tutorial D]
             
             //StateTimerView() // Very quick tutorial on @State, timer, more.
             

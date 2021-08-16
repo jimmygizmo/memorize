@@ -156,11 +156,9 @@ class BleManager: NSObject, ObservableObject, CBCentralManagerDelegate {
     }
     
     
-    
-    
-    
-    
-    
+    // TODO: This tutorial sort of ends abruptly after the scanning. I'll pick up again later
+    // on a BLE app, so we are probably done here for now.
+    // Resuming work specifically on Stanford CS193P and the Memorize game.
     
     
 }  // BleManager
