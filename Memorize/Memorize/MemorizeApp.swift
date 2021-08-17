@@ -61,6 +61,8 @@ struct MemorizeApp: App {
             // We supply the data to the environment and launch the view in the same statement:
             //TwoWayStateView().environmentObject(userData)
             
+            //FontUtilView()  // Shows all IOS fonts to help me choose a font for Memorize! game.
+            
         }  // WindowGroup
     }  // var body Scene
 }  // App
