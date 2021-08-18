@@ -35,35 +35,58 @@ struct CardDeck {
 //                        name: "Travel")
 /**********************************************************************************************************/
 
+let travelIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🛻", "🚂", "🚃", "🚲", "🚁", "🛴", "🚤",
+                  "🚙", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚", "🛹", "🚌", "🛵", "🚒",
+                  "🛥", "🚛" ]  // Count: 24
+
+let foodIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
+                  "🥪", "🍪", "☕️", "🍚", "🍭", "🍔", "🥕", "🍍", "🫒", "🍒", "🍰", "🌭",
+                  "🍉", "🥖", "🥝", "🥑" ]  // Count: 28
+
+let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
+                  "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
+                  "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
+
+//var deckIcons = travelIcons.shuffled()
+var deckIcons = foodIcons.shuffled()  // Note that foodIcons is immutable but this works. This
+// means Swift is smart enough to shuffle in the destination var array or in some intermediate
+// array, but likely just in the destination after figuring out what this expression intends.
+//var deckIcons = animalIcons.shuffled()
+
 
 struct ContentView: View {
+//
+//    let travelIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
+//                      "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
+//                      "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
+//
+//    let foodIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
+//                      "🥪", "🍪", "☕️", "🍫", "🍚", "🍭", "🥦", "🍔", "🥕", "🍍", "🫒", "🌽",
+//                      "🌽", "🍒", "🍰", "🌭", "🍉", "🥖", "🥝", "🥑" ]  // Count: 32
+//
+//    let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
+//                      "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
+//                      "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
     
-    let travelIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
-                      "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
-                      "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
-    
-    let foodIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
-                      "🥪", "🍪", "☕️", "🍫", "🍚", "🍭", "🥦", "🍔", "🥕", "🍍", "🫒", "🌽",
-                      "🌽", "🍒", "🍰", "🌭", "🍉", "🥖", "🥝", "🥑" ]  // Count: 32
- 
-    let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
-                      "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
-                      "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
 /*  let deckIcons = travelIcons  // Doesn't work here but the idea was to set a default theme.
     If I try to simply copy this array here like this, I get the following ERROR:
     Cannot use instance member 'travelIcons' within property initializer;
      property initializers run before 'self' is available
+     UPDATE: I'm dealing with a few things here, one of which is that these structs are immutable,
+     but this particular error (self not yet available) is because I am just in the declaration
+     section and need to do something like this in an init or a method etc. Anyhow, some of
+     these issues have been addressed by moving the initialization of the three theme arrays of
+     strings (emoji characters) into the global level of this file. More restructuring will come,
+     so this arrangement is not necessarily permanent. For example, these arrays might live
+     inside button code or just only be referenced there. Also, they could be moved to a config
+     file or a theme file etc. See comments above about a spossible struct to use to manage
+     other data associated with a theme. If we were to have more than 3 or 4 we would need to
+     abstract in this way.
  */
     
     //var deckIcons: [String]  // TODO: FIGURING OUT WHERE/HOW I CAN SET THIS. SEE ERROR ABOVE.
     
-    // TEMPORARILY:
-    let deckIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
-        "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
-        "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
-    
-    
-    @State var iconCount = 32
+    @State var iconCount = deckIcons.count
     
     var body: some View {
         

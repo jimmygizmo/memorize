@@ -30,7 +30,7 @@ PROGRESS FOR ITEM 4: 3 sets/themes of icons have been prepared with 32 in each. 
 
 4. Add at least 3 “theme choosing” buttons to your UI, each of which causes all of the cards to be replaced with new cards that contain emoji that match the chosen theme. You can use Vehicles from lecture as one of the 3 themes if you want to, but you are welcome to create 3 (or more) completely new themes.
 
-5. The number of cards in each of your 3 themes should be different, but in no case fewer than 8.
+DONE - 5. The number of cards in each of your 3 themes should be different, but in no case fewer than 8.
 
 PROGRESS FOR ITEM 6: This does not need to be coded up. Just use the Array.shuffle() provided by Swift.
 6. The cards that appear when a theme button is touched should be in an unpredictable (i.e. random) order. In other words, the cards should be shuffled each time a theme button is chosen.
