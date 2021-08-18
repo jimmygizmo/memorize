@@ -8,9 +8,6 @@
 import SwiftUI
 
 
-// POSSIBLE FONTS: AmericanTypewriter-Bold
-
-
 // TODO: Programming Assignment 1:
 // https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/assignment_1.pdf
 
@@ -47,46 +44,12 @@ let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "�
                   "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
                   "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
 
-//var deckIcons = travelIcons.shuffled()
-var deckIcons = foodIcons.shuffled()  // Note that foodIcons is immutable but this works. This
-// means Swift is smart enough to shuffle in the destination var array or in some intermediate
-// array, but likely just in the destination after figuring out what this expression intends.
-//var deckIcons = animalIcons.shuffled()
-
 
 struct ContentView: View {
-//
-//    let travelIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🏍", "🛻", "🚂", "🚃", "🚲", "🚁", "🚐",
-//                      "🚓", "🛴", "🚤", "🚙", "🛶", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚",
-//                      "🛹", "🚌", "🛵", "🚒", "🛥", "🚑", "🚛", "🛷" ]  // Count: 32
-//
-//    let foodIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
-//                      "🥪", "🍪", "☕️", "🍫", "🍚", "🍭", "🥦", "🍔", "🥕", "🍍", "🫒", "🌽",
-//                      "🌽", "🍒", "🍰", "🌭", "🍉", "🥖", "🥝", "🥑" ]  // Count: 32
-//
-//    let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
-//                      "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
-//                      "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // Count: 32
     
-/*  let deckIcons = travelIcons  // Doesn't work here but the idea was to set a default theme.
-    If I try to simply copy this array here like this, I get the following ERROR:
-    Cannot use instance member 'travelIcons' within property initializer;
-     property initializers run before 'self' is available
-     UPDATE: I'm dealing with a few things here, one of which is that these structs are immutable,
-     but this particular error (self not yet available) is because I am just in the declaration
-     section and need to do something like this in an init or a method etc. Anyhow, some of
-     these issues have been addressed by moving the initialization of the three theme arrays of
-     strings (emoji characters) into the global level of this file. More restructuring will come,
-     so this arrangement is not necessarily permanent. For example, these arrays might live
-     inside button code or just only be referenced there. Also, they could be moved to a config
-     file or a theme file etc. See comments above about a spossible struct to use to manage
-     other data associated with a theme. If we were to have more than 3 or 4 we would need to
-     abstract in this way.
- */
+    @State var deckIcons = travelIcons.shuffled()
     
-    //var deckIcons: [String]  // TODO: FIGURING OUT WHERE/HOW I CAN SET THIS. SEE ERROR ABOVE.
-    
-    @State var iconCount = deckIcons.count
+    @State var iconCount = travelIcons.count
     
     var body: some View {
         
@@ -128,9 +91,11 @@ struct ContentView: View {
                 Spacer()
             
             HStack {  // Button - Spacer - Button
-                removeButton
+                themeTravelButton
                 Spacer()
-                addButton
+                themeFoodButton
+                Spacer()
+                themeAnimalButton
             }  // HStack Button - Spacer - Button
             // NOTE: The tutorial has the .padding on the HStack.
             // I prefer to keep this padding on the individual buttons for now.
@@ -139,29 +104,59 @@ struct ContentView: View {
         }  // VStack ContentView
     } // var body View
     
-    var removeButton: some View {
-        Button {
-            if iconCount > 1 {
-                iconCount -= 1
+    var themeTravelButton: some View {
+        VStack {
+            Button {
+                deckIcons = travelIcons.shuffled()
+            } label: {
+                Image(systemName: "car")
             }
-        } label: {
-            Image(systemName: "minus.circle")
+            .font(.largeTitle)
+            //.padding()
+            
+            Text("Travel")
+                .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
+                .foregroundColor(Color.purple)
+            //Spacer()
         }
-        .font(.largeTitle)
-        .padding()
-    }  // var removeButton
+        //.frame(height: .leastNormalMagnitude)
+    }  // themeTravelButton
     
-    var addButton: some View {
-        Button {
-            if iconCount < deckIcons.count {
-                iconCount += 1
+    var themeFoodButton: some View {
+        VStack {
+            Button {
+                deckIcons = foodIcons.shuffled()
+            } label: {
+                Image(systemName: "house")
             }
-        } label: {
-            Image(systemName: "plus.circle")
+            .font(.largeTitle)
+            //.padding()
+            
+            Text("Food")
+                .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
+                .foregroundColor(Color.purple)
+            //Spacer()
         }
-        .font(.largeTitle)
-        .padding()
-    }  // var addButton
+        //.frame(height: .leastNormalMagnitude)
+    }  // themeFoodButton
+    
+    var themeAnimalButton: some View {
+        VStack {
+            Button {
+                deckIcons = animalIcons.shuffled()
+            } label: {
+                Image(systemName: "person")
+            }
+            .font(.largeTitle)
+            //.padding()
+            
+            Text("Animals")
+                .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
+                .foregroundColor(Color.purple)
+            //Spacer()
+        }
+        //.frame(height: .leastNormalMagnitude)
+    }  // themeAnimalButton
     
 }  // ContentView
 
