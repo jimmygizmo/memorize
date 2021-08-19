@@ -288,3 +288,12 @@ https://developer.apple.com/forums/thread/19381
 
 -------------------------------------
 
+Fine adjustments of Text() views. Helped me discover .offset() which is how I nudged the Memorize title
+into a position that looks a lot better on all phones I have tested on so far. Good little article in general:
+https://www.hackingwithswift.com/books/ios-swiftui/alignment-and-alignment-guides
+
+-----------------------------------
+
+
+
+
