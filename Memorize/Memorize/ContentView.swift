@@ -8,30 +8,18 @@
 import SwiftUI
 
 
-let travelIcons = [ "🚗", "🚜", "✈️", "⛵️", "🛸", "🛻", "🚂", "🚃", "🚲", "🚁", "🛴", "🚤",
-                  "🚙", "🚕", "🏎", "🚎", "🚀", "🛺", "🛼", "🚚", "🛹", "🚌", "🛵", "🚒",
-                  "🛥", "🚛" ]  // count: 26
-
-let foodIcons = [ "🍑", "🫐", "🍌", "🍕", "🫑", "🥓", "🧁", "🌮", "🍗", "🍓", "🍦", "🍩",
-                  "🥪", "🍪", "☕️", "🍚", "🍭", "🍔", "🥕", "🍍", "🫒", "🍒", "🍰", "🌭",
-                  "🍉", "🥖", "🥝", "🥑" ]  // count: 28
-
-let animalIcons = [ "🐇", "🦞", "🦦", "🐏", "🪰", "🦩", "🦉", "🐟", "🪲", "🐳", "🐈", "🐀",
-                  "🦋", "🐥", "🐗", "🐓", "🐿", "🐖", "🦢", "🐊", "🐅", "🐢", "🐸", "🐘",
-                  "🦝", "🦧", "🦃", "🦂", "🦀", "🦜", "🦥", "🦙" ]  // count: 32
-
-
 struct ContentView: View {
-    @State var deckIcons = travelIcons.shuffled()
-    @State var iconCount = travelIcons.count
+    @State var deckIcons = deckBeasts.cards.shuffled()
+    @State var iconCount = deckBeasts.cards.count
     
     var body: some View {
         VStack {
             
-            Text("Memorize!")  // TODO: Try to make all font sizes absolute. Best practice?
+            Text("Memorize!")
                 .offset(y: 8)  // Most/all devices look better with title nudged down slightly.
                 .font(Font.custom("AmericanTypewriter-Bold", size: 24.0))
                 .foregroundColor(Color.purple)
+                // TODO: Eliminate fixed font sizes in app code:  /notes/font-sizes.txt
             
             ScrollView {
                 LazyVGrid(columns: [
@@ -55,6 +43,8 @@ struct ContentView: View {
                 themeFoodButton
                 Spacer()
                 themeAnimalButton
+                Spacer()
+                themePlantsButton
             }
         }  // VStack
     }
@@ -62,55 +52,82 @@ struct ContentView: View {
     
     var themeTravelButton: some View {
         VStack {
+            let deck = deckWheels
+            let symbol = "car"
             Button {
-                deckIcons = travelIcons.shuffled()
-                iconCount = travelIcons.count
-                print("Deck set to Travel and shuffled. Cards: \(iconCount)")
+                deckIcons = deck.cards.shuffled()
+                iconCount = deck.cards.count
+                print("Deck set to \(deck.name) and shuffled. Cards: \(iconCount)")
             } label: {
-                Image(systemName: "car")
+                Image(systemName: symbol)
             }
             .font(.largeTitle)
             
-            Text("Travel")
+            Text(deck.name)
                 .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
                 .foregroundColor(Color.purple)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
     }
     
     var themeFoodButton: some View {
         VStack {
+            let deck = deckFood
+            let symbol = "house"
             Button {
-                deckIcons = foodIcons.shuffled()
-                iconCount = foodIcons.count
-                print("Deck set to Food and shuffled. Cards: \(iconCount)")
+                deckIcons = deck.cards.shuffled()
+                iconCount = deck.cards.count
+                print("Deck set to \(deck.name) and shuffled. Cards: \(iconCount)")
             } label: {
-                Image(systemName: "house")
+                Image(systemName: symbol)
             }
             .font(.largeTitle)
             
-            Text("Food")
+            Text(deck.name)
                 .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
                 .foregroundColor(Color.purple)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
     }
     
     var themeAnimalButton: some View {
         VStack {
+            let deck = deckCritters
+            let symbol = "person"
             Button {
-                deckIcons = animalIcons.shuffled()
-                iconCount = animalIcons.count
-                print("Deck set to Animals and shuffled. Cards: \(iconCount)")
+                deckIcons = deck.cards.shuffled()
+                iconCount = deck.cards.count
+                print("Deck set to \(deck.name) and shuffled. Cards: \(iconCount)")
             } label: {
-                Image(systemName: "person")
+                Image(systemName: symbol)
             }
             .font(.largeTitle)
-            Text("Animals")
+            
+            Text(deck.name)
                 .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
                 .foregroundColor(Color.purple)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
+    }
+    
+    var themePlantsButton: some View {
+        VStack {
+            let deck = deckPlants
+            let symbol = "leaf"
+            Button {
+                deckIcons = deck.cards.shuffled()
+                iconCount = deck.cards.count
+                print("Deck set to \(deck.name) and shuffled. Cards: \(iconCount)")
+            } label: {
+                Image(systemName: symbol)
+            }
+            .font(.largeTitle)
+            
+            Text(deck.name)
+                .font(Font.custom("AmericanTypewriter-Bold", size: 16.0))
+                .foregroundColor(Color.purple)
+        }
+        .padding(.horizontal, 10)
     }
 }  // ContentView
 
@@ -132,7 +149,7 @@ struct CardView: View {
                     .shadow(color: .black, radius: 12)
                 
             } else {  //  ----------------------------- |BACK|, face down
-                cardShape.fill().foregroundColor(.gray)
+                cardShape.fill().foregroundColor(.blue)
                 cardShape.strokeBorder(lineWidth: 3)
                 
             }

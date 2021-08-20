@@ -1,0 +1,18 @@
+            // REGARDING FONT SIZES. TODO: Continue research to determine a long term
+            // best practice for handling fonts for all iPhone and iPad devices. I would hope for
+            // a techinique that eliminates all fixed sizes or at least abstracts and centralizes
+            // any fixed-sizing issues or device/setting-detection needs. I don't think we should
+            // ever see fixed sizes in app code. A simple standard is needed but I suspect that a
+            // custom one is needed. I would like to just use specifiers that work for nearly all
+            // parts of all apps. Such a scheme might look similar to:
+            // .fontSizeButton, .fontSizeTitle, .fontSizeSettings, .fontSizeFormHead,
+            // .fontSizeFormInput, .fontSizeSmall, .fontSizeHeading, .fontSizeContent
+            //
+            // I am imagining a scheme like this, managed centrally. It should be kept simple
+            // and will need to manage a few different typefaces as well. Some logic for a few
+            // device or setting edge cases might be needed. Bottom line is that once this
+            // has been developed according to best practices, it should need little change to
+            // be used for many different types of applications and should always appear in the
+            // app code in the same defined/clean way.
+
+

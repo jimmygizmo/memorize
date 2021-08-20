@@ -20,6 +20,7 @@
 		4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC61F2F269119B40088B6F5 /* ContentView.swift */; };
 		4CC61F32269119B50088B6F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC61F31269119B50088B6F5 /* Assets.xcassets */; };
 		4CC61F35269119B50088B6F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC61F34269119B50088B6F5 /* Preview Assets.xcassets */; };
+		4CECE4BF26CF62E300ADF97C /* Decks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECE4BE26CF62E300ADF97C /* Decks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		4CC61F31269119B50088B6F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CC61F34269119B50088B6F5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4CC61F36269119B50088B6F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CECE4BE26CF62E300ADF97C /* Decks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			children = (
 				4CC61F2D269119B40088B6F5 /* MemorizeApp.swift */,
 				4CC61F2F269119B40088B6F5 /* ContentView.swift */,
+				4CECE4BE26CF62E300ADF97C /* Decks.swift */,
 				4CC61F31269119B50088B6F5 /* Assets.xcassets */,
 				4CC61F36269119B50088B6F5 /* Info.plist */,
 				4CC61F33269119B50088B6F5 /* Preview Content */,
@@ -173,6 +176,7 @@
 				4CC61F30269119B40088B6F5 /* ContentView.swift in Sources */,
 				4C32C1F726A6187300FC2FA3 /* DashContentView.swift in Sources */,
 				4CC61F2E269119B40088B6F5 /* MemorizeApp.swift in Sources */,
+				4CECE4BF26CF62E300ADF97C /* Decks.swift in Sources */,
 				4C00E12D26B91015000D35B5 /* BleBrowseView.swift in Sources */,
 				4C24BE3526B5D6DF00F5B606 /* StateTimerView.swift in Sources */,
 				4C56A29526B74DAA00CEE557 /* TwoWayStateView.swift in Sources */,
