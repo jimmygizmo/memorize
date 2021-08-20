@@ -8,21 +8,19 @@
 import SwiftUI
 
 
-// This is a hack and an attempt to use a global variable to allow the dynamically-generated
-// deck buttons to set variables back in the ContentView, which is a separate struct.
-// Obviously the wrong way to do this, but ok as a quick intermediate step to allow the refactoring
-// of the deck buttons to be completed. A lot of this will change anyhow as we are about to
-// start implementing the MVVM game logic.
-var globalDeckIcons = deckBeasts.cards.shuffled()
-var globalIconCount = deckBeasts.cards.count
-// DOES NOT WORK. CODE DOES NOT ERROR AND REFACTORING CAN COMPLETE BUT THE BUTTONS MADE WITH
-// THE NEW DYNAMIC VIEW DO NOT CHANGE THE UI AND THE CARDS. NOTHING CHANGES. THIS MEANS THE
-// ContentView IS NOT SEEING THE DATA CHANGE TO THESE GLOBAL VARIABLES.
+// AVAILABLE DECKS: deckWheels, deckFood, deckCritters, deckBeasts, deckPlants
+var initialDeck = deckBeasts
 
 
 struct ContentView: View {
-    @State var deckIcons = globalDeckIcons
-    @State var iconCount = globalIconCount
+    // These variables are made @State so that the child DeckButtonView()s can change these.
+    // Just as importantly, changing an @State here triggers the updating of the View.
+    @State var deckIcons = initialDeck.cards.shuffled()
+    @State var iconCount = initialDeck.cards.count
+    
+    init() {
+        print("First deck initialized to \(initialDeck.name) and shuffled. Cards: \(iconCount)")
+    }
     
     var body: some View {
         VStack {
@@ -50,18 +48,18 @@ struct ContentView: View {
             Spacer()
             
             HStack(alignment: .bottom) {
-                themeTravelButton
+                DeckButtonView(deck: deckWheels, deckIcons: $deckIcons, iconCount: $iconCount)
                 Spacer()
-                themeFoodButton
+                DeckButtonView(deck: deckFood, deckIcons: $deckIcons, iconCount: $iconCount)
                 Spacer()
-                themeAnimalButton
+                DeckButtonView(deck: deckCritters, deckIcons: $deckIcons, iconCount: $iconCount)
                 Spacer()
-                DeckButtonView(deckId: "plants")
+                DeckButtonView(deck: deckPlants, deckIcons: $deckIcons, iconCount: $iconCount)
             }
         }  // VStack
     }
     
-    
+    // This original approach works fine. (First two decks: Wheels and Food)
     var themeTravelButton: some View {
         VStack {
             let deck = deckWheels
@@ -82,6 +80,7 @@ struct ContentView: View {
         .padding(.horizontal, 10)
     }
     
+    // This original approach works fine. (First two decks: Wheels and Food)
     var themeFoodButton: some View {
         VStack {
             let deck = deckFood
@@ -102,12 +101,14 @@ struct ContentView: View {
         .padding(.horizontal, 10)
     }
     
+    // Returned this button to the working strategy. Using globals from here did not work.
+    // (This was a control test, done while trying to get DeckButton() to work with golbals.)
     var themeAnimalButton: some View {
         VStack {
             let deck = deckCritters
             Button {
-                globalDeckIcons = deck.cards.shuffled()
-                globalIconCount = deck.cards.count
+                deckIcons = deck.cards.shuffled()
+                iconCount = deck.cards.count
                 print("Deck set to \(deck.name) and shuffled. Cards: \(iconCount)")
             } label: {
                 Text(deck.icon)
@@ -122,6 +123,7 @@ struct ContentView: View {
         .padding(.horizontal, 10)
     }
     
+    // This button currently not used so the new dynamic DeckButton() can be tested.
     var themePlantsButton: some View {
         VStack {
             let deck = deckPlants
@@ -144,21 +146,19 @@ struct ContentView: View {
 }  // ContentView
 
 
-
-// THIS IS NOT YET WORKING. TRIED A HACKING USING GLOBAL VARIABLES TO GET CHANGES MADE IN THESE
-// DYNAMICALLY GENERATED BUTTONS/VIEWS TO TRIGGER AN UPDATE WITH THE NEW DATA IN THE MAIN VIEW
-// OF CARDS BUT IT IS NOT UPDATING ANY CHANGE WHEN CLICKED. I KNEW THE GLOBAL VARS WERE A VERY
-// HACKISH AND BAD IDEA. Pondering on the correct solution ...
 struct DeckButtonView: View {
-    var deckId: String
+    var deck: Deck
+    // @Binging enables writing to ContentView.deckIcons and ContentView.iconCount
+    // Additionally, we had to put a $ in front of those vars where this view builder is called.
+    @Binding var deckIcons: [String]
+    @Binding var iconCount: Int
     
     var body: some View {
         VStack {
-            let deck = deckPlants
             Button {
-                globalDeckIcons = deck.cards.shuffled()
-                globalIconCount = deck.cards.count
-                print("Deck set to \(deck.name) and shuffled. Cards: \(globalIconCount)")
+                deckIcons = deck.cards.shuffled()
+                iconCount = deck.cards.count
+                print("Deck set to \(deck.name) and shuffled. Cards: \(iconCount)")
             } label: {
                 Text(deck.icon)
                     .font(.largeTitle)

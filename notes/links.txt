@@ -294,6 +294,10 @@ https://www.hackingwithswift.com/books/ios-swiftui/alignment-and-alignment-guide
 
 -----------------------------------
 
+This thread turned me on to using @Binding as a quick/dirty solution to get my dynamically built deck
+buttons (child views) to be able to change data in the parent ContentView and also trigger its update.
+https://stackoverflow.com/questions/56821737/swiftui-question-passing-a-variable-to-another-view
 
+--------------------------------------
 
 
