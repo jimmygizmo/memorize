@@ -300,4 +300,8 @@ https://stackoverflow.com/questions/56821737/swiftui-question-passing-a-variable
 
 --------------------------------------
 
+This NavigationView tut from Paul Hudson looks like a great one to master soon. Covers a lot of important stuff
+especially for making things work well on ALL iOS devices:
+https://www.youtube.com/watch?v=nA6Jo6YnL9g
 
+----------------------------------------
