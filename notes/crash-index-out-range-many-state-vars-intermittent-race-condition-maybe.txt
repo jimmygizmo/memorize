@@ -1,0 +1,83 @@
+UPDATE:
+I noticed from git diff that I made a small whitespace change for readability but I need to check.
+Obviously I am just learning Swift and maybe this particular whitespace change broke something.
+Usually Swift seems to be forgiving. I am not sure, but I will revert this after a commit (so I can track this
+learning process) and see if this is related:
+
+-                    Int.random(in: 4..<initialDeck.cardSymbols.count) :
++                    Int.random(in: 4 ..< initialDeck.cardSymbols.count) :
+
+I put some spaces into the range expression.
+HONESTLY though, the symptoms describe below would usually in my mind totally rule out a cause of a
+simple whitespace syntax change, becuase it is intermittent in this manner. BUT
+The FACT IS: ONCE CANNOT ASSUME.
+IF THERE IS A SIMPLE CODE CHANGE AT THE TIME A PROBLEM OCCURRED, NO MATTER HOW UNRELATED IT --SEEMS--
+ONE MUST TEST THIS THEORY, BECUASE IT IS A QUICK WAY TO RULE OUT THE RECENT CHANGE.
+CORRELATION IN TIME BETWEEN POSSIBLE CAUSE AND EFFECT IS A -VERY- STRONG CLUE THAT MUST BE FOLLOWED,
+REGARDLESS OF ANY OTHER LOGICAL ANALYSIS OR HUNCHES. AND IT IS SIMPLE TO MANAGE THIS IF YOU ARE USING GIT
+TO EVEN A MODERATE LEVEL OF EFFECTIVENESS.
+
+
+---------
+This is an intermittent crash. Index out of range. I suspect a range condition between view threads where
+the index has been updated to a number higher than the array updated, out of sync perhaps. Either that or a simpler logic bug. I did not look very closely yet.
+Problem does not occur the same on all deck buttons and is triggered by rapid tapping. Also I think app wont even do an initial launch right now and there is like phantom version of the app which WILL run when you kill the black screen zombie app instance infront of it. Maybe these are just different view threads and the first is crashed but the next one runs? It is weird. Anyhow, this is the error. Index out of range. (First 60 lines of dump file)
+
+Process:               Memorize [16960]
+Path:                  /Users/USER/Library/Developer/Xcode/UserData/Previews/Simulator Devices/80A20296-4923-481F-B1CF-DBF178020C47/data/Containers/Bundle/Application/1305B2E1-2243-4792-A080-8C62C9441B01/Memorize.app/Memorize
+Identifier:            Memorize
+Version:               1.0 (1)
+Code Type:             X86-64 (Native)
+Parent Process:        launchd_sim [16727]
+Responsible:           SimulatorTrampoline [3023]
+User ID:               501
+
+Date/Time:             2021-08-21 13:52:30.508 -0700
+OS Version:            macOS 11.5.1 (20G80)
+Report Version:        12
+Anonymous UUID:        26D48CC8-845E-139F-0585-24441ADEEBF4
+
+Sleep/Wake UUID:       BBE04668-9755-41D4-8CDA-B4B174679C2C
+
+Time Awake Since Boot: 660000 seconds
+Time Since Wake:       53000 seconds
+
+System Integrity Protection: enabled
+
+Crashed Thread:        0  Dispatch queue: com.apple.main-thread
+
+Exception Type:        EXC_BAD_INSTRUCTION (SIGILL)
+Exception Codes:       0x0000000000000001, 0x0000000000000000
+Exception Note:        EXC_CORPSE_NOTIFY
+
+Termination Signal:    Illegal instruction: 4
+Termination Reason:    Namespace SIGNAL, Code 0x4
+Terminating Process:   exc handler [16960]
+
+Application Specific Information:
+Swift/Array.swift:405: Fatal error: Array index is out of range
+
+CoreSimulator 757.5 - Device: iPhone 12 mini (80A20296-4923-481F-B1CF-DBF178020C47) - Runtime: iOS 14.5 (18E182) - DeviceType: iPhone 12 mini
+
+Thread 0 Crashed:: Dispatch queue: com.apple.main-thread
+0   libswiftCore.dylib            	0x00007fff2f07d8f2 closure #1 in closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 482
+1   libswiftCore.dylib            	0x00007fff2f07d509 closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 105
+2   libswiftCore.dylib            	0x00007fff2f07d2a9 closure #1 in _assertionFailure(_:_:file:line:flags:) + 121
+3   libswiftCore.dylib            	0x00007fff2f07cf6c _assertionFailure(_:_:file:line:flags:) + 428
+4   libswiftCore.dylib            	0x00007fff2f062cb2 Array._checkIndex(_:) + 290
+5   libswiftCore.dylib            	0x00007fff2f063460 Array.subscript.getter + 48
+6   ContentView.2.preview-thunk.dylib	0x000000010ce80b2e closure #1 in closure #1 in closure #1 in ContentView.__preview__body.getter + 542
+7   ContentView.2.preview-thunk.dylib	0x000000010ce84b59 partial apply for closure #1 in closure #1 in closure #1 in ContentView.__preview__body.getter + 25
+8   com.apple.SwiftUI             	0x00007fff568b3a86 LazyHGrid.init(rows:alignment:spacing:pinnedViews:content:) + 186
+9   com.apple.SwiftUI             	0x00007fff568b39c6 LazyVGrid.init(columns:alignment:spacing:pinnedViews:content:) + 40
+10  ContentView.2.preview-thunk.dylib	0x000000010ce806e0 closure #1 in closure #1 in ContentView.__preview__body.getter + 1280
+11  ContentView.2.preview-thunk.dylib	0x000000010ce808c9 partial apply for closure #1 in closure #1 in ContentView.__preview__body.getter + 25
+12  com.apple.SwiftUI             	0x00007fff56531efc ScrollView.init(_:showsIndicators:content:) + 99
+13  ContentView.2.preview-thunk.dylib	0x000000010ce7ef24 closure #1 in ContentView.__preview__body.getter + 2276
+14  ContentView.2.preview-thunk.dylib	0x000000010ce7fd89 partial apply for closure #1 in ContentView.__preview__body.getter + 25
+15  com.apple.SwiftUI             	0x00007fff564dfbcb VStack.init(alignment:spacing:content:) + 159
+16  ContentView.2.preview-thunk.dylib	0x000000010ce7e4b6 ContentView.__preview__body.getter + 422
+17  com.ninthdevice.memorize.Memorize	0x000000010aba3e4d ContentView.body.getter + 205 (ContentView.swift:31)
+18  com.ninthdevice.memorize.Memorize	0x000000010aba8189 protocol witness for View.body.getter in conformance ContentView + 25
+19  com.apple.SwiftUI             	0x00007fff561b9f17 partial apply for closure #1 in ViewBodyAccessor.updateBody(of:changed:) + 22
+

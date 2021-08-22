@@ -21,7 +21,7 @@ struct ContentView: View {
     
     init() {
         cardSymbols = initialDeck.cardSymbols.shuffled()
-        symbolCount = randomizeSymbolCount ? Int.random(in: 4..<initialDeck.cardSymbols.count) :
+        symbolCount = randomizeSymbolCount ? Int.random(in: 4 ..< initialDeck.cardSymbols.count) :
             initialDeck.cardSymbols.count
         
         print("First deck initialized to \(initialDeck.name) and shuffled.")
@@ -87,7 +87,7 @@ struct DeckButtonView: View {
             Button {
                 cardSymbols = deck.cardSymbols.shuffled()
                 symbolCount = randomizeSymbolCount ?
-                    Int.random(in: 4..<initialDeck.cardSymbols.count) :
+                    Int.random(in: 4 ..< initialDeck.cardSymbols.count) :
                     initialDeck.cardSymbols.count
                 print("Deck set to \(deck.name) and shuffled.")
                 print("  Using \(symbolCount) of \(deck.cardSymbols.count) cards available.")
