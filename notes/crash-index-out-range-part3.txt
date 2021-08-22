@@ -1,0 +1,15 @@
+Well I restructured things so I initialized the first deck at app startup and passed stuff to the args for ContentView and thus I eliminated the init() from ContentView.
+This definitely was good, since this init() could not set any game state anyhow since it gets called so much as the UI is repainted (I hope I am assuming all that correctly .. but I think so). Anyhow, I figured I had made all good changes and the bug wouod be gone, but no.
+
+The bug is still here although it might behave a little differently now.
+
+I slowed down. Tapping fast has nothing to do with it. Just picking an index that is too big, RANDOMLY .. is all it takes.
+If you tap slowly and change decks on ANY button, it will eventually hit the bug VIA THE RANDOM NUMBER PICK.
+
+But the issue still could be how @State/@Binding update. So we might still call it a sort of race condition, but not one that comes from tapping fast and a whole bunch of threads running amok etc.
+
+This might be a design-related race condition. A bad design .. or a fundamental code logic bug.
+
+I think I made an improvement with the init() change, but the main bug is still here. I just prevented it from showing up before the app could even launch. At least now it should always launch without ever hitting this bug. Before my init() change I think it could hit the bug even before the app showed the first view. Which it was clearly doing.
+
+-----

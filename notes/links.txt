@@ -305,3 +305,13 @@ especially for making things work well on ALL iOS devices:
 https://www.youtube.com/watch?v=nA6Jo6YnL9g
 
 ----------------------------------------
+
+This looks like Apple's official starting point for debugging and troubleshooting a running IOS App.
+My intermittent index out of range crash bug I just introduced when I did the extra credit radomization
+of card count in a new deck .. this bug is my first strange one to use as a case study of the debugging process.
+Bug is very intermittent and triggered more on certain deck buttons and more when tapping rapidly on one.
+https://developer.apple.com/documentation/xcode/diagnosing-and-resolving-bugs-in-your-running-app
+
+----------------------------------------
+
+

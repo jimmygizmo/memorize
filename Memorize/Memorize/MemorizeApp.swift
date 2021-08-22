@@ -8,7 +8,20 @@
 import SwiftUI
 import Combine
 
+// AVAILABLE DECKS: deckWheels, deckFood, deckCritters, deckBeasts, deckPlants
+let initialDeck = deckBeasts
+let randomizeSymbolCount = true
 
+let startCardSymbols: [String] = initialDeck.cardSymbols.shuffled()
+let startSymbolCount = randomizeSymbolCount ?
+    Int.random(in: 4..<startCardSymbols.count) :
+    startCardSymbols.count
+
+
+/**********************************************************************************************************/
+// INSIDE THE **** ALL THIS IS FOR TwoWayStateView.swift (and probably also the Combine import)
+// TODO: Now that we are back to Memorize work, should probably just comment this out.
+//
 // Example of environment data used to hold a user record at the highest app level, then
 // passing that user into a Content View. Illustrating @EnvironmentObject for the @State tutorial.
 // This goes along with the file TwoWayStateView.swift
@@ -21,10 +34,19 @@ class User: ObservableObject {
     @Published var userEmail = "jimmy.gizmo@internet.com" { didSet { didChange.send() } }
     
 }
+/**********************************************************************************************************/
 
 
 @main
 struct MemorizeApp: App {
+    
+    // I had to create this init as the only place in this file I could execute print()
+    // Then becuase of that I had to move my first deck init stuff up to global level
+    // so I had startSymbolCount by here.
+    init() {
+        print("First deck of game will be \(initialDeck.name) and will be shuffled.")
+        print("  Using \(startSymbolCount) of \(startCardSymbols.count) cards available.")
+    }
     
     var userData = User()  // See User() above. For the @State tut in file TwoWayStateView.swift.
     
@@ -42,8 +64,17 @@ struct MemorizeApp: App {
              enter the app with the various UIs, with the main one being 'ContentView()'
              */
             
+            
             // Memorize App - part of the coursework for Stanford CS193P.
-            ContentView()  // The main entry-point for the Memorize app, focus of this repo.
+            // NOTE: First I attempted starting initial game state in the ContentView init() but
+            // learned that I probably don't even want an init() in such a view and certainly
+            // cannot change most state there with it ALWAYS being called. etc. So I am moving
+            // some of that game init to right here. This all comes from doing the Extra Credit
+            // to deal a random number of cards from each deck each time a deck is chosen, which
+            // would include game start up.
+            //ContentView()  // The main entry-point for the Memorize app, focus of this repo.
+            ContentView(cardSymbols: startCardSymbols, symbolCount: startSymbolCount)
+            
             
             //DashContentView()  // An experimental view with a TabBar and more. [Tutorial B]
             

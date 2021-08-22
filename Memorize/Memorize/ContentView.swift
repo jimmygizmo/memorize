@@ -8,9 +8,9 @@
 import SwiftUI
 
 
-// AVAILABLE DECKS: deckWheels, deckFood, deckCritters, deckBeasts, deckPlants
-var initialDeck = deckBeasts
-var randomizeSymbolCount = true
+//// AVAILABLE DECKS: deckWheels, deckFood, deckCritters, deckBeasts, deckPlants
+//var initialDeck = deckBeasts
+//var randomizeSymbolCount = true
 
 
 struct ContentView: View {
@@ -19,14 +19,18 @@ struct ContentView: View {
     @State var cardSymbols: [String]
     @State var symbolCount: Int
     
-    init() {
-        cardSymbols = initialDeck.cardSymbols.shuffled()
-        symbolCount = randomizeSymbolCount ? Int.random(in: 4 ..< initialDeck.cardSymbols.count) :
-            initialDeck.cardSymbols.count
-        
-        print("First deck initialized to \(initialDeck.name) and shuffled.")
-        print("  Using \(symbolCount) of \(initialDeck.cardSymbols.count) cards available.")
-    }
+//    // CRASH BUG CONCLUSION: I CANNOT DO SOMETHING LIKE THIS IN THIS INIT.
+//    // I will go back to having NO INIT. I put this init() here to try to set and randomize the
+//    // first deck/view, but will have to do it another way. Maybe via the initial call in
+//    // MemorizeApp.swift
+//    init() {
+//        cardSymbols = initialDeck.cardSymbols.shuffled()
+//        symbolCount = randomizeSymbolCount ? Int.random(in: 4..<cardSymbols.count) :
+//            initialDeck.cardSymbols.count
+//        
+//        print("First deck initialized to \(initialDeck.name) and shuffled.")
+//        print("  Using \(symbolCount) of \(initialDeck.cardSymbols.count) cards available.")
+//    }
     
     var body: some View {
         VStack {
@@ -41,7 +45,7 @@ struct ContentView: View {
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 65))
                 ]) {
-                    ForEach(cardSymbols[ 0 ..< symbolCount ], id: \.self) { cardIcon in
+                    ForEach(cardSymbols[ 0..<symbolCount ], id: \.self) { cardIcon in
                         CardView(iconCharacter: cardIcon, isFaceUp: true)
                             .aspectRatio(0.618, contentMode: .fit)
                     }
@@ -87,7 +91,7 @@ struct DeckButtonView: View {
             Button {
                 cardSymbols = deck.cardSymbols.shuffled()
                 symbolCount = randomizeSymbolCount ?
-                    Int.random(in: 4 ..< initialDeck.cardSymbols.count) :
+                    Int.random(in: 4..<initialDeck.cardSymbols.count) :
                     initialDeck.cardSymbols.count
                 print("Deck set to \(deck.name) and shuffled.")
                 print("  Using \(symbolCount) of \(deck.cardSymbols.count) cards available.")
@@ -138,7 +142,8 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        // startCardSymbols and startSymbolCount are set in MemorizeApp.swift
+        ContentView(cardSymbols: startCardSymbols, symbolCount: startSymbolCount)
             .previewDevice("iPhone 12 mini")
 //            .previewDevice("iPhone 6s Plus")
             .preferredColorScheme(.dark)  // Comment this out for .light, which is the default.

@@ -1,0 +1,47 @@
+Now see part 3
+
+
+crash bug index out range part 2.
+
+Crash occurred again and now I have more details.
+Crash is at line 44 ..... ForEach(cardSymbols[ 0..<symbolCount ], id: \.self)
+
+Deck set to Critters and shuffled.
+  Using 20 of 19 cards available.
+Swift/Array.swift:405: Fatal error: Array index is out of range
+2021-08-22 15:01:28.416060-0700 Memorize[3992:2010506] Swift/Array.swift:405: Fatal error: Array index is out of range
+
+YOU CAN SEE THE LOG OUTPUT EVEN STATES THE INCONSISTENCY.
+A bit more context. .. I had been tapping the Critters button very fast. When the app crashes the Critters button is greyed out, indicating it was processing triggered by the tap, BEFORE everything was done related to what was triggered by the tap. Considering how SwiftUI works, that may or may not really be saying much, but we need to look deeper.
+
+Although we see inconsistencies plainly in our variables, it might not be so much of a logic issue. It still could be a race condition because of the bound variables and multiple threads and what some might call excessive or inappropriate use of @State in a SwiftUI app .. this is all fine and part of the experiment .. BUT ..nothing is conclusive yet.
+We might have a VERY BASIC logic error related to random numbers and arrays and a separate array index var etc.
+Or it might be bad logic/design combined with a race condition (duh yeah .. you MUST design logic to handle race conditions .. but there is sometimes a phase (maybe this is one) where you first discover and figure out the race condition scenario.)
+Proceedeing with analysis...
+
+XCode is highlighting in the code: Thread 1: Fatal Error: Array index is out of range
+
+I SEE THE PROBLEM IN THE CODE .. BUT I remember when I created the issue. I was dealing with access to an instance variable before self existed. I made a change but then had to move the code to the init. Maybe I simple need to change the var I reference .. anyhow, ISSUES IS THAT I AM PICKING THE RANDOM INDEX FROM THE RANGE OF THE -INITAL- DECK (in initialDeck) not the current deck which is cardSymbols. (im being a little sloppy with terminology here .. but the bug is here (but is a bit more complex because of struct init issues )
+
+        cardSymbols = initialDeck.cardSymbols.shuffled()
+        symbolCount = randomizeSymbolCount ? Int.random(in: 4..<initialDeck.cardSymbols.count) :
+            initialDeck.cardSymbols.count
+
+I will attempt a fix by changing to this:
+        cardSymbols = initialDeck.cardSymbols.shuffled()
+        symbolCount = randomizeSymbolCount ? Int.random(in: 4..<cardSymbols.count) :
+            initialDeck.cardSymbols.countcard
+
+NOPE! Can't do it. XCode complains: 'self' used before all stored properties are initialized.
+
+*ALSO* .. One can see there must ALSO BE A RACE CONDITION. Because as it is written here, there should not be a bug, and the code change does not make much of a difference.
+
+I think I have a few problems, but mainly a bad design for what I am trying to do. I might have a race condition for the way I am trying to use @State and @Binding. And I have not clearly thought through how I am initializing vars that are also bound and potentially accessed by multiple threads (although you would hope the state-binding mechanisms would manage all of that.)
+
+CONCLUSION ON DESIGN STRATEGY:
+Since the init() is called every time the view is painted, I cannot change state varaibles here. (I had tried to do stuff here that I only wanted done on the first creation of ContentView .. but this will be happening ALL the time.)
+
+Taking code out of init(). I will need to set and randomize the first deck in sone other way.
+
+
+

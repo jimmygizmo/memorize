@@ -1,3 +1,25 @@
+
+GOOD INFO ON BUG GATHERED. ROOT CAUSE BECOMING APARENT.
+The debugger has allowed me to immediately see the evidence I suspected although have not yet unraveled the full causation scenario. Here is what I have:
+
+1. Set debugger breakpoint immediately before DeckButtonView button action closure but I am stopped during app startup and I have not tapped anything of course. I do not yet see any cards, just a black screen. So this is stopped at a stage prior to the painting of any views, when the data for the first button (wheels) is being composed.
+Remember the error is index out of range.
+
+2. State of the deck/Deck struct matches the code in Deck.Swift. Has CORRECT WHEELS ARRAY AND cardSymbols is correct at 26.
+
+3. POSSIBLE/PROBABLE INCONSISTENCY: _cardSymbols (The current instance value for the bound variable) is THE WRONG ARRAY IT IS THE BEASTS ARRAY AND HAS ONLY 21 ITEMS. ** NOTE THE BEASTS ARRAY -HAS- BEEN RANDOMIZED. (and remember this is inside the 'deck' variable which is NOT BOUND and is part of the button instance.
+ALSO - _symbolCount (the button instance bound variable symbolCount) is at 5.
+LOG OUTPUT FROM ContentView init():
+First deck initialized to Beasts and shuffled.
+  Using 5 of 21 cards available.
+
+STEPPING INTO THE BUTTON CODE NOW THAT SETS cardSymbols and symbolCount. (Is it actually OK that we have the mismatching values showing in that deck var? ***MAYBE*** that 'deck' is NOT the instance 'deck'. OK. Maybe a sidenote here is to use different variable names in different places. Looking at code to see if all is OK and this Beasts deck is simple what is about to show in the view. The log output matches. Maybe everything I have described in 1,2 and 3 and here is all OK so far. Continuing analysis.
+
+OK. Will start a new document.
+
+
+
+--------------------
 UPDATE:
 I noticed from git diff that I made a small whitespace change for readability but I need to check.
 Obviously I am just learning Swift and maybe this particular whitespace change broke something.
