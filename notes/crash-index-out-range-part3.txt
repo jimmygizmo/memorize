@@ -1,3 +1,24 @@
+May have found the bug but we'll see how easy the fix is (based on var access/init etc):
+INSIDE THE DECK BUTTON CODE - we are looking at the initial deck instead of the buttons deck for the count. THis will only trigger an error when the random index picked is larger than the symbols in the current buttons deck.
+
+So, THIS:
+
+                    Int.random(in: 4..<initialDeck.cardSymbols.count) :
+                    initialDeck.cardSymbols.count
+
+Should really be THIS:
+
+                    Int.random(in: 4..<deck.cardSymbols.count) :
+                    deck.cardSymbols.count
+
+
+SOLVED.
+CONCLUSION: We had a few issues but the main bug was a simple logic issue of using the wrong variable. Nothing really fancy.
+I would say that now, everything is working AND the extra credit feature of random card counts drawn is now implemented correctly. The init strategy is much better now too. (At least for now) The MVVM stuff will now rip everything apart and change it all again.
+
+
+-------------------
+
 Well I restructured things so I initialized the first deck at app startup and passed stuff to the args for ContentView and thus I eliminated the init() from ContentView.
 This definitely was good, since this init() could not set any game state anyhow since it gets called so much as the UI is repainted (I hope I am assuming all that correctly .. but I think so). Anyhow, I figured I had made all good changes and the bug wouod be gone, but no.
 

@@ -80,7 +80,7 @@ struct ContentView: View {
 
 
 struct DeckButtonView: View {
-    var deck: Deck
+    let deck: Deck
     // @Binding enables writing to ContentView.deckIcons and ContentView.iconCount
     // Additionally, we had to put a $ in front of those vars where this view builder is called.
     @Binding var cardSymbols: [String]
@@ -91,8 +91,8 @@ struct DeckButtonView: View {
             Button {
                 cardSymbols = deck.cardSymbols.shuffled()
                 symbolCount = randomizeSymbolCount ?
-                    Int.random(in: 4..<initialDeck.cardSymbols.count) :
-                    initialDeck.cardSymbols.count
+                    Int.random(in: 4..<deck.cardSymbols.count) :
+                    deck.cardSymbols.count
                 print("Deck set to \(deck.name) and shuffled.")
                 print("  Using \(symbolCount) of \(deck.cardSymbols.count) cards available.")
             } label: {
