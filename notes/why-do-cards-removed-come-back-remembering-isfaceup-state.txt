@@ -1,0 +1,10 @@
+https://developer.apple.com/forums/thread/684606
+
+This thread looks very relevant.
+My tests show that SwiftUI caching behavior when @State is involved is complex. Maybe we wont be using @State much, but the issue is important.
+I want/need to fully understand why SOME of my cards retain this isFaceUp state apparently in a cache based off their identity. Logical expected behavior would be for them to NOT come back when a new array is created but obviously that is not what is happening. It would appear @State is captured in the cached version, which I would say is logically incorrect. A new member of the array with the same Identity should still have a fresh @State.
+
+POSSIBLE SOLUTION? Tell just the cards NOT TO CACHE?
+or is there another way to look at it, with some aspect of the variable?
+
+

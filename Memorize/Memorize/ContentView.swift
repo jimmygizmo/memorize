@@ -8,29 +8,11 @@
 import SwiftUI
 
 
-//// AVAILABLE DECKS: deckWheels, deckFood, deckCritters, deckBeasts, deckPlants
-//var initialDeck = deckBeasts
-//var randomizeSymbolCount = true
-
-
 struct ContentView: View {
     // These variables are made @State so that the child DeckButtonView()s can change these.
     // Just as importantly, changing a @State var here triggers the updating of the View.
     @State var cardSymbols: [String]
     @State var symbolCount: Int
-    
-//    // CRASH BUG CONCLUSION: I CANNOT DO SOMETHING LIKE THIS IN THIS INIT.
-//    // I will go back to having NO INIT. I put this init() here to try to set and randomize the
-//    // first deck/view, but will have to do it another way. Maybe via the initial call in
-//    // MemorizeApp.swift
-//    init() {
-//        cardSymbols = initialDeck.cardSymbols.shuffled()
-//        symbolCount = randomizeSymbolCount ? Int.random(in: 4..<cardSymbols.count) :
-//            initialDeck.cardSymbols.count
-//        
-//        print("First deck initialized to \(initialDeck.name) and shuffled.")
-//        print("  Using \(symbolCount) of \(initialDeck.cardSymbols.count) cards available.")
-//    }
     
     var body: some View {
         VStack {
@@ -47,7 +29,7 @@ struct ContentView: View {
                 ]) {
                     ForEach(cardSymbols[ 0..<symbolCount ], id: \.self) { cardIcon in
                         CardView(iconCharacter: cardIcon, isFaceUp: true)
-                            .aspectRatio(0.618, contentMode: .fit)
+                            .aspectRatio(0.618, contentMode: .fit)  // The Golden Ratio
                     }
                 }
                 .padding(.horizontal)
@@ -81,7 +63,7 @@ struct ContentView: View {
 
 struct DeckButtonView: View {
     let deck: Deck
-    // @Binding enables writing to ContentView.deckIcons and ContentView.iconCount
+    // @Binding enables writing to ContentView.cardSymbols and ContentView.symbolCount
     // Additionally, we had to put a $ in front of those vars where this view builder is called.
     @Binding var cardSymbols: [String]
     @Binding var symbolCount: Int
@@ -90,6 +72,13 @@ struct DeckButtonView: View {
         VStack {
             Button {
                 cardSymbols = deck.cardSymbols.shuffled()
+                // TODO determine if a=b.shuffled() affects b?
+                // In our case it does not matter so much, but VERY important to
+                // understand, because Swift ALSO has Array.shuffle().
+                // CS193 professor mentions that using Array.shuffled() is preferred.
+                // TODO: Research and fully understand this topic as it will be
+                // simple to master but very important in many real world scenarios.
+                // Great interview topic too.
                 symbolCount = randomizeSymbolCount ?
                     Int.random(in: 4..<deck.cardSymbols.count) :
                     deck.cardSymbols.count

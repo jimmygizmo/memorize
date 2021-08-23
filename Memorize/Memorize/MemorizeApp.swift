@@ -44,6 +44,7 @@ struct MemorizeApp: App {
     // Then becuase of that I had to move my first deck init stuff up to global level
     // so I had startSymbolCount by here.
     init() {
+        print("MemorizeApp starting. randomizeSymbolCount: \(randomizeSymbolCount)")
         print("First deck of game will be \(initialDeck.name) and will be shuffled.")
         print("  Using \(startSymbolCount) of \(startCardSymbols.count) cards available.")
     }
