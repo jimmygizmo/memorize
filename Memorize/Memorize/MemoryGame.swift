@@ -25,7 +25,7 @@ struct MemoryGame<CardSymbol> {
     init(pairsCount: Int, createCardSymbol: (Int) -> CardSymbol) {
         cards = Array<Card>()
         for pairIndex in 0..<pairsCount {
-            let symbol: CardSymbol = createCardSymbol(pairIndex)
+            let symbol = createCardSymbol(pairIndex)
             cards.append(Card(cardSymbol: symbol))
             cards.append(Card(cardSymbol: symbol))
         }
