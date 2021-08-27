@@ -38,14 +38,20 @@ class EmojiMemoryGame {
     static let deckSymbols = [ "🍀", "☘️", "🌷", "🍄", "🌹", "🌸", "🌻", "🌾", "🍁", "🌵",
     "🌲", "🌳", "🌴", "🪴", "🌺", "🌼", "🍂", "🌿" ]
     
-    func createMemoryGame() -> MemoryGame<String> {
+    static func createMemoryGame() -> MemoryGame<String> {
             MemoryGame<String>(pairsCount: 4) { pairIndex in
-            EmojiMemoryGame.deckSymbols[pairIndex]  // Just deckSymbols[pairIndex] works too.
+            EmojiMemoryGame.deckSymbols[pairIndex]
+            // BECAUSE this is a static func and I am trying to access a static member,
+            // Swift will fill in the EmojiMemoryGame for me and allow me to just put this here:
+            // deckSymbols[pairIndex]
+            // However, in normal INSTANCE functions, I will have to fully qualify that I am
+            // accessing the STATIC TYPE PROPERTY and specify fully as:
+            // EmojiMemoryGame.deckSymbols[pairIndex]
         }
     }
     
     // Because this is the Emoji version, the type for the MemoryGame generic is String:
-    private var model: MemoryGame<String> = createMemoryGame()
+    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     // NOTE: Because this is a class property, we MUST provide a value, here or in an init().
     // We have placeholders for the Int and the func with static value but that will change soon.
 
