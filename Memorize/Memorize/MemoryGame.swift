@@ -43,9 +43,5 @@ struct MemoryGame<CardSymbol> {
     
     
     
-    
-    
-    
-    
 }
 

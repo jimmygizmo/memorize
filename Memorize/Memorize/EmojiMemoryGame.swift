@@ -42,7 +42,7 @@ class EmojiMemoryGame {
             MemoryGame<String>(pairsCount: 4) { pairIndex in
             EmojiMemoryGame.deckSymbols[pairIndex]
             // BECAUSE this is a static func and I am trying to access a static member,
-            // Swift will fill in the EmojiMemoryGame for me and allow me to just put this here:
+            // Swift will fill in the 'EmojiMemoryGame' for me and allow me to just put this here:
             // deckSymbols[pairIndex]
             // However, in normal INSTANCE functions, I will have to fully qualify that I am
             // accessing the STATIC TYPE PROPERTY and specify fully as:
@@ -53,8 +53,23 @@ class EmojiMemoryGame {
     // Because this is the Emoji version, the type for the MemoryGame generic is String:
     private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     // NOTE: Because this is a class property, we MUST provide a value, here or in an init().
-    // We have placeholders for the Int and the func with static value but that will change soon.
-
+    // We have placeholders for the Int and the func with static values but that will change soon.
+    //
+    // ALSO, specifying the 'EmojiMemoryGame.__' appears to be optional here, but I'm not perfectly
+    // clear as to why, since it sort of looks like an instance variable calling a type/static
+    // function and I thought in those cases, full qualification was enforced.
+    //
+    // SO .. This is currently the only var we have AND we are initializing it with a call to
+    // our own custom function for this purpose; createMemoryGame().
+    // This function CREATES THE MODEL. IT TAKES NO ARGUMENTS. IT RETURNS A MemoryGame struct,
+    // when has been customized through generics for 'emoji' decks/cards (String) for the
+    // cardSymbol data payload. (Our generic CardSymbol can be considered a generic data payload.)
+    
+    // A GOOD WAY TO REMEMBER AN IMPORTANT FEATURE OF SWIFT:
+    // Structs get a free init() that initializes all vars. Classes get a free init that does
+    // nothing more than create an instance, so you will have to provide values to those vars
+    // EITHER in the definition/accessors OR by making a custom init().
+    // TODO: Consider the nuances. Other ways to initialize class members/properties/vars?
     
     // Remember Card is a struct so when we return this, the caller is getting its own copy.
     // Clearly this means it is read only as a result. Arrays are structs too for that matter.
@@ -65,6 +80,13 @@ class EmojiMemoryGame {
     
     
     //init() {
+    
+    
+    // At this point in lecture, he has made first instantiation of this class and is simply
+    // using the built-in "free" init this class provides. Remember, all class members must
+    // be initialized one way or another.
+    // https://youtu.be/oWZOFSYS5GE?list=PLpGHT1n4-mAsxuRxVPv7kj4-dQYoC3VVu&t=238
+    
         
         /* HOLD: Putting on hold, button-deck switching etc. to follow the lectures.
         //deckName = startingDeck.name

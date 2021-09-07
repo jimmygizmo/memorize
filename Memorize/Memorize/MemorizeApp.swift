@@ -12,10 +12,19 @@ import Combine
 let initialDeck = deckBeasts
 let randomizeSymbolCount = true
 
+// Stuff near here was initialization for the old design with deck-switching buttons. Leaving
+// enabled for the moment. It's not yet clear yet how the deck-buttons will work with proper MVVM.
 let startCardSymbols: [String] = initialDeck.cardSymbols.shuffled()
 let startSymbolCount = randomizeSymbolCount ?
     Int.random(in: 4..<startCardSymbols.count) :
     startCardSymbols.count
+
+
+// ---- NEW MVVM Initialization of the ViewModel ----
+// TODO: We might end up passing in the above deck-initialization vars into the ViewModel here
+// since conceptually that is what we want .. but might we do this within the ViewModel instead?
+// THE MAIN FACT is that 
+let game = EmojiMemoryGame()
 
 
 /**********************************************************************************************************/
@@ -73,9 +82,22 @@ struct MemorizeApp: App {
             // some of that game init to right here. This all comes from doing the Extra Credit
             // to deal a random number of cards from each deck each time a deck is chosen, which
             // would include game start up.
-            //ContentView()  // The main entry-point for the Memorize app, focus of this repo.
-            ContentView(cardSymbols: startCardSymbols, symbolCount: startSymbolCount)
+            // This is the main entry-point for the Memorize app, focus of this repo.
+            // DISABLED AT START OF TRANSITION TO NEW MVVM:
+            //ContentView(cardSymbols: startCardSymbols, symbolCount: startSymbolCount)
             
+            
+            // ---- NEW MVVM STARTUP OF Memorize! GAME ----
+            // Initialization of 'game' (the ViewModel) occurs at the top/global level in this file.
+            ContentView(viewModel: game)
+            
+            // --------------------------------------------
+            
+            
+            // All of the below entry points are for tutorial work totally separate from Memorize!
+            // These are all working mini apps, many related to topics covered in CS193P.
+            // The Bluetooth stuff is just a personal interest of mine that I plan to leverage
+            // along with what I learn from CS193P in some of my first apps.
             
             //DashContentView()  // An experimental view with a TabBar and more. [Tutorial B]
             

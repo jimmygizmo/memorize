@@ -9,10 +9,13 @@ import SwiftUI
 
 
 struct ContentView: View {
-    // These variables are made @State so that the child DeckButtonView()s can change these.
-    // Just as importantly, changing a @State var here triggers the updating of the View.
-    @State var cardSymbols: [String]
-    @State var symbolCount: Int
+    var viewModel: EmojiMemoryGame  // A more typical name for this var might be 'game'.
+
+// DISABLED AT START OF TRANSITION TO NEW MVVM
+//    // These variables are made @State so that the child DeckButtonView()s can change these.
+//    // Just as importantly, changing a @State var here triggers the updating of the View.
+//    @State var cardSymbols: [String]
+//    @State var symbolCount: Int
     
     var body: some View {
         VStack {
@@ -26,7 +29,7 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 65))
-                ]) {
+                ]) { 
                     ForEach(cardSymbols[ 0..<symbolCount ], id: \.self) { cardIcon in
                         CardView(iconCharacter: cardIcon, isFaceUp: true)
                             .aspectRatio(0.618, contentMode: .fit)  // The Golden Ratio
@@ -100,8 +103,11 @@ struct DeckButtonView: View {
 
 
 struct CardView: View {
-    var iconCharacter: String
-    @State var isFaceUp: Bool
+    
+// DISABLED AT START OF TRANSITION TO NEW MVVM
+//    var iconCharacter: String
+//    @State var isFaceUp: Bool
+    
     
     var body: some View {
         ZStack {
@@ -110,8 +116,10 @@ struct CardView: View {
             if isFaceUp {  //  ------------------------ |FRONT|, face up
                 cardShape.fill().foregroundColor(.green)
                 cardShape.strokeBorder(lineWidth: 3)
-                
-                Text(iconCharacter).font(.largeTitle)
+                    
+                // MVVM TRANSITION
+                //Text(iconCharacter).font(.largeTitle)
+                Text("🍉").font(.largeTitle)
                     .shadow(color: .black, radius: 28)
                     .shadow(color: .black, radius: 12)
                 
@@ -122,9 +130,10 @@ struct CardView: View {
             }
             
         }  // ZStack
-        .onTapGesture {
-            isFaceUp = !isFaceUp
-        }
+// DISABLED AT START OF TRANSITION TO NEW MVVM
+//        .onTapGesture {
+//            isFaceUp = !isFaceUp
+//        }
     }
 }  // CardView
 
@@ -132,7 +141,12 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         // startCardSymbols and startSymbolCount are set in MemorizeApp.swift
-        ContentView(cardSymbols: startCardSymbols, symbolCount: startSymbolCount)
+        //ContentView(cardSymbols: startCardSymbols, symbolCount: startSymbolCount)
+        // Above here was pre-MVVM with the button-deck switching.
+        //
+        // MVVM addition:
+        let game = EmojiMemoryGame()
+        ContentView(viewModel: game)
             .previewDevice("iPhone 12 mini")
 //            .previewDevice("iPhone 6s Plus")
             .preferredColorScheme(.dark)  // Comment this out for .light, which is the default.
