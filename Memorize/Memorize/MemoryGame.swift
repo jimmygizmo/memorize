@@ -26,17 +26,20 @@ struct MemoryGame<CardSymbol> {
         cards = Array<Card>()
         for pairIndex in 0..<pairsCount {
             let symbol = createCardSymbol(pairIndex)
-            cards.append(Card(cardSymbol: symbol))
-            cards.append(Card(cardSymbol: symbol))
+            cards.append(Card(cardSymbol: symbol, id: pairIndex*2))
+            cards.append(Card(cardSymbol: symbol, id: pairIndex*2+1))
         }
         
     }
     
     
-    struct Card {
-        var isFaceUp: Bool = false
+    struct Card: Identifiable {
+        var isFaceUp: Bool = true
         var isMatched: Bool = false
         var cardSymbol: CardSymbol
+        
+        //var id: ObjectIdentifier  // Default stub provides this.
+        var id: Int  // But we want Int.
     }
     
     

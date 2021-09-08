@@ -75,7 +75,8 @@ class EmojiMemoryGame {
     // Clearly this means it is read only as a result. Arrays are structs too for that matter.
     // This function can in no way change model or model.cards.
     var cards: Array<MemoryGame<String>.Card> {
-        return model.cards
+        //return model.cards  // The return is implied so:
+        model.cards
     }
     
     

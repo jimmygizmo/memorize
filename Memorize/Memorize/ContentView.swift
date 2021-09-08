@@ -9,7 +9,8 @@ import SwiftUI
 
 
 struct ContentView: View {
-    var viewModel: EmojiMemoryGame  // A more typical name for this var might be 'game'.
+    // We make this a let initially but it will become a var later in the lecture.
+    let viewModel: EmojiMemoryGame  // A more typical name for this var might be 'game'.
 
 // DISABLED AT START OF TRANSITION TO NEW MVVM
 //    // These variables are made @State so that the child DeckButtonView()s can change these.
@@ -29,6 +30,19 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 65))
+                ]) {
+                    ForEach(viewModel.cards) { card in
+                        CardView(card: card)
+                            .aspectRatio(0.618, contentMode: .fit)  // The Golden Ratio
+                    }
+                }
+                .padding(.horizontal)
+                .foregroundColor(.purple)
+                
+                /*
+                 // PRE-MVVM
+                LazyVGrid(columns: [
+                    GridItem(.adaptive(minimum: 65))
                 ]) { 
                     ForEach(cardSymbols[ 0..<symbolCount ], id: \.self) { cardIcon in
                         CardView(iconCharacter: cardIcon, isFaceUp: true)
@@ -37,9 +51,12 @@ struct ContentView: View {
                 }
                 .padding(.horizontal)
                 .foregroundColor(.purple)
+                */
                 
             }
-                
+             
+            /*
+            // TEMPORARILY DISABLING THE DECK/THEME BUTTONS
             Spacer()
             
             HStack(alignment: .bottom) {
@@ -59,6 +76,8 @@ struct ContentView: View {
                                cardSymbols: $cardSymbols,
                                symbolCount: $symbolCount)
             }
+            */
+ 
         }  // VStack
     }
 }  // ContentView
@@ -103,6 +122,7 @@ struct DeckButtonView: View {
 
 
 struct CardView: View {
+    let card: MemoryGame<String>.Card
     
 // DISABLED AT START OF TRANSITION TO NEW MVVM
 //    var iconCharacter: String
@@ -113,13 +133,13 @@ struct CardView: View {
         ZStack {
             let cardShape = RoundedRectangle(cornerRadius: 20)
             
-            if isFaceUp {  //  ------------------------ |FRONT|, face up
+            if card.isFaceUp {  //  ------------------------ |FRONT|, face up
                 cardShape.fill().foregroundColor(.green)
                 cardShape.strokeBorder(lineWidth: 3)
                     
                 // MVVM TRANSITION
                 //Text(iconCharacter).font(.largeTitle)
-                Text("🍉").font(.largeTitle)
+                Text(card.cardSymbol).font(.largeTitle)
                     .shadow(color: .black, radius: 28)
                     .shadow(color: .black, radius: 12)
                 
