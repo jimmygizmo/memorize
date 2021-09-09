@@ -34,6 +34,9 @@ struct ContentView: View {
                     ForEach(viewModel.cards) { card in
                         CardView(card: card)
                             .aspectRatio(0.618, contentMode: .fit)  // The Golden Ratio
+                            .onTapGesture {
+                                viewModel.choose(card)
+                            }
                     }
                 }
                 .padding(.horizontal)

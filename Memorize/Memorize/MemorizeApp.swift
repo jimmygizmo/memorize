@@ -23,7 +23,6 @@ let startSymbolCount = randomizeSymbolCount ?
 // ---- NEW MVVM Initialization of the ViewModel ----
 // TODO: We might end up passing in the above deck-initialization vars into the ViewModel here
 // since conceptually that is what we want .. but might we do this within the ViewModel instead?
-// THE MAIN FACT is that 
 let game = EmojiMemoryGame()
 
 
