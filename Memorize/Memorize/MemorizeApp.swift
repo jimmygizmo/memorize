@@ -133,5 +133,3 @@ struct MemorizeApp: App {
 // For the many other tutorials worked on:
 // See individual code files for full details on all the tutorials and coresework covered.
 
-
-/**/
